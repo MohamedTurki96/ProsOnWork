@@ -1,0 +1,44 @@
+@if (!initialized) {
+<app-loading></app-loading>
+} @else {
+<div
+  class="main-wrapper"
+  [ngClass]="{
+    'menu-opened': showMiniSidebar === true,
+    'expand-menu': expandMenu === true && miniSidebar === true,
+    'mini-sidebar': miniSidebar === true,
+    'slide-nav': mobileSidebar === true,
+    'chat-page-body': page === 'customer-chat',
+    'provider-page':base === 'providers',
+    'authentication-page':base === 'error-page',
+    'darkmode': showDark === true,
+  }"
+>
+  <router-outlet></router-outlet>
+  <div class="back-to-top" *ngIf="showBackToTop">
+    <a
+      (click)="scrollToTop()"
+      class="back-to-top-icon align-items-center justify-content-center d-flex show"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+  </div>
+  <div
+    class="sidebar-overlay"
+    [ngClass]="{
+      opened: mobileSidebar === true
+    }"
+  ></div>
+
+  <div
+    class="xb-cursor tx-js-cursor is-enabled"
+    [ngClass]="{ 'is-active': isHovered }"
+  >
+    <div class="xb-cursor-wrapper">
+      <div class="xb-cursor--follower xb-js-follower"></div>
+    </div>
+  </div>
+</div>
+<div class="slot">
+  <ng-content></ng-content>
+</div>
+}

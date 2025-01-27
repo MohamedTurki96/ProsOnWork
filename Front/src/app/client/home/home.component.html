@@ -1,0 +1,265 @@
+<section class="hero-section">
+  <div class="bg-wave d-none d-md-block">
+    <img src="assets/img/bg/bg-wave.png" class="img-fluid" alt="bg" />
+  </div>
+  <div class="corner-large d-none d-md-block">
+    <img src="assets/img/bg/corner-large.png" class="img-fluid" alt="bg" />
+  </div>
+  <div class="corner-small d-none d-md-block">
+    <img src="assets/img/bg/corner-small.png" class="img-fluid" alt="bg" />
+  </div>
+  <div class="container">
+    <div class="home-banner">
+      <div class="row align-items-center w-100">
+        <div class="col-lg-7 col-md-10 mx-auto">
+          <div class="section-search aos" data-aos="fade-up">
+            <h1 class="mb-5">
+              Connectez-vous avec les meilleurs
+              <span class="typed" #typedElement></span>
+            </h1>
+            <div class="search-box mt-5">
+              <form>
+                <div class="search-input line">
+                  <div class="search-group-icon">
+                    <i class="feather icon-map-pin"></i>
+                  </div>
+                  <div class="form-group mb-0">
+                    <label>Votre Localisation</label>
+                    <a
+                      href="javascript:void(0);"
+                      data-bs-toggle="modal"
+                      data-bs-dismiss="modal"
+                      data-bs-target="#geolocation_modal"
+                      class="link-primary text-decoration-underline fs-14"
+                      >Selectionner</a
+                    >
+                  </div>
+                </div>
+                <div class="search-input">
+                  <div class="search-group-icon search-icon">
+                    <i class="feather icon-search"></i>
+                  </div>
+                  <div class="form-group mb-0">
+                    <label>Que recherchez-vous ?</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Réparation automobile"
+                    />
+                  </div>
+                </div>
+                <div class="search-btn">
+                  <button
+                    class="btn btn-primary btn-lg"
+                    type="button"
+                    (click)="handleSearch()"
+                  >
+                    Afficher
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="d-flex align-items-center flex-wrap banner-info">
+              <div class="d-flex align-items-center me-4">
+                <img src="assets/img/icons/success-01.svg" alt="icon" />
+                <div class="ms-2">
+                  <h6>5,000 +</h6>
+                  <p>Prestataire Vérifiés</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center me-4">
+                <img src="assets/img/icons/success-02.svg" alt="icon" />
+                <div class="ms-2">
+                  <h6>12,000+</h6>
+                  <p>Services Complétés</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center me-4">
+                <img src="assets/img/icons/success-03.svg" alt="icon" />
+                <div class="ms-2">
+                  <h6>180,968</h6>
+                  <p>Avis Globaux</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="banner-imgs d-none d-md-block">
+            <div class="banner-1 shape-1">
+              <img
+                class="img-fluid"
+                alt="banner"
+                src="assets/img/services/banner1.png"
+              />
+            </div>
+            <div class="banner-2 shape-3">
+              <img
+                class="img-fluid"
+                alt="banner"
+                src="assets/img/services/banner2.png"
+              />
+            </div>
+            <div class="banner-3 shape-3">
+              <img
+                class="img-fluid"
+                alt="banner"
+                src="assets/img/services/banner3.png"
+              />
+            </div>
+            <div class="banner-4 shape-2">
+              <img
+                class="img-responsive"
+                alt="banner"
+                src="assets/img/services/banner4.png"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Work Section -->
+<section class="work-section-two aos" data-aos="fade-up">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.2s">
+        <div class="section-header text-center">
+          <h2 class="mb-1">
+            Comment <span class="text-primary">Ça Marche</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center" style="margin-left: 5.8rem">
+      <div class="col-lg-4 col-md-6">
+        <div class="work-wrap-box work-first aos" data-aos="fade-up">
+          <div class="work-icon">
+            <span>
+              <img src="assets/img/icons/work-icon-03.svg" alt="img" />
+            </span>
+          </div>
+          <h5>Définissez Votre Localisation</h5>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="work-wrap-box work-last aos" data-aos="fade-up">
+          <div class="work-icon">
+            <span>
+              <img src="assets/img/icons/work-icon-02.svg" alt="img" />
+            </span>
+          </div>
+          <h5>Trouvez Ce Que Vous Voulez</h5>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="work-wrap-box aos" data-aos="fade-up">
+          <div class="work-flex">
+            <div class="work-icon">
+              <span>
+                <img src="assets/img/icons/work-icon-01.svg" alt="img" />
+              </span>
+            </div>
+            <h5>Réservez Votre Service</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Work Section -->
+
+<!-- Category Section -->
+<section class="section category-section aos" data-aos="fade-up">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.2s">
+        <div class="section-header text-center">
+          <h2 class="mb-1">
+            Explorez <span class="text-primary">Les Catégories</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row g-4 row-cols-xxl-6 row-cols-xl-6 row-cols-md-4 row-cols-sm-2 row-cols-1 justify-content-center"
+    >
+      @for (category of categories; track category.id) {
+      <div class="col d-flex" [id]="">
+        <div
+          class="category-item text-center flex-fill wow fadeInUp"
+          data-wow-delay="0.2s"
+        >
+          <div class="mx-auto mb-3">
+            <img [src]="category.logo" class="img-fluid" alt="img" />
+          </div>
+          <h6 class="fs-14 mb-1">{{ category.name }}</h6>
+          <p class="fs-14 mb-0">{{ category.listing }} Listings</p>
+          <a
+            [routerLink]="routes.services"
+            class="link-primary text-decoration-underline fs-14"
+            >Afficher Tous</a
+          >
+        </div>
+      </div>
+      }
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center view-all wow fadeInUp" data-wow-delay="0.2s">
+          <a [routerLink]="routes.categories" class="btn btn-dark"
+            >Afficher Tous<i class="ti ti-arrow-right ms-2"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Category Section -->
+
+<!-- Provider Section -->
+<section class="section provide-section bg-black">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+        <div class="section-header mb-md-0 mb-3">
+          <p class="sub-title fw-medium text-light mb-1">
+            Devenez un Prestataire
+          </p>
+          <h2 class="text-white">
+            Publiez votre service en
+            <span class="text-primary">une minute</span>
+          </h2>
+        </div>
+      </div>
+      <div class="col-md-6 text-md-end wow fadeInUp" data-wow-delay="0.2s">
+        <a [routerLink]="routes.Register" class="btn btn-primary"
+          ><i class="ti ti-user-filled me-2"></i>Rejoignez-nous</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="provider-bg1">
+    <img src="assets/img/bg/provide-bg-01.svg" class="img-fluid" alt="img" />
+  </div>
+  <div class="provider-bg2">
+    <img src="assets/img/bg/provide-bg-02.svg" class="img-fluid" alt="img" />
+  </div>
+</section>
+<!-- /Provider Section -->
+<div
+  class="modal fade modal-xl"
+  id="geolocation_modal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-geo-location [parentControl]="true"></app-geo-location>
+      </div>
+    </div>
+  </div>
+</div>

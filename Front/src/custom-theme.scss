@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+@import "assets/scss/utils/variables";
+@import "assets/scss/utils/mixins";
+@import "../src/assets/scss/main.scss";
+
+.back-to-top-icon.show {
+  opacity: 1;
+  @include transition(all 0.5s ease);
+}
+.back-to-top-icon {
+  position: fixed;
+  right: 15px;
+  bottom: 30px;
+  z-index: 9999;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  background: $dark;
+  color: $white;
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease-out;
+  opacity: 0;
+  @include transition(all 0.5s ease);
+  &:hover {
+    color: $white;
+    background: $primary;
+  }
+}
+
+:root {
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: $primary,
+  ));
+}
+
+app-admin {
+  @import "../src/assets/admin/scss/admin.scss";
+}

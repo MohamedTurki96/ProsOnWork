@@ -1,0 +1,350 @@
+<div class="row justify-content-center align-items-center">
+    <div class="col-xl-4 col-md-6" >
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-13.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Car Wash</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(1)" (keydown)="toggleClass(1)" [ngClass]="{ 'selected': isClassAdded[1] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Car Repair Service</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Maryland City, MD, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.9</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$25.00 <span class="fs-13 text-gray"><del>$30.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-14.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Construction</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(2)" (keydown)="toggleClass(2)" [ngClass]="{ 'selected': isClassAdded[2] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Toughened Glass Fitting</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>New Jersey, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.7</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$20.00 <span class="fs-13 text-gray"><del>$25.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-15.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Computer</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(3)" (keydown)="toggleClass(3)" [ngClass]="{ 'selected': isClassAdded[3] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2 text-truncate">
+                        <a [routerLink]="routes.serviceDetails">Computer Hardware Service</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>California, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.5</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$20.00 <span class="fs-13 text-gray"><del>$35.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-16.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Interior</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(4)" (keydown)="toggleClass(4)" [ngClass]="{ 'selected': isClassAdded[4] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Interior Designing</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Maryland, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.8</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$30.00 <span class="fs-13 text-gray"><del>$35.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-17.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Car Wash</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(5)" (keydown)="toggleClass(5)" [ngClass]="{ 'selected': isClassAdded[5] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Steam Car Wash</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Montana, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.2</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$20.00 <span class="fs-13 text-gray"><del>$25.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-18.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Electrical</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(6)" (keydown)="toggleClass(6)" [ngClass]="{ 'selected': isClassAdded[6] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Electric Panel Repairing</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Texas, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.9</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$40.00 <span class="fs-13 text-gray"><del>$45.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-19.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Cleaning</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(7)" (keydown)="toggleClass(7)" [ngClass]="{ 'selected': isClassAdded[7] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2 text-truncate">
+                        <a href="javascript:void(0);">House Cleaning Services</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>New Jersey, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.6</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$45.00 <span class="fs-13 text-gray"><del>$50.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-20.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Construction</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(8)" (keydown)="toggleClass(8)" [ngClass]="{ 'selected': isClassAdded[8] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Commercial Painting </a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Alabama, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.5</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$40.00 <span class="fs-13 text-gray"><del>$45.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-21.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Appliance</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(9)" (keydown)="toggleClass(9)" [ngClass]="{ 'selected': isClassAdded[9] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Air Conditioner Service</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Washington, DC, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.2</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$20.00 <span class="fs-13 text-gray"><del>$25.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-22.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Construction</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(10)" (keydown)="toggleClass(10)" [ngClass]="{ 'selected': isClassAdded[10] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Building Construction</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Montana, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.0</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$50.00 <span class="fs-13 text-gray"><del>$55.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-23.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Plumber</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(11)" (keydown)="toggleClass(11)" [ngClass]="{ 'selected': isClassAdded[11] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Plumbing Services</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Virginia, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.3</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$45.00 <span class="fs-13 text-gray"><del>$50.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card p-0">
+            <div class="card-body p-0">
+                <div class="img-sec w-100">
+                    <a [routerLink]="routes.serviceDetails"><img src="assets/img/providers/provider-24.jpg" class="img-fluid rounded-top w-100" alt="img"></a>
+                    <div class="image-tag d-flex justify-content-end align-items-center">
+                        <span class="trend-tag">Carpentry</span>
+                        <a href="javascript:void(0);" class="fav-icon like-icon" (click)="toggleClass(12)" (keydown)="toggleClass(12)" [ngClass]="{ 'selected': isClassAdded[12] }"><i class="ti ti-heart"></i></a>
+                    </div>
+                    <span class="image-logo avatar avatar-md border rounded-circle">
+                        <img src="assets/img/providers/provider-01.jpg" class="img-fluid rounded-circle " alt="logo">
+                    </span>
+                </div>
+                <div class="p-3">
+                    <h5 class="mb-2">
+                        <a [routerLink]="routes.serviceDetails">Wooden Carpentry Work</a>
+                    </h5>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <p class="fs-14 mb-0"><i class="ti ti-map-pin me-2"></i>Alabama, USA</p>
+                        <span class="rating text-gray fs-14"><i class="fa fa-star filled me-1"></i>4.1</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>$25.00 <span class="fs-13 text-gray"><del>$30.00/hr</del></span></h5>
+                        <a [routerLink]="routes.booking" class="btn bg-primary-transparent">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
