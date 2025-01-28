@@ -34,7 +34,8 @@ export class GeoLocationComponent implements AfterViewInit {
     );
 
     this.map = L.map('map', {
-      center: [39.8282, -98.5795],
+      center: [
+        34.551811369170494, 10.546875000000002],
       zoom: 3,
     });
 
@@ -42,19 +43,20 @@ export class GeoLocationComponent implements AfterViewInit {
 
     this.map.addEventListener('click', (e) => this.onClick(e));
 
-    this.geoLocationService.selectedLocation$.subscribe(value => {
+    this.geoLocationService.selectedLocation$.subscribe((value) => {
       if (value) {
-        this.setMarker(value)
+        this.setMarker(value);
       }
     });
   }
 
   onClick(event: L.LeafletMouseEvent) {
+    console.log(event.latlng)
     const location = {
       latitude: event.latlng.lat,
       longitude: event.latlng.lng,
     };
-    this.geoLocationService.setGeoLocation(location)
+    this.geoLocationService.setGeoLocation(location);
   }
 
   setMarker(geoLocation: GeoLocation) {
@@ -68,6 +70,8 @@ export class GeoLocationComponent implements AfterViewInit {
     });
 
     this.map?.addLayer(this.marker);
+
+    this.map!.flyTo([geoLocation.latitude, geoLocation.longitude], 15);
   }
 
   resizeMap() {

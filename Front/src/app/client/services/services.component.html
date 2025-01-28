@@ -6,22 +6,28 @@
         <div class="col-xl-3 col-lg-4 theiaStickySidebar">
           <div class="card">
             <div class="card-body">
-              <form (submit)="(routes.search)">
+              <form (submit)="(routes.services)">
                 <div
                   class="d-flex align-items-center justify-content-between mb-3 pb-3 border-bottom"
                 >
-                  <h5><i class="ti ti-filter-check me-2"></i>Filters</h5>
-                  <a href="javascript:void(0);">Reset Filter</a>
+                  <h5><i class="ti ti-filter-check me-2"></i>Filtres</h5>
+                  <a href="javascript:void(0);">Réinitialiser le filtre</a>
                 </div>
                 <div class="mb-3 pb-3 border-bottom">
                   <label class="form-label">Localisation</label>
                   <div class="mb-3">
                     <div class="position-relative">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Select Location"
-                      />
+                      <label class="form-label">{{
+                        geoLocation | geolocation
+                      }}</label>
+                      <a
+                        href="javascript:void(0);"
+                        data-bs-toggle="modal"
+                        data-bs-dismiss="modal"
+                        data-bs-target="#geolocation_modal"
+                        class="link-primary text-decoration-underline fs-14"
+                        >Selectionner</a
+                      >
                       <span class="icon-addon"
                         ><i class="ti ti-map-pin"></i
                       ></span>
@@ -29,11 +35,11 @@
                   </div>
                 </div>
                 <div class="mb-3 pb-3 border-bottom">
-                  <label class="form-label">Search By Keyword</label>
+                  <label class="form-label">Recherche par mot-clé</label>
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="What are you looking for?"
+                    placeholder="Que cherchez-vous?"
                   />
                 </div>
                 <div class="accordion border-bottom mb-3">
@@ -47,7 +53,7 @@
                         aria-controls="accordion-collapseThree"
                         role="button"
                       >
-                        Categories
+                        Catégories
                       </div>
                     </div>
                     <div
@@ -67,45 +73,17 @@
                               type="checkbox"
                               checked
                             />
-                            All Categories
+                            Toutes les Catégories
                           </label>
                         </div>
+                        @for(category of categories; track category.id) {
                         <div class="form-check mb-2">
                           <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" />
-                            Construction
+                            {{ category.name }}
                           </label>
                         </div>
-                        <div class="form-check mb-2">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" />
-                            Car Wash
-                          </label>
-                        </div>
-                        <div class="form-check mb-2">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" />
-                            Electrical
-                          </label>
-                        </div>
-                        <div class="form-check mb-2">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" />
-                            Cleaning
-                          </label>
-                        </div>
-                        <div class="form-check mb-2">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" />
-                            Plumbing
-                          </label>
-                        </div>
-                        <div class="form-check mb-2">
-                          <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" />
-                            Designing
-                          </label>
-                        </div>
+                        }
                       </div>
                       <a
                         href="javascript:void(0);"
@@ -128,7 +106,7 @@
                       aria-controls="accordion-collapseSix"
                       role="button"
                     >
-                      Price Range
+                      Gamme de prix
                     </div>
                   </div>
                   <div
@@ -148,7 +126,7 @@
                       </mat-slider>
                     </div>
                     <div class="filter-range-amount mb-3">
-                      <p class="fs-14">Price: <span>$5 - $210</span></p>
+                      <p class="fs-14">Prix: <span>$5 - $210</span></p>
                     </div>
                   </div>
                 </div>
@@ -163,7 +141,7 @@
                         aria-controls="accordion-collapseTwo"
                         role="button"
                       >
-                        Ratings
+                        Notes
                       </div>
                     </div>
                     <div
@@ -245,7 +223,9 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-dark w-100">Search</button>
+                <button type="submit" class="btn btn-dark w-100">
+                  Recherche
+                </button>
               </form>
             </div>
           </div>
@@ -254,23 +234,23 @@
           <div
             class="d-flex justify-content-between align-items-center flex-wrap mb-4"
           >
-            <h4>Found <span class="text-primary">11 Services</span></h4>
+            <h4><span class="text-primary">11 services </span> trouvés</h4>
             <div class="d-flex align-items-center">
-              <span class="text-dark me-2">Sort</span>
+              <span class="text-dark me-2">Trier</span>
               <div class="dropdown me-2">
                 <a
                   href="javascript:void(0);"
                   class="dropdown-toggle bg-light-300"
                   data-bs-toggle="dropdown"
                 >
-                  Price Low to High
+                  Prix du plus bas au plus élevé
                 </a>
                 <div class="dropdown-menu">
                   <a href="javascript:void(0);" class="dropdown-item active"
-                    >Price Low to High</a
+                    >Prix du plus bas au plus élevé</a
                   >
                   <a href="javascript:void(0);" class="dropdown-item"
-                    >Price High to Low</a
+                    >Prix du plus élevé au plus bas</a
                   >
                 </div>
               </div>
@@ -295,9 +275,9 @@
           <div class="row">
             <div class="col-md-12">
               @if (listView) {
-              <services-list></services-list>
+              <services-list [services]="services"></services-list>
               } @else {
-              <services-grid></services-grid>
+              <services-grid [services]="services"></services-grid>
               }
             </div>
           </div>
@@ -307,7 +287,7 @@
             >
               <li class="page-item me-3">
                 <a class="page-link"
-                  ><i class="ti ti-arrow-left me-2"></i>Prev</a
+                  ><i class="ti ti-arrow-left me-2"></i>Précédent</a
                 >
               </li>
               <li class="page-item me-2">
@@ -333,7 +313,7 @@
               </li>
               <li class="page-item">
                 <a class="page-link" href="javascript:void(0);"
-                  >Next<i class="ti ti-arrow-right ms-2"></i
+                  >Suivant<i class="ti ti-arrow-right ms-2"></i
                 ></a>
               </li>
             </ul>
@@ -344,3 +324,17 @@
   </div>
 </div>
 <!-- /Page Wrapper -->
+<div
+  class="modal fade modal-xl"
+  id="geolocation_modal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-geo-location [parentControl]="true"></app-geo-location>
+      </div>
+    </div>
+  </div>
+</div>

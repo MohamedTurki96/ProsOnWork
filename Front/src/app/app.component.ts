@@ -19,6 +19,7 @@ import { SidebarService } from './shared/side-bar/pages-sidebar.service';
 import { url } from './shared/models/pages-model';
 import * as Aos from 'aos';
 import { AppService } from './app.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -60,6 +61,7 @@ export class AppComponent implements OnInit {
     this.common.last.subscribe((last: string) => {
       this.last = last;
     });
+
     router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationStart) {
         this.getRoutes(event);

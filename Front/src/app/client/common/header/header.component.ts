@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonService } from 'src/app/shared/common/common.service';
-import { DataService } from 'src/app/shared/data/data.service';
-import { header } from 'src/app/shared/models/pages-model';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router, Scroll } from '@angular/router';
+import { User } from 'src/app/shared/models/model';
 import { routes } from 'src/app/shared/routes/routes';
 import { SidebarService } from 'src/app/shared/side-bar/pages-sidebar.service';
 
@@ -9,29 +8,28 @@ import { SidebarService } from 'src/app/shared/side-bar/pages-sidebar.service';
   selector: 'app-client-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public routes = routes;
+  public connectedUser: User | null = null;
 
-  header: Array<header> = [];
-  base = '';
-  page = '';
-  last = '';
+  constructor(private sidebarService: SidebarService, private router: Router) {}
 
-  constructor(
-    private common: CommonService,
-    private data: DataService,
-    private sidebarService: SidebarService
-  ) {
-    this.common.base.subscribe((res: string) => {
-      this.base = res;
+  ngOnInit(): void {
+    const check = (url: string) => {
+      if (url.includes('dashboard')) {
+        this.connectedUser = {};
+      } else {
+        this.connectedUser = null;
+      }
+    };
+
+    this.router.events.subscribe((x) => {
+      if (x instanceof NavigationEnd) {
+        check(x.url);
+      } else if (x instanceof Scroll) {
+        check(x.routerEvent.url);
+      }
     });
-    this.common.page.subscribe((res: string) => {
-      this.page = res;
-    });
-    this.common.last.subscribe((res: string) => {
-      this.last = res;
-    });
-    this.header = this.data.header;
   }
 
   public toggleSidebar(): void {

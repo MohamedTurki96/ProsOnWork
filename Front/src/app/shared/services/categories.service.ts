@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { Category } from '../models/model';
 
 @Injectable({
@@ -9,15 +9,15 @@ import { Category } from '../models/model';
 export class CategoriesService {
   private baseUrl = '/assets/json/categories.json';
 
-  private subject = new BehaviorSubject<Category[]>([]);
-  categories$ = this.subject.asObservable();
+  private categoriesSubject = new BehaviorSubject<Category[]>([]);
+  categories$ = this.categoriesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  loadCategories() {
+  getCategories() {
     return this.http.get(this.baseUrl).pipe(
       tap((res: any) => {
-        this.subject.next(res.data);
+        this.categoriesSubject.next(res.data);
       })
     );
   }

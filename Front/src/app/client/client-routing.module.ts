@@ -36,6 +36,13 @@ const routes: Routes = [
             (m) => m.ServiceDetailsModule
           ),
       },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/customers.module').then(
+            (m) => m.CustomersModule
+          ),
+      },
     ],
   },
 ];

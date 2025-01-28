@@ -62,25 +62,25 @@ export class routes {
     return this.baseUrl + '/service-information';
   }
   public static get customerBooking(): string {
-    return this.baseUrl + '/customers/customer-booking';
+    return this.baseUrl + '/dashboard/customer-booking';
   }
   public static get customerChat(): string {
-    return this.baseUrl + '/customers/customer-chat';
+    return this.baseUrl + '/dashboard/customer-chat';
   }
   public static get customerDashboard(): string {
-    return this.baseUrl + '/customers/customer-dashboard';
+    return this.baseUrl + '/dashboard';
   }
   public static get customerFavourite(): string {
-    return this.baseUrl + '/customers/customer-favourite';
+    return this.baseUrl + '/dashboard/customer-favourite';
   }
   public static get customerProfile(): string {
-    return this.baseUrl + '/customers/settings/customer-profile';
+    return this.baseUrl + '/dashboard/settings/customer-profile';
   }
   public static get customerReviews(): string {
-    return this.baseUrl + '/customers/customer-reviews';
+    return this.baseUrl + '/dashboard/customer-reviews';
   }
   public static get customerWallet(): string {
-    return this.baseUrl + '/customers/customer-wallet';
+    return this.baseUrl + '/dashboard/customer-wallet';
   }
   public static get customerWallets(): string {
     return this.baseUrl + '/admin/customer-wallet';
@@ -200,7 +200,7 @@ export class routes {
     return this.baseUrl + '/providers/notification';
   }
   public static get use_notification(): string {
-    return this.baseUrl + '/customers/notification';
+    return this.baseUrl + '/dashboard/notification';
   }
   public static get providersList(): string {
     return this.baseUrl + '/provider/providers-list';
@@ -218,7 +218,7 @@ export class routes {
     return this.baseUrl + '/providers/provider-coupons';
   }
   public static get providerDashboard(): string {
-    return this.baseUrl + '/providers/provider-dashboard';
+    return this.baseUrl + '/providers';
   }
   public static get providerEnquiry(): string {
     return this.baseUrl + '/providers/provider-enquiry';
@@ -317,7 +317,7 @@ export class routes {
     return this.baseUrl + '/services/service-list';
   }
   public static get securitySettings(): string {
-    return this.baseUrl + '/customers/settings/security-settings';
+    return this.baseUrl + '/dashboard/settings/security-settings';
   }
   public static get providerDetails(): string {
     return this.baseUrl + '/provider/provider-details';
@@ -353,7 +353,7 @@ export class routes {
     return this.baseUrl + '/admin/settings/notifications';
   }
   public static get connectedApps(): string {
-    return this.baseUrl + '/customers/settings/connected-apps';
+    return this.baseUrl + '/dashboard/settings/connected-apps';
   }
   public static get adminConnectedApps(): string {
     return this.baseUrl + '/admin/settings/connected-apps';
@@ -794,16 +794,16 @@ export class routes {
     return this.baseUrl + '/provider-signup-payment';
   }
   public static get customerNotifications(): string {
-    return this.baseUrl + '/customers/settings/customer-notification';
+    return this.baseUrl + '/dashboard/settings/customer-notification';
   }
   public static get customerBookingCalendar(): string {
-    return this.baseUrl + '/customers/customer-booking-calendar';
+    return this.baseUrl + '/dashboard/customer-booking-calendar';
   }
   public static get invoice(): string {
-    return this.baseUrl + '/customers/invoice';
+    return this.baseUrl + '/dashboard/invoice';
   }
   public static get orders(): string {
-    return this.baseUrl + '/customers/orders';
+    return this.baseUrl + '/dashboard/orders';
   }
   public static get searchList(): string {
     return this.baseUrl + '/search/list';
@@ -824,10 +824,10 @@ export class routes {
     return this.baseUrl + '/providers/provider-device-management';
   }
   public static get customerDeviceManagement(): string {
-    return this.baseUrl + '/customers/settings/user-device-management';
+    return this.baseUrl + '/dashboard/settings/user-device-management';
   }
   public static get customerLoginActivity(): string {
-    return this.baseUrl + '/customers/settings/user-login-activity';
+    return this.baseUrl + '/dashboard/settings/user-login-activity';
   }
   public static get providerLoginActivity(): string {
     return this.baseUrl + '/providers/provider-login-activity';
@@ -836,7 +836,7 @@ export class routes {
     return this.baseUrl + '/admin/forget-password';
   }
   public static get customerNotification(): string {
-    return this.baseUrl + '/customers/notification';
+    return this.baseUrl + '/dashboard/notification';
   }
   public static get booking2(): string {
     return this.baseUrl + '/bookings/user-booking';

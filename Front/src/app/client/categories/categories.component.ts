@@ -21,6 +21,8 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.categories$.subscribe(
       (data) => (this.categories = data)
     );
+    
+    this.categoriesService.getCategories()
   }
 
   goToSearch() {

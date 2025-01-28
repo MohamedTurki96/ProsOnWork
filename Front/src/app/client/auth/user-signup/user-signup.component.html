@@ -16,11 +16,10 @@
             <div class="card p-sm-4 my-5">
               <div class="card-body">
                 <div class="text-center mb-3">
-                  <h3 class="mb-2">User Signup</h3>
-                  <p>Enter your credentials to access your account</p>
+                  <h3 class="mb-2">Inscription Utilisateur</h3>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">First Name</label>
+                  <label class="form-label">Prénom</label>
                   <input type="text" class="form-control" />
                 </div>
                 <div class="mb-3">
@@ -28,7 +27,7 @@
                   <input type="email" class="form-control" />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Phone Number</label>
+                  <label class="form-label">Numéro de téléphone</label>
                   <input
                     class="form-control"
                     id="phone"
@@ -40,9 +39,9 @@
                   <div
                     class="d-flex align-items-center justify-content-between flex-wrap"
                   >
-                    <label class="form-label">Password</label>
+                    <label class="form-label">Mot de passe</label>
                     <p class="text-gray-6 fw-medium mb-1">
-                      Must be 8 Characters at Least
+                      Doit comporter au moins 8 caractères
                     </p>
                   </div>
                   <input type="password" class="form-control" />
@@ -59,17 +58,17 @@
                         id="remember_me"
                       />
                       <label class="form-check-label" for="remember_me">
-                        I agree to
+                        J'accepte les
                         <a
                           href="javascript:void(0);"
                           class="text-primary text-decoration-underline"
-                          >Terms of use</a
+                          >Conditions d'utilisation</a
                         >
-                        &
+                        et la
                         <a
                           href="javascript:void(0);"
                           class="text-primary text-decoration-underline"
-                          >Privacy policy</a
+                          >Politique de confidentialité</a
                         >
                       </label>
                     </div>
@@ -81,14 +80,14 @@
                     class="btn btn-lg btn-linear-primary w-100"
                     (click)="navigate()"
                   >
-                    Sign Up
+                    S'inscrire
                   </button>
                 </div>
                 <div class="d-flex justify-content-center">
                   <p>
-                    Already have a account?
+                    Vous avez déjà un compte ?
                     <a [routerLink]="routes.login" class="text-primary"
-                      >Sign In</a
+                      >Se connecter</a
                     >
                   </p>
                 </div>
@@ -97,12 +96,12 @@
                 <img
                   src="assets/img/bg/authentication-bg.png"
                   class="bg-left-top"
-                  alt="Img"
+                  alt="Image"
                 />
                 <img
                   src="assets/img/bg/authentication-bg.png"
                   class="bg-right-bottom"
-                  alt="Img"
+                  alt="Image"
                 />
               </div>
             </div>

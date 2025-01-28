@@ -8,119 +8,96 @@
       "img": "assets/img/services/service-26.jpg"
     },
     {
-      "id": 2,
-      "name": "Removal",
-      "listings": 0,
-      "logo": "assets/img/icons/category-02.svg",
-      "img": "assets/img/services/service-28.jpg"
-    },
-    {
       "id": 3,
-      "name": "Electrical",
+      "name": "Électrique",
       "listings": 0,
       "logo": "assets/img/icons/category-05.svg",
       "img": "assets/img/services/service-29.jpg"
     },
     {
-      "id": 4,
-      "name": "Furniture Assembly",
-      "listings": 0,
-      "logo": "assets/img/icons/category-03.svg",
-      "img": "assets/img/services/service-30.jpg"
-    },
-    {
       "id": 5,
-      "name": "Mobile Barbers",
+      "name": "Barbiers",
       "listings": 0,
       "logo": "assets/img/icons/category-08.svg",
       "img": "assets/img/services/service-31.jpg"
     },
     {
       "id": 6,
-      "name": "Deliveries",
+      "name": "Livraisons",
       "listings": 0,
       "logo": "assets/img/icons/category-07.svg",
       "img": "assets/img/services/service-01.jpg"
     },
     {
       "id": 7,
-      "name": "Cleaning",
+      "name": "Nettoyage",
       "listings": 0,
       "logo": "assets/img/icons/category-14.svg",
       "img": "assets/img/services/service-33.jpg"
     },
     {
       "id": 8,
-      "name": "Man and Van",
+      "name": "Transporteurs",
       "listings": 0,
       "logo": "assets/img/icons/category-06.svg",
       "img": "assets/img/services/service-34.jpg"
     },
     {
       "id": 9,
-      "name": "Nail Technicians",
+      "name": "Techniciens d'ongles",
       "listings": 0,
       "logo": "assets/img/icons/category-11.svg",
       "img": "assets/img/services/service-35.jpg"
     },
     {
-      "id": 10,
-      "name": "Shop & Deliver",
-      "listings": 0,
-      "logo": "assets/img/icons/category-13.svg",
-      "img": "assets/img/services/service-32.jpg"
-    },
-    {
       "id": 11,
-      "name": "Car Transport",
+      "name": "Transport de voitures",
       "listings": 0,
       "logo": "assets/img/icons/category-15.svg",
       "img": "assets/img/services/service-37.jpg"
     },
     {
       "id": 12,
-      "name": "Hairdressers",
+      "name": "Coiffeurs",
       "listings": 0,
       "logo": "assets/img/icons/category-12.svg",
       "img": "assets/img/services/service-38.jpg"
     },
     {
       "id": 13,
-      "name": "Computer Service",
+      "name": "Informatique",
       "listings": 0,
       "logo": "assets/img/icons/category-04.svg",
       "img": "assets/img/services/service-39.jpg"
     },
     {
       "id": 14,
-      "name": "Plumbing",
+      "name": "Plomberie",
       "listings": 0,
       "logo": "assets/img/icons/category-10.svg",
       "img": "assets/img/services/service-40.jpg"
     },
     {
       "id": 15,
-      "name": "Carpentry",
+      "name": "Menuiserie",
       "listings": 0,
       "logo": "assets/img/icons/category-16.svg",
       "img": "assets/img/services/service-41.jpg"
     },
     {
       "id": 16,
-      "name": "Interior",
+      "name": "Intérieur",
       "listings": 0,
       "logo": "assets/img/icons/category-09.svg",
       "img": "assets/img/services/service-42.jpg"
     },
     {
       "id": 17,
-      "name": "Car Wash",
+      "name": "Lavage",
       "listings": 0,
       "logo": "assets/img/icons/category-17.svg",
       "img": "assets/img/services/service-43.jpg"
     }
-  ]
-  
-  ,
+  ],
   "totalData": 8
 }

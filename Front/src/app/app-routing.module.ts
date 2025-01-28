@@ -8,7 +8,7 @@ const routes: Routes = [
       import('./client/client.module').then((m) => m.ClientModule),
   },
   {
-    path: 'professional',
+    path: 'providers',
     loadChildren: () =>
       import('./professional/professional.module').then(
         (m) => m.ProfessionalModule

@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProfessionalComponent } from './professional.component';
-import { ProfessionalRoutingModule } from './professional-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { ProvidersRoutingModule } from './providers-routing.module';
+import { ProvidersComponent } from './providers.component';
+
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ProvidersHeaderComponent } from './common/providers-header/providers-header.component';
+import { ProvidersSidebarComponent } from './common/providers-sidebar/providers-sidebar.component';
 
 @NgModule({
-  declarations: [ProfessionalComponent],
-  imports: [CommonModule, ProfessionalRoutingModule, SharedModule],
+  declarations: [
+    ProvidersComponent,
+    ProvidersHeaderComponent,
+    ProvidersSidebarComponent
+  ],
+  imports: [
+    CommonModule,
+    ProvidersRoutingModule,
+    SharedModule,
+  ],
 })
-export class ProfessionalModule {}
+export class ProfessionalModule { }

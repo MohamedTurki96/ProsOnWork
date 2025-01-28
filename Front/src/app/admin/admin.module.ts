@@ -1,12 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { AdminComponent } from './admin.component';
+
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AdminHeaderComponent } from './common/admin-header/admin-header.component';
+import { AdminSidebarComponent } from './common/admin-sidebar/admin-sidebar.component';
+import { ModalComponent } from './modal/modal.component';
+
 
 @NgModule({
-  declarations: [AdminComponent],
-  imports: [CommonModule, AdminRoutingModule, SharedModule],
+  declarations: [
+    AdminComponent,
+    AdminHeaderComponent,
+    AdminSidebarComponent,
+    ModalComponent,
+  ],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    SharedModule
+  ],
 })
-export class AdminModule {}
+export class AdminModule { }

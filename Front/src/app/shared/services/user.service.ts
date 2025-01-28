@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  loadUser() {
+  getConnectedUser() {
     return this.http.get(this.baseUrl).pipe(
       tap((data) => {
         this.subject.next(null);

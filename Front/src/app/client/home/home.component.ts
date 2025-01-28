@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { routes } from 'src/app/shared/routes/routes';
 import { init } from 'ityped';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
@@ -13,7 +13,7 @@ declare var $: any;
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public routes = routes;
   public categories: Category[] = [];
   public selectedLocation: GeoLocation | null = null;
@@ -24,10 +24,14 @@ export class HomeComponent {
     private categoriesService: CategoriesService,
     private geoLocationService: GeoLocationService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.categoriesService.categories$.subscribe(
       (data) => (this.categories = data.slice(0, 12))
     );
+
+    this.categoriesService.getCategories();
   }
 
   ngAfterViewInit(): void {
@@ -58,6 +62,6 @@ export class HomeComponent {
   }
 
   handleSearch() {
-    this.router.navigateByUrl(this.routes.services)
+    this.router.navigateByUrl(this.routes.services);
   }
 }
