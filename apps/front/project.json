@@ -1,0 +1,36 @@
+{
+  "name": "front",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/front/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project front --web",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/apps/web"
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": {
+        "port": 3000,
+        "buildTarget": "front:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "generate:api": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "swagger-typescript-api -p http://127.0.0.1:8000/docs/api-docs.json -o ./src/api -n index.ts --extract-enums --unwrap-response-data --single-http-client --module-name-first-tag",
+        "cwd": "apps/front"
+      }
+    }
+  }
+}
