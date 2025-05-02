@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@pros-on-work/core": ["libs/core/src/index.ts"],
+      "@pros-on-work/utils": ["libs/utils/src/index.ts"],
+      "@pros-on-work/resources": ["libs/resources/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
