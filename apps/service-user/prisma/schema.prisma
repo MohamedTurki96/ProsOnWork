@@ -1,0 +1,45 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
+  output        = "../src/prisma"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int       @id @default(autoincrement())
+  name            String
+  email           String    @unique
+  emailVerifiedAt DateTime?
+  password        String
+  role            UserRole  @default(client)
+  phone           String?
+  avatarId        Int?
+  address         String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model EmailVerificationToken {
+  email     String   @id
+  token     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model PasswordResetToken {
+  email     String   @id
+  token     String   @unique
+  createdAt DateTime @default(now())
+}
+
+enum UserRole {
+  admin
+  client
+  serviceProvider
+}

@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  # Postgres is used to store persistent data
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: prosonwork
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres-16-data:/var/lib/postgresql/data
+    ports:
+      - 127.0.0.1:5432:5432
+
+  nats:
+    image: nats:2.10
+    restart: unless-stopped
+    command: --jetstream --store_dir /tmp/nats/jetstream --user local --pass admin
+    volumes:
+      - nats-data:/tmp/nats/jetstream
+    ports:
+      - 127.0.0.1:4222:4222
+
+volumes:
+  postgres-16-data:
+  nats-data:

@@ -1,0 +1,39 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
+  output        = "../src/prisma"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  parentId  Int? // null = root feedback
+  rating    Int?      
+  comment   String?
+  createdAt DateTime @default(now())
+
+  // Relations
+  parent  Feedback?  @relation("FeedbackReplies", fields: [parentId], references: [id])
+  replies Feedback[] @relation("FeedbackReplies")
+}
+
+model Reclamation {
+  id        Int               @id @default(autoincrement())
+  userId    Int
+  productId Int
+  comment   String
+  status    ReclamationStatus @default(open)
+  createdAt DateTime          @default(now())
+}
+
+enum ReclamationStatus {
+  open
+  inProgress
+  resolved
+}

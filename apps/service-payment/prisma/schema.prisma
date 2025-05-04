@@ -1,0 +1,44 @@
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native"]
+  output          = "../src/prisma"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model Wallet {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  balance   Float    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  payments  Payment[]
+}
+
+model Payment {
+  id         Int           @id @default(autoincrement())
+  walletId   Int
+  type       PaymentType
+  amount     Float         @default(0)
+  status     PaymentStatus @default(pending)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  wallet     Wallet        @relation(fields: [walletId], references: [id])
+}
+
+enum PaymentType {
+  cashIn     // e.g., client adds money
+  cashOut    // e.g., provider withdrawal
+  reservation // client pays for booking
+}
+
+enum PaymentStatus {
+  pending
+  completed
+  failed
+}

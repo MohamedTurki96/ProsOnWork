@@ -1,0 +1,58 @@
+{
+  "name": "gateway",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/service-gateway/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/service-gateway",
+        "main": "apps/service-gateway/src/main.ts",
+        "tsConfig": "apps/service-gateway/tsconfig.app.json",
+        "assets": [
+          {
+            "input": "apps/service-gateway/assets",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ],
+        "isolatedConfig": true,
+        "watch": true,
+        "webpackConfig": "apps/service-gateway/webpack.config.js",
+        "generatePackageJson": true
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "gateway:build",
+        "inspect": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "gateway:build:development"
+        },
+        "production": {
+          "buildTarget": "gateway:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/service-gateway/**/*.ts",
+          "apps/service-gateway/package.json"
+        ]
+      }
+    }
+  }
+}

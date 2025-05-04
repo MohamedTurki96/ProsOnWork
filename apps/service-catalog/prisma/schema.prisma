@@ -1,0 +1,72 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
+  output        = "../src/prisma"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int     @id @default(autoincrement())
+  name      String
+  iconId    Int?
+  imageId   Int?
+  createdAt DateTime @default(now())
+
+  products  Product[]
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  isActive    Boolean   @default(true)
+  includes    Json?
+  faq         Json?
+  type        ProductType
+  priceType   PriceType
+  categoryId  Int
+  shopId      Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  category    Category  @relation(fields: [categoryId], references: [id])
+  shop        Shop      @relation(fields: [shopId], references: [id])
+  workers     Worker[]
+}
+
+model Shop {
+  id        Int      @id @default(autoincrement())
+  name      String
+  address   String
+  ownerId   Int
+  createdAt DateTime @default(now())
+
+  products  Product[]
+  workers   Worker[]
+}
+
+model Worker {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String?
+  shopId    Int
+  createdAt DateTime @default(now())
+
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  products  Product[]
+}
+
+enum ProductType {
+  service
+  equipment
+}
+
+enum PriceType {
+  hour
+  package
+}

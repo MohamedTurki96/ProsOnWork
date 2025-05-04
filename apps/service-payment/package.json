@@ -1,0 +1,12 @@
+{
+  "name": "@pros-on-work/service-payment",
+  "version": "0.0.1",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "migrate:deploy": "prisma migrate deploy --schema=./schema.prisma",
+    "db:seed": "node prisma-seed.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
