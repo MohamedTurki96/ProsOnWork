@@ -313,5 +313,19 @@ export class Api<SecurityDataType extends unknown> {
         format: 'json',
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags Files
+     * @name ServeFile
+     * @request GET:/files/{id}/serve
+     */
+    serveFile: (id: number, params: RequestParams = {}) =>
+      this.http.request<File, void>({
+        path: `/files/${id}/serve`,
+        method: 'GET',
+        ...params,
+      }),
   };
 }

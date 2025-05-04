@@ -1,0 +1,183 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // ==== Service: Gateway ====
+    {
+      "label": "Serve: Gateway",
+      "type": "shell",
+      "command": "nx serve gateway",
+      "problemMatcher": []
+    },
+    // ==== Service: User ====
+    {
+      "label": "Serve: User",
+      "type": "shell",
+      "command": "nx serve user",
+      "problemMatcher": []
+    },
+    {
+      "label": "Migrate: User Prisma",
+      "type": "shell",
+      "command": "nx run user:prisma-migrate",
+      "problemMatcher": []
+    },
+    {
+      "label": "Seed: User Prisma",
+      "type": "shell",
+      "command": "nx run user:prisma-seed",
+      "problemMatcher": []
+    },
+    // ==== Service: File ====
+    {
+      "label": "Serve: File",
+      "type": "shell",
+      "command": "nx serve file",
+      "problemMatcher": []
+    },
+    {
+        "label": "Migrate: File Prisma",
+        "type": "shell",
+        "command": "nx run file:prisma-migrate",
+        "problemMatcher": []
+      },
+      {
+        "label": "Seed: File Prisma",
+        "type": "shell",
+        "command": "nx run file:prisma-seed",
+        "problemMatcher": []
+      },
+    // ==== Service: Catalog ====
+    {
+      "label": "Serve: Catalog",
+      "type": "shell",
+      "command": "nx serve catalog",
+      "problemMatcher": []
+    },
+    {
+        "label": "Migrate: Catalog Prisma",
+        "type": "shell",
+        "command": "nx run catalog:prisma-migrate",
+        "problemMatcher": []
+      },
+      {
+        "label": "Seed: Catalog Prisma",
+        "type": "shell",
+        "command": "nx run catalog:prisma-seed",
+        "problemMatcher": []
+      },
+    // ==== Service: Booking ====
+    {
+      "label": "Serve: Booking",
+      "type": "shell",
+      "command": "nx serve booking",
+      "problemMatcher": []
+    },
+    {
+        "label": "Migrate: Booking Prisma",
+        "type": "shell",
+        "command": "nx run booking:prisma-migrate",
+        "problemMatcher": []
+      },
+      {
+        "label": "Seed: Booking Prisma",
+        "type": "shell",
+        "command": "nx run booking:prisma-seed",
+        "problemMatcher": []
+      },
+    // ==== Service: Feedback ====
+    {
+      "label": "Serve: Feedback",
+      "type": "shell",
+      "command": "nx serve feedback",
+      "problemMatcher": []
+    },
+    {
+        "label": "Migrate: Feedback Prisma",
+        "type": "shell",
+        "command": "nx run feedback:prisma-migrate",
+        "problemMatcher": []
+      },
+      {
+        "label": "Seed: Feedback Prisma",
+        "type": "shell",
+        "command": "nx run feedback:prisma-seed",
+        "problemMatcher": []
+      },
+    // ==== Service: Chat ====
+    {
+      "label": "Serve: Chat",
+      "type": "shell",
+      "command": "nx serve chat",
+      "problemMatcher": []
+    },
+    {
+        "label": "Migrate: Chat Prisma",
+        "type": "shell",
+        "command": "nx run chat:prisma-migrate",
+        "problemMatcher": []
+      },
+      {
+        "label": "Seed: Chat Prisma",
+        "type": "shell",
+        "command": "nx run chat:prisma-seed",
+        "problemMatcher": []
+      },
+    // ==== Service: Notification ====
+    {
+      "label": "Serve: Notification",
+      "type": "shell",
+      "command": "nx serve notification",
+      "problemMatcher": []
+    },
+    {
+        "label": "Migrate: Notification Prisma",
+        "type": "shell",
+        "command": "nx run notification:prisma-migrate",
+        "problemMatcher": []
+      },
+      {
+        "label": "Seed: Notification Prisma",
+        "type": "shell",
+        "command": "nx run notification:prisma-seed",
+        "problemMatcher": []
+      },
+    // ==== Service: Payment ====
+    {
+      "label": "Serve: Payment",
+      "type": "shell",
+      "command": "nx serve payment",
+      "problemMatcher": []
+    },
+    {
+        "label": "Migrate: Payment Prisma",
+        "type": "shell",
+        "command": "nx run payment:prisma-migrate",
+        "problemMatcher": []
+      },
+      {
+        "label": "Seed: Payment Prisma",
+        "type": "shell",
+        "command": "nx run payment:prisma-seed",
+        "problemMatcher": []
+      },
+    // ==== Frontend ====
+    {
+      "label": "Serve: Front",
+      "type": "shell",
+      "command": "nx serve front",
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate: API (Main)",
+      "type": "shell",
+      "command": "nx run front:generate:api",
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate: API (File)",
+      "type": "shell",
+      "command": "nx run front:generate:file-api",
+      "problemMatcher": []
+    }
+  ]
+}

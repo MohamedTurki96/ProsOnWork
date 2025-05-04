@@ -66,6 +66,8 @@ export interface UserListResultDTO {
   items: UserDTO[];
 }
 
+export type UserUpdateCommand = object;
+
 export interface UserLoginDTO {
   email: string;
   password: string;
@@ -695,11 +697,13 @@ export class Api<SecurityDataType extends unknown> {
      * @request PUT:/users/me
      * @secure
      */
-    updateOwnUser: (params: RequestParams = {}) =>
+    updateOwnUser: (data: UserUpdateCommand, params: RequestParams = {}) =>
       this.http.request<UserDTO, void>({
         path: `/users/me`,
         method: 'PUT',
+        body: data,
         secure: true,
+        type: ContentType.Json,
         format: 'json',
         ...params,
       }),
@@ -748,7 +752,7 @@ export class Api<SecurityDataType extends unknown> {
      * @secure
      */
     changePassword: (data: ChangePasswordDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, void>({
+      this.http.request<UserUpdateCommand, void>({
         path: `/auth/change-password`,
         method: 'POST',
         body: data,
@@ -766,7 +770,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/request-password-reset
      */
     requestReset: (data: RequestPasswordResetDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, any>({
+      this.http.request<UserUpdateCommand, any>({
         path: `/auth/request-password-reset`,
         method: 'POST',
         body: data,
@@ -783,7 +787,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/reset-password
      */
     resetPassword: (data: ResetPasswordDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, any>({
+      this.http.request<UserUpdateCommand, any>({
         path: `/auth/reset-password`,
         method: 'POST',
         body: data,
@@ -800,7 +804,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/verify-email
      */
     verifyEmail: (data: VerifyEmailDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, any>({
+      this.http.request<UserUpdateCommand, any>({
         path: `/auth/verify-email`,
         method: 'POST',
         body: data,
@@ -1193,13 +1197,13 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags Reservations
      * @name Accept
-     * @request POST:/reservations/{id}/accept
+     * @request PUT:/reservations/{id}/accept
      * @secure
      */
     accept: (id: number, params: RequestParams = {}) =>
       this.http.request<ReservationDTO, void>({
         path: `/reservations/${id}/accept`,
-        method: 'POST',
+        method: 'PUT',
         secure: true,
         format: 'json',
         ...params,
@@ -1210,13 +1214,13 @@ export class Api<SecurityDataType extends unknown> {
      *
      * @tags Reservations
      * @name Cancel
-     * @request POST:/reservations/{id}/cancel
+     * @request PUT:/reservations/{id}/cancel
      * @secure
      */
     cancel: (id: number, params: RequestParams = {}) =>
       this.http.request<ReservationDTO, void>({
         path: `/reservations/${id}/cancel`,
-        method: 'POST',
+        method: 'PUT',
         secure: true,
         format: 'json',
         ...params,

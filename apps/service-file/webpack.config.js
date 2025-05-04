@@ -12,9 +12,18 @@ module.exports = {
       compiler: 'tsc',
       main: './src/main.ts',
       tsConfig: './tsconfig.app.json',
+      assets: [
+        {
+          input: join(__dirname, 'media'),
+          glob: '**/*',
+          output: 'media',
+        },
+      ],
+      watch: true,
       optimization: false,
       outputHashing: 'none',
     }),
   ],
   stats: 'errors-only',
+  watch: true,
 };

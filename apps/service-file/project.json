@@ -22,6 +22,7 @@
           }
         ],
         "isolatedConfig": true,
+        "watch": true,
         "webpackConfig": "apps/service-file/webpack.config.js",
         "generatePackageJson": true
       }

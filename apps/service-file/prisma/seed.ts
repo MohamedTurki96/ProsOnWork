@@ -3,7 +3,16 @@ import { PrismaClient } from '../src/prisma';
 const prisma = new PrismaClient();
 
 async function seed() {
-  await prisma.$transaction(async (client) => {});
+  await prisma.$transaction(async (client) => {
+    await client.media.create({
+      data: {
+        filename: 'test-file.png',
+        filePath: 'test-file.png',
+        mimeType: 'image/jpeg',
+        size: 1024, 
+      },
+    });
+  });
 }
 
 seed()

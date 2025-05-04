@@ -1,3 +1,4 @@
+import { createReadStream, existsSync } from 'fs';
 import { extname, join } from 'path';
 
 import {
@@ -7,6 +8,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -15,6 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { QueryPattern } from '@pros-on-work/core';
 import { MediaDTO, MediaGetDTO, MediaGetQuery } from '@pros-on-work/resources';
+import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -60,6 +63,48 @@ export class FileController {
   @ApiResponse({ status: HttpStatus.OK, type: MediaDTO })
   async getFile(@Param('id') id: number) {
     return await this.fileService.getFileById(id);
+  }
+
+  @Get(':id/serve')
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Serves the actual file based on media ID.',
+    content: {
+      'application/octet-stream': {
+        schema: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'File not found' })
+  async serveFile(@Param('id') id: number, @Res() res: Response) {
+    const media = await this.fileService.getFileById(id);
+    if (!media) {
+      res.status(HttpStatus.NOT_FOUND).send('File not found');
+      return;
+    }
+
+    const filePath = join(__dirname, 'media', media.filename);
+    if (!existsSync(filePath)) {
+      res.status(HttpStatus.NOT_FOUND).send("File not found");
+      return;
+    }
+
+    res.setHeader(
+      'Content-Disposition',
+      `inline; filename="${media.filename}"`,
+    );
+    res.setHeader(
+      'Content-Type',
+      media.mimeType || 'application/octet-stream',
+    );
+
+    const stream = createReadStream(filePath);
+    stream.pipe(res);
   }
 
   @QueryPattern(MediaGetQuery)

@@ -17,4 +17,5 @@ module.exports = {
     }),
   ],
   stats: 'errors-only',
+  watch: true
 };
