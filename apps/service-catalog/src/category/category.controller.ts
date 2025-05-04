@@ -25,7 +25,7 @@ export class CategoryController {
       query.where = {};
     }
 
-    const orders = await this.categoryService.findMany({
+    const categories = await this.categoryService.findMany({
       skip: query.skip,
       take: query.take,
       orderBy: query.sort
@@ -48,7 +48,7 @@ export class CategoryController {
 
     const count = await this.categoryService.count({ where: query.where });
 
-    const dtoItems = orders.map((i) => i.toDTO());
+    const dtoItems = categories.map((i) => i.toDTO());
 
     return PaginationResponse(dtoItems, count, query);
   }

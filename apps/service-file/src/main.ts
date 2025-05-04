@@ -30,8 +30,8 @@ setupApp(modLoader, {
 export function setupApiSwagger(app: INestApplication) {
   const docBuilder = new DocumentBuilder()
     .setTitle('ProsOnWork Files Gateway')
-    .addBearerAuth()
     .setVersion(process.env['APP_VERSION']!)
+    .addBearerAuth()
     .addServer(ServerURL.get);
 
   const docConfig = docBuilder.build();
@@ -45,6 +45,7 @@ export function setupApiSwagger(app: INestApplication) {
 
   SwaggerModule.setup('docs', app, document, {
     useGlobalPrefix: false,
+    jsonDocumentUrl: "docs/docs.json",
     swaggerOptions: { tagsSorter: 'alpha', withCredentials: true },
   });
 }

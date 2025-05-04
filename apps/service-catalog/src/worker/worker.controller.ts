@@ -25,7 +25,7 @@ export class WorkerController {
       query.where = {};
     }
 
-    const orders = await this.workerService.findMany({
+    const workers = await this.workerService.findMany({
       skip: query.skip,
       take: query.take,
       orderBy: query.sort
@@ -48,7 +48,7 @@ export class WorkerController {
 
     const count = await this.workerService.count({ where: query.where });
 
-    const dtoItems = orders.map((i) => i.toDTO());
+    const dtoItems = workers.map((i) => i.toDTO());
 
     return PaginationResponse(dtoItems, count, query);
   }

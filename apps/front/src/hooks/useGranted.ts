@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
-import { UserRoleEnum } from '../api';
+
+import { UserRole } from '../api';
+
 import { useConnectedUser } from './useAuth';
 
-export function useGranted(roles: UserRoleEnum[], anonymous?: boolean) {
+export function useGranted(roles: UserRole[], anonymous?: boolean) {
   const { data: user } = useConnectedUser();
 
   return useMemo(

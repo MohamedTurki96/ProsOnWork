@@ -25,7 +25,10 @@ import {
   WorkerUpdateDTO,
 } from '@pros-on-work/resources';
 
-import { ApiListQuery, ApiNeedsAuthentication } from '../decorators/api.decorator';
+import {
+  ApiListQuery,
+  ApiNeedsAuthentication,
+} from '../decorators/api.decorator';
 import { Public } from '../decorators/public.decorator';
 import { Roles } from '../decorators/roles.decorator';
 
@@ -68,6 +71,7 @@ export class WorkerController {
   @Roles(UserRole.Admin, UserRole.ServiceProvider)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, type: WorkerDTO })
+  @ApiBody({ type: WorkerUpdateDTO })
   @ApiParam({ name: 'id', type: Number })
   async update(@Param('id') id: number, @Body() dto: WorkerUpdateDTO) {
     return this.eventHub.sendCommand(new WorkerUpdateCommand({ id, ...dto }));

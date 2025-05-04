@@ -1,8 +1,8 @@
-import { PriceTypeEnum } from '../api';
+import { PriceType } from '../api';
 
 export function renderPrice(
   price: number,
-  type: PriceTypeEnum = PriceTypeEnum.PACKAGE,
+  type: PriceType = PriceType.Package,
 ) {
-  return price + `${type == PriceTypeEnum.HOUR ? '/h' : ''}` + ' TND';
+  return price + `${type == PriceType.Hour ? '/h' : ''}` + ' TND';
 }

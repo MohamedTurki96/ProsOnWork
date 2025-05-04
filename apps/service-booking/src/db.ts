@@ -1,11 +1,14 @@
 import { ITXClientDenyList } from '@prisma/client/runtime/library';
-import { prismaExtensionExists } from '@pros-on-work/core';
+import { prismaExtensionExists, prismaToDTO } from '@pros-on-work/core';
+import { ReservationDTO } from '@pros-on-work/resources';
 
 import { PrismaClient } from './prisma';
 
 export function createPrismaClient() {
   return new PrismaClient().$extends(prismaExtensionExists).$extends({
-    result: {},
+    result: {
+      reservation: {toDTO: prismaToDTO(ReservationDTO)}
+    },
   });
 }
 

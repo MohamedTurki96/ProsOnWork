@@ -25,7 +25,7 @@ export class ShopController {
       query.where = {};
     }
 
-    const orders = await this.shopService.findMany({
+    const shops = await this.shopService.findMany({
       skip: query.skip,
       take: query.take,
       orderBy: query.sort
@@ -48,7 +48,7 @@ export class ShopController {
 
     const count = await this.shopService.count({ where: query.where });
 
-    const dtoItems = orders.map((i) => i.toDTO());
+    const dtoItems = shops.map((i) => i.toDTO());
 
     return PaginationResponse(dtoItems, count, query);
   }

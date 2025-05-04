@@ -14,7 +14,7 @@ model Feedback {
   userId    Int
   productId Int
   parentId  Int? // null = root feedback
-  rating    Int      @default(0)
+  rating    Int?      
   comment   String?
   createdAt DateTime @default(now())
 
@@ -27,7 +27,7 @@ model Reclamation {
   id        Int               @id @default(autoincrement())
   userId    Int
   productId Int
-  comment   String?
+  comment   String
   status    ReclamationStatus @default(open)
   createdAt DateTime          @default(now())
 }

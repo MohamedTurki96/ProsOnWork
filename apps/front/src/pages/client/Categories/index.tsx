@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+
 import { useCategories } from '../../../hooks/useCategory';
 import { Routes } from '../../../router/routes/routes';
 
 export function Categories() {
   const { data: categories } = useCategories();
 
-  if (!categories?.data) {
+  if (!categories?.items) {
     return <></>;
   }
 
@@ -14,7 +15,7 @@ export function Categories() {
       <div className="content">
         <div className="container">
           <div className="row justify-content-center align-items-center">
-            {categories.data.map((category) => (
+            {categories.items.map((category) => (
               <div key={category.id} className="col-lg-3 col-md-6">
                 <Link to={`${Routes.search}?categories=${category.id}`}>
                   <div

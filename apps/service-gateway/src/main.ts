@@ -55,6 +55,7 @@ export function setupApiSwagger(app: INestApplication) {
 
   SwaggerModule.setup('docs', app, document, {
     useGlobalPrefix: false,
+    jsonDocumentUrl: "docs/docs.json",
     swaggerOptions: { tagsSorter: 'alpha', withCredentials: true },
   });
 }

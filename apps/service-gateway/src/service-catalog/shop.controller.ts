@@ -71,6 +71,7 @@ export class ShopController {
   @Roles(UserRole.Admin, UserRole.ServiceProvider)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, type: ShopDTO })
+  @ApiBody({ type: ShopUpdateDTO })
   @ApiParam({ name: 'id', type: Number })
   async update(@Param('id') id: number, @Body() dto: ShopUpdateDTO) {
     return this.eventHub.sendCommand(new ShopUpdateCommand({ id, ...dto }));

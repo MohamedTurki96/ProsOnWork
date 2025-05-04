@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
-import { useConnectedUser } from '../../hooks/useAuth';
 import { Navigate, useLocation } from 'react-router-dom';
+
+import { UserRole } from '../../api';
+import { useConnectedUser } from '../../hooks/useAuth';
 import { Routes } from '../routes/routes';
-import { UserRoleEnum } from '../../api';
 
 type GrantedProps = {
-  roles: UserRoleEnum[];
+  roles: UserRole[];
   children: ReactNode;
 };
 

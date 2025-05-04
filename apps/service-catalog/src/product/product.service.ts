@@ -1,6 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { EventHub, PRISMA_CLIENT } from '@pros-on-work/core';
-import { ProductCreateDTO, ProductUpdateDTO } from '@pros-on-work/resources';
 
 import { ExtendedPrismaClient } from '../db';
 import { Prisma } from '../prisma';
@@ -36,7 +35,7 @@ export class ProductService {
     return result.toDTO();
   }
 
-  async create(dto: ProductCreateDTO) {
+ /*  async create(dto: ProductCreateDTO) {
     const workersId = dto.workers;
     
 
@@ -51,5 +50,5 @@ export class ProductService {
       where: { id },
       data: dto,
     });
-  }
+  } */
 }

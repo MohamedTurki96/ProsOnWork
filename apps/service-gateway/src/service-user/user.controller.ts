@@ -8,8 +8,8 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { EventHub } from '@pros-on-work/core';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CurrentUser, EventHub } from '@pros-on-work/core';
 import {
   CurrentUserDTO,
   UserDTO,
@@ -20,14 +20,12 @@ import {
   UserListWhereDTO,
   UserRole,
   UserUpdateCommand,
-  UserUpdateDTO,
 } from '@pros-on-work/resources';
 
 import {
   ApiListQuery,
   ApiNeedsAuthentication,
 } from '../decorators/api.decorator';
-import { CurrentUser } from '../decorators/current-user.decorator';
 import { Roles } from '../decorators/roles.decorator';
 
 @ApiTags('Users')
@@ -66,10 +64,11 @@ export class UserController {
   @Put('me')
   @ApiNeedsAuthentication()
   @HttpCode(HttpStatus.OK)
+  @ApiBody({ type: UserUpdateCommand })
   @ApiResponse({ status: HttpStatus.OK, type: UserDTO })
   updateOwnUser(
     @CurrentUser() user: CurrentUserDTO,
-    @Body() dto: Omit<UserUpdateDTO, 'id'>,
+    @Body() dto: UserUpdateCommand,
   ) {
     return this.eventHub.sendCommand(
       new UserUpdateCommand({ id: user.id, ...dto }),

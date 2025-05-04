@@ -1,20 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Lightbox from 'yet-another-react-lightbox';
-import Slider from 'react-slick';
 import { Link, useParams } from 'react-router-dom';
+import Slider from 'react-slick';
 import StickyBox from 'react-sticky-box';
+import Lightbox from 'yet-another-react-lightbox';
+
+import { UserRole } from '../../../api';
+import { AppLoader } from '../../../components/AppLoader';
 import VideoModal from '../../../core/hooks/video-modal';
+import { useGranted } from '../../../hooks/useGranted';
+import { useProduct } from '../../../hooks/useProducts';
 import { Routes } from '../../../router/routes/routes';
 import 'yet-another-react-lightbox/styles.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { useProduct } from '../../../hooks/useProducts';
-import { AppLoader } from '../../../components/AppLoader';
-import { useGranted } from '../../../hooks/useGranted';
-import { UserRoleEnum } from '../../../api';
 import { getGeolocationText } from '../../../utils/getGeolocationText';
-import { renderPrice } from '../../../utils/renderPrice';
 import { renderDate } from '../../../utils/renderDate';
+import { renderPrice } from '../../../utils/renderPrice';
 
 export function ServiceDetails() {
   const params = useParams<{ id: string }>();
@@ -24,7 +25,7 @@ export function ServiceDetails() {
   const [nav2, setNav2] = useState(null);
   const sliderRef1 = useRef(null);
   const sliderRef2 = useRef(null);
-  const show = useGranted([UserRoleEnum.CLIENT], true);
+  const show = useGranted([UserRole.CLIENT], true);
   const [addressText, setAddressText] = useState('');
 
   const [showModal, setShowModal] = useState(false);

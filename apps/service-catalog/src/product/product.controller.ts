@@ -1,16 +1,12 @@
 import { Controller } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
-import { CommandPattern, QueryPattern } from '@pros-on-work/core';
+import { QueryPattern } from '@pros-on-work/core';
 import {
   PaginationResponse,
-  ProductCreateCommand,
-  ProductCreateDTO,
   ProductGetDTO,
   ProductGetQuery,
   ProductListDTO,
   ProductListQuery,
-  ProductUpdateCommand,
-  ProductUpdateCommandDTO,
 } from '@pros-on-work/resources';
 
 import { ProductService } from './product.service';
@@ -25,7 +21,7 @@ export class ProductController {
       query.where = {};
     }
 
-    const orders = await this.productService.findMany({
+    const products = await this.productService.findMany({
       skip: query.skip,
       take: query.take,
       orderBy: query.sort
@@ -48,7 +44,7 @@ export class ProductController {
 
     const count = await this.productService.count({ where: query.where });
 
-    const dtoItems = orders.map((i) => i.toDTO());
+    const dtoItems = products.map((i) => i.toDTO());
 
     return PaginationResponse(dtoItems, count, query);
   }
@@ -58,7 +54,7 @@ export class ProductController {
     return await this.productService.get(query.id);
   }
 
-  @CommandPattern(ProductCreateCommand)
+/*   @CommandPattern(ProductCreateCommand)
   async handleCreate(@Payload('payload') dto: ProductCreateDTO) {
     const result = await this.productService.create(dto);
 
@@ -70,5 +66,5 @@ export class ProductController {
     const result = await this.productService.update(dto.id, dto);
 
     return result.toDTO();
-  }
+  } */
 }

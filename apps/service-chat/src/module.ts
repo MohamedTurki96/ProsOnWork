@@ -1,9 +1,11 @@
-import { Module } from "@nestjs/common"
-import { /* DatabaseModule, */ ProsOnWorkCoreModule } from "@pros-on-work/core"
+import { Module } from '@nestjs/common';
+import { DatabaseModule, ProsOnWorkCoreModule } from '@pros-on-work/core';
 
-import { TestController } from "./controller/user.controller"
-//import { createPrismaClient } from "./db"
-
+import { ChatController } from './chat/chat.controller';
+import { ChatService } from './chat/chat.service';
+import { createPrismaClient } from './db';
+import { MessageController } from './message/message.controller';
+import { MessageService } from './message/message.service';
 
 @Module({
   imports: [
@@ -13,11 +15,9 @@ import { TestController } from "./controller/user.controller"
         nats: { enabled: true },
       },
     }),
-    //DatabaseModule.forPrisma(createPrismaClient()),
+    DatabaseModule.forPrisma(createPrismaClient()),
   ],
-  providers: [],
-  controllers: [
-    TestController
-  ],
+  providers: [ChatService, MessageService],
+  controllers: [ChatController, MessageController],
 })
 export class UserServiceModule {}

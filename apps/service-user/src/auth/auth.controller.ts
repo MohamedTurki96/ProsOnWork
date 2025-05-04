@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
-import { CommandPattern, EventHub } from '@pros-on-work/core';
+import { CommandPattern, EventHub, InjectableLogger } from '@pros-on-work/core';
 import {
   ChangePasswordCommandDTO,
   RequestPasswordResetDTO,
@@ -22,6 +22,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly eventHub: EventHub,
+    private readonly logger: InjectableLogger,
   ) {}
 
   @CommandPattern(UserLoginCommand)

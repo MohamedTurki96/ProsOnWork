@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { useApi } from './useApi';
 
 export function useCategories() {
@@ -6,6 +7,6 @@ export function useCategories() {
 
   return useQuery({
     queryKey: ['categories'],
-    queryFn: () => api.category.listCategories(),
+    queryFn: () => api.categories.list(),
   });
 }

@@ -4,6 +4,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "start": "scripts\\start-services.cmd"
+  },
   "devDependencies": {
     "@faker-js/faker": "^9.7.0",
     "@nx-tools/nx-prisma": "^6.5.0",
@@ -54,6 +57,7 @@
     "nx": "18.3.1",
     "prettier": "^3.5.3",
     "sass": "^1.55.0",
+    "swagger-typescript-api": "13.0.12",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "~5.4.2",
@@ -98,6 +102,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
     "nats": "^2.29.3",
+    "nestjs-cls": "^5.4.3",
     "otp-input-react": "^0.3.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

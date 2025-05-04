@@ -68,6 +68,7 @@ export class CategoryController {
   @Roles(UserRole.Admin)
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, type: CategoryDTO })
+  @ApiBody({ type: CategoryUpdateDTO })
   @ApiParam({ name: 'id', type: Number })
   async update(@Param('id') id: number, @Body() dto: CategoryUpdateDTO) {
     return this.eventHub.sendCommand(new CategoryUpdateCommand({ id, ...dto }));

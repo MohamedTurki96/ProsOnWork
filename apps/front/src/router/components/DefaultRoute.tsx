@@ -1,7 +1,8 @@
 import { Navigate } from 'react-router-dom';
+
+import { UserRole } from '../../api';
 import { useConnectedUser } from '../../hooks/useAuth';
 import { Routes } from '../routes/routes';
-import { UserRoleEnum } from '../../api';
 
 export default function DefaultRoute() {
   const { data: user } = useConnectedUser();
@@ -11,11 +12,11 @@ export default function DefaultRoute() {
   }
 
   switch (user?.role) {
-    case UserRoleEnum.ADMIN:
+    case UserRole.Admin:
       return <Navigate to={Routes.admin} replace />;
-    case UserRoleEnum.SERVICE_PROVIDER:
+    case UserRole.ServiceProvider:
       return <Navigate to={Routes.provider} replace />;
-    case UserRoleEnum.CLIENT:
+    case UserRole.Client:
       return <Navigate to={Routes.dashbaord} replace />;
     default:
       return <Navigate to={Routes.home} replace />;

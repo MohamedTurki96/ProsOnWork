@@ -8,6 +8,7 @@
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
+      "dependsOn": ["generate:api", "generate:file-api"],
       "options": {
         "outputPath": "dist/apps/web"
       }
@@ -28,8 +29,13 @@
     "generate:api": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "swagger-typescript-api -p http://127.0.0.1:8000/docs/api-docs.json -o ./src/api -n index.ts --extract-enums --unwrap-response-data --single-http-client --module-name-first-tag",
-        "cwd": "apps/front"
+        "command": "sh {projectRoot}/scripts/generate-api.sh main"
+      }
+    },
+    "generate:file-api": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh {projectRoot}/scripts/generate-api.sh file"
       }
     }
   }

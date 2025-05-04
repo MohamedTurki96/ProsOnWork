@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { EventHub } from '@pros-on-work/core';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CurrentUser, EventHub } from '@pros-on-work/core';
 import {
   ChangePasswordDTO,
   CurrentUserDTO,
@@ -19,7 +19,6 @@ import {
 } from '@pros-on-work/resources';
 
 import { ApiNeedsAuthentication } from '../decorators/api.decorator';
-import { CurrentUser } from '../decorators/current-user.decorator';
 import { Public } from '../decorators/public.decorator';
 
 @ApiTags('Auth')
@@ -33,6 +32,7 @@ export class AuthController {
   @Post('login')
   @Public()
   @HttpCode(HttpStatus.OK)
+  @ApiBody({ type: UserLoginDTO })
   @ApiResponse({ status: HttpStatus.OK, type: UserLoginResultDTO })
   async login(@Body() dto: UserLoginDTO): Promise<UserLoginResultDTO> {
     const user = await this.eventHub.sendCommand<UserDTO>(
@@ -54,6 +54,7 @@ export class AuthController {
   @Post('change-password')
   @ApiNeedsAuthentication()
   @HttpCode(HttpStatus.OK)
+  @ApiBody({ type: ChangePasswordDTO })
   @ApiResponse({ status: HttpStatus.OK, type: Object })
   async changePassword(
     @CurrentUser() user: CurrentUserDTO,
@@ -70,6 +71,7 @@ export class AuthController {
   @Post('request-password-reset')
   @Public()
   @HttpCode(HttpStatus.OK)
+  @ApiBody({ type: RequestPasswordResetDTO })
   @ApiResponse({ status: HttpStatus.OK, type: Object })
   async requestReset(@Body() dto: RequestPasswordResetDTO) {
     return this.eventHub.sendCommand(new UserRequestPasswordResetCommand(dto));
@@ -78,6 +80,7 @@ export class AuthController {
   @Post('reset-password')
   @Public()
   @HttpCode(HttpStatus.OK)
+  @ApiBody({ type: ResetPasswordDTO })
   @ApiResponse({ status: HttpStatus.OK, type: Object })
   async resetPassword(@Body() dto: ResetPasswordDTO) {
     return this.eventHub.sendCommand(new UserResetPasswordCommand(dto));
@@ -86,6 +89,7 @@ export class AuthController {
   @Post('verify-email')
   @Public()
   @HttpCode(HttpStatus.OK)
+  @ApiBody({ type: VerifyEmailDTO })
   @ApiResponse({ status: HttpStatus.OK, type: Object })
   async verifyEmail(@Body() dto: VerifyEmailDTO) {
     return this.eventHub.sendCommand(new UserVerifyEmailCommand(dto));
