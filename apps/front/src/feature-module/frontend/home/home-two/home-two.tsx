@@ -1,15 +1,18 @@
+import AOS from 'aos';
 import React, { useEffect, useState } from 'react';
+import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'aos/dist/aos.css';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import HomeHeader from '../header/home-header';
+
+import FooterTwo from './footer-two';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import * as Icon from 'react-feather';
-import FooterTwo from './footer-two';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import HomeHeader from '../header/home-header';
 
 const HomeTwo = () => {
   const routes = all_routes;

@@ -1,7 +1,12 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import CustomerBookingCalendar from './customer-booking-calendar/customer-booking-calendar';
+
+import Booking1 from '../pages/booking/booking-1';
+import BookingDone from '../pages/booking/booking-done';
+import BookingPayment from '../pages/booking/booking-payment';
+
 import CustomerBooking from './customer-booking/customer-booking';
+import CustomerBookingCalendar from './customer-booking-calendar/customer-booking-calendar';
 import CustomerChat from './customer-chat/customer-chat';
 import CustomerDashboard from './customer-dashboard/customer-dashboard';
 import CustomerFavourite from './customer-favourite/customer-favourite';
@@ -9,15 +14,12 @@ import CustomerNotifications from './customer-notifications/customer-notificatio
 import CustomerProfile from './customer-profile/customer-profile';
 import CustomerReviews from './customer-reviews/customer-reviews';
 import CustomerWallet from './customer-wallet/customer-wallet';
+import Notification from './notification/notification';
+import CustomerConnectedApp from './settings/connectedApp';
 import DeviceManagement from './settings/device-management';
 import LoginActivity from './settings/login-activity';
-import Notification from './notification/notification';
 import SecuritySetting from './settings/security-setting';
-import CustomerConnectedApp from './settings/connectedApp';
-import Booking2 from '../pages/booking/booking-2';
-import Booking1 from '../pages/booking/booking-1';
-import BookingDone from '../pages/booking/booking-done';
-import BookingPayment from '../pages/booking/booking-payment';
+
 
 const CustomersRoutes = () => {
   const all_customers_routes = [

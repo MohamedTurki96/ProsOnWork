@@ -1,9 +1,10 @@
-import { useRoutes } from 'react-router-dom';
-import { router } from './router';
-import { AppLoader } from './components/AppLoader';
-import { useAppInit } from './hooks/useAppInit';
 import AOS from 'aos';
 import { useCallback, useEffect } from 'react';
+import { useRoutes } from 'react-router-dom';
+
+import { AppLoader } from './components/AppLoader';
+import { useAppInit } from './hooks/useAppInit';
+import { router } from './router';
 
 export function App() {
   const content = useRoutes(router);

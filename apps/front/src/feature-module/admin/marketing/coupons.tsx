@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DataTable } from 'primereact/datatable'
-import React, { useEffect, useState } from 'react'
-import { couponsData } from '../../../core/data/json/coupons';
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
-import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { useSelector } from 'react-redux';
-import CouponsModal from '../common/modals/coupons-modal';
+import { DataTable } from 'primereact/datatable'
 import { Dropdown } from 'primereact/dropdown';
-import DeleteCouponsModal from '../common/modals/delete-coupons-modal';
+import React, { useState } from 'react'
+import * as Icon from 'react-feather';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { CouponsInterface } from '../../../core/models/interface';
+import CouponsModal from '../common/modals/coupons-modal';
+import DeleteCouponsModal from '../common/modals/delete-coupons-modal';
 
 const Coupons = () => {
 

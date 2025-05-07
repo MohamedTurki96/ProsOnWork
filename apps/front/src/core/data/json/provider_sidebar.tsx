@@ -1,6 +1,7 @@
 import React from 'react';
-import { all_routes } from '../routes/all_routes';
 import * as Icon from 'react-feather';
+
+import { all_routes } from '../routes/all_routes';
 const routes = all_routes;
 
 export const providersSidebar = [

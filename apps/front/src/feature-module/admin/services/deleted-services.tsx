@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Dropdown } from 'primereact/dropdown';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { useSelector } from 'react-redux';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../core/data/routes/all_routes';
-import { deletedServices } from '../../../core/models/interface';
+import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
 import * as Icon from 'react-feather';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import { deletedServices } from '../../../core/models/interface';
 import DeletedServicesModal from '../common/modals/deleted-services-modal';
 
 const DeletedServices = () => {

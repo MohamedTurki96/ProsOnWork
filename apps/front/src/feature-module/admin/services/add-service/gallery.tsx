@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
 
-import * as Icon from 'react-feather';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 
 type props = {
   prevTab: CallableFunction;

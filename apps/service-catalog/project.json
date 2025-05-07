@@ -14,16 +14,13 @@
         "outputPath": "dist/apps/service-catalog",
         "main": "apps/service-catalog/src/main.ts",
         "tsConfig": "apps/service-catalog/tsconfig.app.json",
-        "assets": [
-          {
-            "input": "apps/service-catalog/assets",
-            "glob": "**/*",
-            "output": "assets"
-          }
-        ],
-        "isolatedConfig": true,
         "webpackConfig": "apps/service-catalog/webpack.config.js",
         "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {
+          "webpackConfig": "apps/service-catalog/webpack.config.dev.js"
+        }
       }
     },
     "serve": {
@@ -97,7 +94,8 @@
     "prisma-reset": {
       "executor": "@nx-tools/nx-prisma:reset",
       "options": {
-        "schema": "apps/service-catalog/prisma/schema.prisma"
+        "schema": "apps/service-catalog/prisma/schema.prisma",
+        "force": true
       }
     },
     "prisma-resolve": {

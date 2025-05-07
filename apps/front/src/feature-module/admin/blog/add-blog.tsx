@@ -1,8 +1,9 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DefaultEditor from 'react-simple-wysiwyg';
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
 
 const AddBlog = () => {
   const [values, setValue] = React.useState();

@@ -1,13 +1,14 @@
-import { DataTable } from 'primereact/datatable';
-import React, { useState } from 'react';
 import { Column } from 'primereact/column';
-import * as Icon from 'react-feather';
-import { Link } from 'react-router-dom';
+import { DataTable } from 'primereact/datatable';
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
+import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
-import EmailTemplateModal from '../common/modals/email-template-modal';
-import DeleteEmailTemplateModal from '../common/modals/delete-email-template-modal';
+import { Link } from 'react-router-dom';
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import DeleteEmailTemplateModal from '../common/modals/delete-email-template-modal';
+import EmailTemplateModal from '../common/modals/email-template-modal';
 
 const EmailTemplate = () => {
   const data = useSelector((state: any) => state.email_template);

@@ -10,7 +10,7 @@ export class UserUpdateDTO {
   name?: string;
 
   @IsOptional()
-  @IsString(null)
+  @IsString()
   @Expose()
   @ApiPropertyOptional()
   phone?: string;

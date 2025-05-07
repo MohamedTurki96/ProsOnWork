@@ -1,9 +1,8 @@
+import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import React from 'react';
-
-import { Column } from 'primereact/column';
-
 import { useSelector } from 'react-redux';
+
 import SettingsSidebar from '../common/settingssidebar';
 
 const DeviceManagementSettting = () => {

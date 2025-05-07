@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
 import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useEffect, useState } from 'react';
 import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom';
+
 import { activeService } from '../../../core/data/json/active_services';
-import InactiveServicesModal from '../common/modals/inactive-services-modal';
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { ActiveserviceInterface } from '../../../core/models/interface';
+import InactiveServicesModal from '../common/modals/inactive-services-modal';
 
 const ActiveServices = () => {
   const routes = all_routes;

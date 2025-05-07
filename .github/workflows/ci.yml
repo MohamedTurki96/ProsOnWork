@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request: 
+    branches: ['*']
+
+jobs:
+  nx-ci:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣  Check out the repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2️⃣  Set up Node
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3️⃣  Install dependencies
+      - name: Install packages
+        run: npm ci
+
+      # 5️⃣  Lint
+      - name: Lint
+        run: npx nx run-many --target=lint --parallel=3 --base=origin/main
+
+      # 6️⃣  Build
+      - name: Build
+        run: npx nx run-many --target=build --parallel=3 --base=origin/main
+
+      # 7️⃣  Test
+      - name: Test
+        run: echo "test"

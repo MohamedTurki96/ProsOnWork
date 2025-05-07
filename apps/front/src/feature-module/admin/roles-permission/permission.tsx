@@ -1,8 +1,9 @@
-import React from 'react';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { all_routes } from '../../../core/data/routes/all_routes';
+import { DataTable } from 'primereact/datatable';
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { all_routes } from '../../../core/data/routes/all_routes';
 
 const Permissions = () => {
   const routes = all_routes;

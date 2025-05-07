@@ -1,15 +1,16 @@
-import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import CustomerSideBar from '../common/sidebar';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
 interface EventDetails {
   title: string;
 }

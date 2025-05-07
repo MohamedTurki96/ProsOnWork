@@ -1,7 +1,9 @@
-import { authRoutes, publicRoutes } from './router.link';
 import { Route, Routes } from 'react-router-dom';
+
 import AuthFeature from '../authFeature';
 import Feature from '../feature';
+
+import { authRoutes, publicRoutes } from './router.link';
 
 const AllRoutes = () => {
   return (

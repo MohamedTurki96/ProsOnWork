@@ -1,16 +1,17 @@
+import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 import * as Icon from 'react-feather';
-import { Dropdown } from 'primereact/dropdown';
-import { Column } from 'primereact/column';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { useSelector } from 'react-redux';
-import FeaturedServicesModal from '../common/modals/featured-services-modal';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import DeleteFeaturedServiceModal from '../common/modals/delete-featured-service-modal';
+import FeaturedServicesModal from '../common/modals/featured-services-modal';
 
 const routes = all_routes;
-import DeleteFeaturedServiceModal from '../common/modals/delete-featured-service-modal';
-import { Link } from 'react-router-dom';
 
 const FeatureServices = () => {
   const [selectedValue, setSelectedValue] = useState(null);

@@ -1,9 +1,10 @@
+import { Slider, SliderSingleProps } from 'antd';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Slider, SliderSingleProps } from 'antd';
 import StickyBox from 'react-sticky-box';
-import { useCategories } from '../../../../hooks/useCategory';
+
 import { GeoLocationMap } from '../../../../components/GeoLocation';
+import { useCategories } from '../../../../hooks/useCategory';
 import { renderPrice } from '../../../../utils/renderPrice';
 
 interface FilterProps {

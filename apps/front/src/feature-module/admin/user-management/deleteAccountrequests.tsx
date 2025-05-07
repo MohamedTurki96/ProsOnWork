@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Dropdown } from 'primereact/dropdown';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { useSelector } from 'react-redux';
+import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
 import * as Icon from 'react-feather';
-import DeleteAccountrequestsmodalpopup from '../common/modals/delete-account-requests-modal';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { DeleteAccounts } from '../../../core/models/interface';
+import DeleteAccountrequestsmodalpopup from '../common/modals/delete-account-requests-modal';
 
 const DeleteAccountrequests = () => {
   const data = useSelector(

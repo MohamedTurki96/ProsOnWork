@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import PhoneInput from 'react-phone-input-2';
+import { Link } from 'react-router-dom';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
 const ProviderSecuritySettings = () => {
   const routes = all_routes;
   const [selectedItems, setSelectedItems] = useState(Array(6).fill(false));

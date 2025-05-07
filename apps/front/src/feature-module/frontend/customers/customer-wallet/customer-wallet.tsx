@@ -1,7 +1,8 @@
 import React from 'react';
-import CustomerWalletModal from '../../common/modals/customer-wallet-modals';
 import { Link } from 'react-router-dom';
+
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+import CustomerWalletModal from '../../common/modals/customer-wallet-modals';
 import CustomerSideBar from '../common/sidebar';
 
 const CustomerWallet = () => {

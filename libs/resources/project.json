@@ -5,14 +5,16 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/js:swc",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
+        "target": "node",
+        "compiler": "tsc",
         "outputPath": "dist/libs/resources",
-        "tsConfig": "libs/resources/tsconfig.lib.json",
-        "packageJson": "libs/resources/package.json",
         "main": "libs/resources/src/index.ts",
-        "assets": ["libs/resources/*.md"]
+        "tsConfig": "libs/resources/tsconfig.lib.json",
+        "webpackConfig": "libs/resources/webpack.config.js"
       }
     },
     "lint": {

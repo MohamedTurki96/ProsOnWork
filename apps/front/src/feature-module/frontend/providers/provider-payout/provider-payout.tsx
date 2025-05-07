@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import { payout } from '../../../../core/data/json/payout';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { Link } from 'react-router-dom';
-import { payoutDatas } from '../../../../core/models/interface';
+
+import { paymentOption, statusOption2 } from '../../../../core/data/json/dropDownData';
+import { payout } from '../../../../core/data/json/payout';
 import { all_routes } from '../../../../core/data/routes/all_routes';
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
-import { paymentOption, statusOption2 } from '../../../../core/data/json/dropDownData';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import { payoutDatas } from '../../../../core/models/interface';
 import CustomDropdown from '../../common/dropdown/commonSelect';
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
 
 const ProviderPayout = () => {
   const routes = all_routes

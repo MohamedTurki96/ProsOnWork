@@ -1,64 +1,63 @@
 import {
   ArgumentsHost,
   Catch,
-  ForbiddenException,
   HttpException,
   Injectable,
   InternalServerErrorException,
   ExceptionFilter as NestExceptionFilter,
-} from "@nestjs/common"
-import { RpcException } from "@nestjs/microservices"
-import { ErrorDTO } from "@pros-on-work/resources"
-import { AxiosError } from "axios"
-import { instanceToPlain } from "class-transformer"
-import type { Request, Response } from "express"
-import { throwError } from "rxjs"
+} from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
+import { ErrorDTO } from '@pros-on-work/resources';
+import { AxiosError } from 'axios';
+import { instanceToPlain } from 'class-transformer';
+import type { Request, Response } from 'express';
+import { throwError } from 'rxjs';
 
-import { InjectableLogger } from "../logger/pino"
+import { InjectableLogger } from '../logger/pino';
 
 interface PlainError {
-  status: number
-  message: string
-  name: string
-  stack?: string
+  status: number;
+  message: string;
+  name: string;
+  stack?: string;
 }
-const fallbackInternalServerErrorMessage = "An internal server error occured"
+const fallbackInternalServerErrorMessage = 'An internal server error occured';
 
 @Injectable()
 @Catch()
 export class ExceptionFilter implements NestExceptionFilter {
   constructor(private readonly logger: InjectableLogger) {}
 
-  catch(exception: Error, host: ArgumentsHost) {
-    let responseData
+  catch(exception: Error, host: ArgumentsHost): any {
+    let responseData;
 
     // Error from Axios
     if (
       exception instanceof HttpException &&
       exception?.cause instanceof AxiosError
     ) {
-      responseData = exception?.cause?.response?.data
+      responseData = exception?.cause?.response?.data;
     }
 
     this.logger.error({
       err: exception,
       responseData,
-    })
+    });
 
     // The health endpoint requires dedicated error handling
-    if (host.getType() === "http" && exception instanceof HttpException) {
-      const ctx = host.switchToHttp()
-      const request = ctx.getRequest<Request>()
-      const response = ctx.getResponse<Response>()
+    if (host.getType() === 'http' && exception instanceof HttpException) {
+      const ctx = host.switchToHttp();
+      const request = ctx.getRequest<Request>();
+      const response = ctx.getResponse<Response>();
 
-      if (request.url.endsWith("/health")) {
-        response.status(exception.getStatus()).json(exception.getResponse())
-        return
+      if (request.url.endsWith('/health')) {
+        response.status(exception.getStatus()).json(exception.getResponse());
+        return;
       }
     }
 
     // Convert unknown exception into plain error that can be exposed to requestors.
-    let error: PlainError
+    let error: PlainError;
 
     if (exception instanceof HttpException) {
       error = {
@@ -66,56 +65,56 @@ export class ExceptionFilter implements NestExceptionFilter {
         message: exception.message,
         name: exception.name,
         stack: exception.stack,
-      }
+      };
     } else if (exception instanceof RpcException) {
       error = {
         status: 500,
         message: exception.message,
         name: exception.name,
         stack: exception.stack,
-      }
+      };
     } else {
       // Fallback for unknown exception
-      let status = 500
+      let status = 500;
       let message =
-        typeof exception === "string"
+        typeof exception === 'string'
           ? exception
-          : fallbackInternalServerErrorMessage
-      let name = InternalServerErrorException.name
+          : fallbackInternalServerErrorMessage;
+      let name = InternalServerErrorException.name;
 
-      if (typeof exception === "object" && exception !== null) {
-        if ("status" in exception && typeof exception.status === "number") {
-          status = exception.status as number
+      if (typeof exception === 'object' && exception !== null) {
+        if ('status' in exception && typeof exception.status === 'number') {
+          status = exception.status as number;
         }
 
-        if ("message" in exception && typeof exception.message === "string") {
-          message = exception.message
+        if ('message' in exception && typeof exception.message === 'string') {
+          message = exception.message;
         }
 
-        if ("name" in exception && typeof exception.name === "string") {
-          name = exception.name
+        if ('name' in exception && typeof exception.name === 'string') {
+          name = exception.name;
         }
       }
 
-      error = { status, message, name }
+      error = { status, message, name };
     }
 
     // Response handling depending on the host type
-    if (host.getType() === "http") {
-      const ctx = host.switchToHttp()
-      const response = ctx.getResponse<Response>()
-      const request = ctx.getRequest<Request>()
+    if (host.getType() === 'http') {
+      const ctx = host.switchToHttp();
+      const response = ctx.getResponse<Response>();
+      const request = ctx.getRequest<Request>();
 
-      const errorDto = new ErrorDTO()
-      errorDto.statusCode = error.status
-      errorDto.timestamp = new Date().toISOString()
-      errorDto.path = request.url
-      errorDto.message = error.message
+      const errorDto = new ErrorDTO();
+      errorDto.statusCode = error.status;
+      errorDto.timestamp = new Date().toISOString();
+      errorDto.path = request.url;
+      errorDto.message = error.message;
 
-      response.status(error.status).json(instanceToPlain(errorDto))
-      return
-    } else if (host.getType() === "rpc") {
-      return throwError(() => error)
+      response.status(error.status).json(instanceToPlain(errorDto));
+      return;
+    } else if (host.getType() === 'rpc') {
+      return throwError(() => error);
     }
   }
 }

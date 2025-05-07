@@ -1,7 +1,8 @@
-import { Link, useSearchParams } from 'react-router-dom';
-import { Routes } from '../../../router/routes/routes';
-import { useRegister } from '../../../hooks/useAuth';
 import { FormEvent, useCallback } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+
+import { useRegister } from '../../../hooks/useAuth';
+import { Routes } from '../../../router/routes/routes';
 
 export function Register() {
   const [searchParams] = useSearchParams();

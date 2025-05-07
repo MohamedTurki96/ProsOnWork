@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import Slider from 'react-slick';
+import StickyBox from 'react-sticky-box';
+import Lightbox from 'yet-another-react-lightbox';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
-import StickyBox from 'react-sticky-box';
+
 const ProviderDetails = () => {
   const routes = all_routes;
   const [open, setOpen] = React.useState(false);

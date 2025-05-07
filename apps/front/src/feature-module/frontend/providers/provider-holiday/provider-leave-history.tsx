@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
-import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+
 import { staffOption, statusOption2 } from '../../../../core/data/json/dropDownData';
+import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import CustomDropdown from '../../common/dropdown/commonSelect';
 
 const ProviderLeaveHistory = () => {

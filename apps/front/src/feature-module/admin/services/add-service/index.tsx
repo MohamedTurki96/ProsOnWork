@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import ServiceInformation from './serviceInformation';
+
 import Availability from './availability';
-import Location from './location';
 import Gallery from './gallery';
+import Location from './location';
 import EditSeo from './seo';
+import ServiceInformation from './serviceInformation';
 
 const AddService = () => {
   const [TabChange, setTabChange] = useState(true);

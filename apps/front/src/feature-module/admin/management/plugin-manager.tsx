@@ -1,9 +1,10 @@
 import React from 'react'
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
-import PluginManagerModal from '../common/modals/plugin-manager-modal';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import PluginManagerModal from '../common/modals/plugin-manager-modal';
 
 const routes = all_routes;
 const PluginManager = () => {

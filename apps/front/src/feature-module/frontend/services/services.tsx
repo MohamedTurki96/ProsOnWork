@@ -1,7 +1,9 @@
 import React from 'react';
-import ServicesRoutes from './services.routes';
+
 import NewFooter from '../home/footer/newFooter';
 import HomeHeader from '../home/header/home-header';
+
+import ServicesRoutes from './services.routes';
 
 const Services = () => {
   return (

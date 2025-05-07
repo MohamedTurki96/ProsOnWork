@@ -1,13 +1,13 @@
 import { plainToInstance } from "class-transformer"
 
+import { getClass } from "../get-class"
+import { Type } from "../interfaces"
+
 import { EVENT_SERIALIZE_DATA } from "./constants"
 import { EventOptions, ICommand, IEvent, IQuery } from "./interfaces"
-import { Type } from "../interfaces"
-import { getClass } from "../get-class"
 
 export type EventMetaType = "command" | "event" | "query" | "queue"
 export class EventMetaObject implements EventOptions {
-  msp?: string | undefined
   resource!: string
   action!: string
   type!: EventMetaType
@@ -34,7 +34,6 @@ export class EventSerializer {
 
     const meta = EventSerializer.fromClass(classObj)
 
-    meta.msp = event["msp"] || meta.msp
     meta.action = event["action"] || meta.action
     meta.resource = event["resource"] || meta.resource
 
@@ -57,7 +56,6 @@ export class EventSerializer {
       }
     }
 
-    extend(obj.msp)
     extend(obj.resource)
     extend(obj.action)
 
@@ -75,30 +73,17 @@ export class EventSerializer {
   static fromEventName(eventName: string): EventMetaObject {
     const split = eventName.split(".")
 
-    let msp: string | undefined
-
     const type = split.shift() as EventMetaType
 
-    if (split.length === 3) {
-      msp = split.shift()
-    }
 
     const resource = split.shift()!
     const action = split.shift()!
 
     return {
       type: type,
-      msp,
       resource,
       action,
       eventName,
-    }
-  }
-
-  static forAllMSP(event: Type) {
-    return {
-      ...EventSerializer.fromClass(event),
-      msp: "*",
     }
   }
 }

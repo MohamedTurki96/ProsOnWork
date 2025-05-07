@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import * as Icon from 'react-feather';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
-import FooterNine from './footer-nine';
-import Slider from 'react-slick';
+import React, { useEffect } from 'react';
 import CountUp from 'react-countup';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import HomeHeader from '../header/home-header';
-import { all_routes } from '../../../../core/data/routes/all_routes';
+
+import FooterNine from './footer-nine';
+
+import 'aos/dist/aos.css';
 
 const HomeNine = () => {
   const routes = all_routes

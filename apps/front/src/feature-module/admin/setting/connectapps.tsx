@@ -1,6 +1,7 @@
 import React from 'react'
-import SettingsSidebar from '../common/settingssidebar'
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath'
+import SettingsSidebar from '../common/settingssidebar'
 
 const ConnectApps = () => {
   return (

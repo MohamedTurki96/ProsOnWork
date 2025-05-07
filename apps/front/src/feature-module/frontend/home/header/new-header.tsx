@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import { Header } from '../../../../core/models/interface';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import { Header } from '../../../../core/models/interface';
 type props = {
   type: number;
 };

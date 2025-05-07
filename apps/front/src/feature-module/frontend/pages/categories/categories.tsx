@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
 import AOS from 'aos';
+import React, { useEffect } from 'react';
+
 import 'aos/dist/aos.css';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';

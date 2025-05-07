@@ -1,9 +1,11 @@
 import React from 'react'
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import { Link } from 'react-router-dom'
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import StickyBox from 'react-sticky-box';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+
 
 const ProvidersList = () => {
   const routes = all_routes;

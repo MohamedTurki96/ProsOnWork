@@ -1,12 +1,12 @@
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
+import * as Icon from 'react-feather';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import * as Icon from 'react-feather';
-import { Dropdown } from 'primereact/dropdown';
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { useSelector } from 'react-redux';
 import { blogCategoriesValue } from '../../../core/models/interface';
 import BlogCategoriesModal from '../common/modals/blog-categories-modal';
 

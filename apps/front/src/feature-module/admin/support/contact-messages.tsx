@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable'
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react'
 import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
+
 import { all_routes } from '../../../core/data/routes/all_routes';
-import DeleteContactMessagesModal from '../common/modals/delete-contact-messages-modal';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { ContactMessagesInterface } from '../../../core/models/interface';
+import DeleteContactMessagesModal from '../common/modals/delete-contact-messages-modal';
 const routes = all_routes;
 
 

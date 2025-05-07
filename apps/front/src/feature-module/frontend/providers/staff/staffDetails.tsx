@@ -1,8 +1,10 @@
 import React from 'react'
-import StaffDetailModal from './staffDetailModal'
 import { Link } from 'react-router-dom'
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+
 import { all_routes } from '../../../../core/data/routes/all_routes'
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+
+import StaffDetailModal from './staffDetailModal'
 
 const StaffDetails = () => {
   const routes = all_routes

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
+import DatePicker from "react-datepicker";
+import { Link } from 'react-router-dom';
 import { TagsInput } from 'react-tag-input-component';
+
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import CustomerSideBar from '../common/sidebar';
-import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 const CustomerProfile = () => {

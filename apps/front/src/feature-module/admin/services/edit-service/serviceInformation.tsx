@@ -1,8 +1,8 @@
 import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
+import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
 import DefaultEditor from 'react-simple-wysiwyg';
-import * as Icon from 'react-feather';
 
 type props = {
   nextTab: CallableFunction;

@@ -1,19 +1,14 @@
 import React from 'react';
-import * as Icon from 'react-feather';
-
 import { useState } from 'react';
-import { DataTable } from 'primereact/datatable';
-
-import { Column } from 'primereact/column';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
-import { Dropdown } from 'primereact/dropdown';
-import ProviderOfferModal from '../../common/modals/provideroffer-modal';
 import { Link } from 'react-router-dom';
+
+import { offerOption, percentageOption, serviceOption } from '../../../../core/data/json/dropDownData';
 import { all_routes } from '../../../../core/data/routes/all_routes';
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import CustomDropdown from '../../common/dropdown/commonSelect';
-import { offerOption, percentageOption, serviceOption } from '../../../../core/data/json/dropDownData';
 
 const ProviderOffer = () => {
   const routes = all_routes

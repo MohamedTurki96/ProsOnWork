@@ -71,7 +71,7 @@ export enum ContentType {
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = 'http://localhost:4003';
+  public baseUrl: string = 'http://localhost:4002';
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
   private abortControllers = new Map<CancelToken, AbortController>();
@@ -266,7 +266,7 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title ProsOnWork Files Gateway
  * @version undefined
- * @baseUrl http://localhost:4003
+ * @baseUrl http://localhost:4002
  * @contact
  */
 export class Api<SecurityDataType extends unknown> {

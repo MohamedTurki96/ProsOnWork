@@ -1,11 +1,12 @@
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
+import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as Icon from 'react-feather';
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 
 const Review = () => {
   const data = useSelector((state:any) => state.review_data);

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+
 import { useConnectedUser } from './useAuth';
 
 export function useAppInit() {

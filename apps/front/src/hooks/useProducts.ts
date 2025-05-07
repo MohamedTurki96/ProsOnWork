@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
-import { useApi } from './useApi';
+
 import { queryToObject } from '../utils/queryToObject';
+
+import { useApi } from './useApi';
 
 export function useFilteredServices() {
   const api = useApi();

@@ -14,7 +14,7 @@ case "$TARGET" in
         NAME="index"
         ;;
     file)
-        URL="http://localhost:4003/docs/docs.json"
+        URL="http://localhost:4002/docs/docs.json"
         NAME="file"
         ;;
     *)

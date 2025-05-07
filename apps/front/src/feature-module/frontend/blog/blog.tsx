@@ -1,7 +1,9 @@
 import React from 'react'
-import FooterOne from '../home/home-one/footer-one'
-import BlogRoutes from './blog.routes'
+
 import HomeHeader from '../home/header/home-header'
+import FooterOne from '../home/home-one/footer-one'
+
+import BlogRoutes from './blog.routes'
 
 const Blog = () => {
   return (

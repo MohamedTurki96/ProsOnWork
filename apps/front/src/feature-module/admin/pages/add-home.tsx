@@ -1,8 +1,9 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 
 const AddHome = () => {
   const [selectedValue, setSelectedValue] = useState(null);

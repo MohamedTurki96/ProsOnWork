@@ -1,9 +1,10 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import ImageWithBasePath from '../../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../../core/data/routes/all_routes';
-import { useSelector, useDispatch } from 'react-redux';
+
 import { set_toggleSidebar_data } from '../../../../../core/data/redux/action';
+import { all_routes } from '../../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../../core/img/ImageWithBasePath';
 import { AppState, Header } from '../../../../../core/models/interface';
 
 const ProviderAuthHeader2 = () => {

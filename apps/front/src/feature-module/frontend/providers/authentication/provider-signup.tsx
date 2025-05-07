@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import * as Icon from 'react-feather';
 import PhoneInput from 'react-phone-input-2';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import ProviderAuthHeader from './common/header1';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import ProviderAuthHeader from './common/header1';
 
 const ProviderSignup = () => {
   const routes = all_routes;

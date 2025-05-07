@@ -1,14 +1,14 @@
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import React, { useState } from 'react';
-
-import * as Icon from 'react-feather';
 import { Dropdown } from 'primereact/dropdown';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import React, { useState } from 'react';
+import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import SubCatogriesModal from '../common/modals/subcategories-modal';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import DeleteSubCategoriesModal from '../common/modals/delete-subcategories-modal';
+import SubCatogriesModal from '../common/modals/subcategories-modal';
 
 const SubCategoriesList = () => {
   const data = useSelector((state: any) => state.sub_categories);

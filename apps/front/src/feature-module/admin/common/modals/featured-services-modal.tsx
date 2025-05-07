@@ -1,6 +1,6 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react'
 import * as Icon from 'react-feather';
-import { Dropdown } from 'primereact/dropdown';
 
 const FeaturedServicesModal = () => {
 

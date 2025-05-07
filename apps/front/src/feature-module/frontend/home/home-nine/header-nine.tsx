@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, To, useLocation } from 'react-router-dom';
-import { all_routes } from '../../../../core/data/routes/all_routes';
+
 import { set_toggleSidebar_data } from '../../../../core/data/redux/action';
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { AppState, Header } from '../../../../core/models/interface';
 const routes = all_routes;

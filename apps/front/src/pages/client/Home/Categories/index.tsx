@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Routes } from '../../../../router/routes/routes';
-import { useCategories } from '../../../../hooks/useCategory';
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+
+import { useCategories } from '../../../../hooks/useCategory';
+import { Routes } from '../../../../router/routes/routes';
 
 export function Categories() {
   const { data } = useCategories();

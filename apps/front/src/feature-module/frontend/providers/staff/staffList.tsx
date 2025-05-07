@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import StaffModal from './staffModal'
 import { Link } from 'react-router-dom'
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+
+import { staffIdOption, staffOption, statusOption } from '../../../../core/data/json/dropDownData'
 import { all_routes } from '../../../../core/data/routes/all_routes'
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker'
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import CustomDropdown from '../../common/dropdown/commonSelect'
-import { staffIdOption, staffOption, statusOption } from '../../../../core/data/json/dropDownData'
+
+import StaffModal from './staffModal'
 
 const StaffList = () => {
   const routes = all_routes

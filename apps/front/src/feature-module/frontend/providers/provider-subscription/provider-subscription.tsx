@@ -1,7 +1,8 @@
 import React from 'react'
 import * as Icon from 'react-feather';
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import { Link } from 'react-router-dom';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
 
 const ProviderSubscription = () => {
   const routes = all_routes;

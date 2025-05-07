@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 
-// import * as Icon from 'react-feather'
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import HomeHeader from '../header/home-header';
+
+import FooterThree from './footer-three';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
-import FooterThree from './footer-three';
-import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
-import HomeHeader from '../header/home-header';
-import { all_routes } from '../../../../core/data/routes/all_routes';
+import 'aos/dist/aos.css';
 
 const HomeThree = () => {
   const routes = all_routes

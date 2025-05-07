@@ -1,8 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useApi } from './useApi';
-import { LoginRequest, RegisterRequest } from '../api';
 import { useNavigate } from 'react-router-dom';
+
+import { LoginRequest, RegisterRequest } from '../api';
 import { Routes } from '../router/routes/routes';
+
+import { useApi } from './useApi';
 
 const clearData = () => {
   localStorage.removeItem('access_token');

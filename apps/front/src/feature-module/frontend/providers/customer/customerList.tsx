@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import CustomerModal from './customerModal'
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 import { customerIdOption, customerOption, statusOption } from '../../../../core/data/json/dropDownData';
-import CustomDropdown from '../../common/dropdown/commonSelect';
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import CustomDropdown from '../../common/dropdown/commonSelect';
+
+import CustomerModal from './customerModal'
 
 const CustomerList = () => {
   const routes = all_routes

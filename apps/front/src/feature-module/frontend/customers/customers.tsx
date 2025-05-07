@@ -1,7 +1,9 @@
 import React from 'react';
-import CustomersRoutes from './customers.routes';
+
 import NewFooter from '../home/footer/newFooter';
 import HomeHeader from '../home/header/home-header';
+
+import CustomersRoutes from './customers.routes';
 
 const Customers = () => {
   return (

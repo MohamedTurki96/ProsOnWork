@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react'
 
 const ProviderAppointmentSettings = () => {
   const [selectedValue, setSelectedValue] = useState(null);

@@ -1,6 +1,7 @@
 import React from 'react';
-import CustomerSideBar from '../common/sidebar';
+
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+import CustomerSideBar from '../common/sidebar';
 
 const CustomerNotifications = () => {
   return (

@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
     "module": "commonjs",
     "outDir": "../../dist/out-tsc",
     "declaration": true,

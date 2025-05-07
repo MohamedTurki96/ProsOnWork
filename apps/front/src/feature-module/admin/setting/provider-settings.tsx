@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
+
 import SettingsSidebar from '../common/settingssidebar';
 
 const ProviderSettings = () => {

@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
+import * as L from 'leaflet';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import * as L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { getGeolocationText } from '../../utils/getGeolocationText';
+
 import { useConnectedUser } from '../../hooks/useAuth';
-import { Address } from '../../api';
+import { getGeolocationText } from '../../utils/getGeolocationText';
+
+import 'leaflet/dist/leaflet.css';
+
+type Address = any;
 
 interface GeoLocationProps {
   show: boolean;

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 
 const PrivacyPolicy = () => {

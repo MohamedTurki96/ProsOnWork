@@ -1,10 +1,12 @@
+import { InputOtp } from 'primereact/inputotp';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import PagesAuthHeader from './common/header';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 import AuthFooter from './common/footer';
-import { InputOtp } from 'primereact/inputotp';
+import PagesAuthHeader from './common/header';
 
 const PhoneOtp = () => {
   

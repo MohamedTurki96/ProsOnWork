@@ -1,8 +1,9 @@
 import React from 'react';
-import SettingsSidebar from '../common/settingssidebar';
 import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
 import Securitymodal from '../common/modals/security-modal';
+import SettingsSidebar from '../common/settingssidebar';
 
 const Security = () => {
   const routes = all_routes;

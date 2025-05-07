@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import * as Icon from 'react-feather';
-import { Dropdown } from 'primereact/dropdown';
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
+import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 
 const ProviderEditService = () => {
   dayjs.extend(customParseFormat);

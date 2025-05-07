@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import SettingsSidebar from '../common/settingssidebar'
 import { Link } from 'react-router-dom'
 import { TagsInput } from 'react-tag-input-component';
+
+import SettingsSidebar from '../common/settingssidebar'
 
 const SeoSettings = () => {
   const [tags] = useState(['Test']);

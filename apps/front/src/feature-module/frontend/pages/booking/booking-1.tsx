@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
+import Calendar from 'react-calendar';
+import { Link } from 'react-router-dom';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'react-calendar/dist/Calendar.css';
-import Calendar from 'react-calendar';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 
 const Booking1 = () => {
   const routes = all_routes;

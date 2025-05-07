@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
-import { Routes } from '../../../router/routes/routes';
-import { useLogin } from '../../../hooks/useAuth';
 import { FormEvent, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+
+import { useLogin } from '../../../hooks/useAuth';
+import { Routes } from '../../../router/routes/routes';
 
 export function Login() {
   const { mutate: login } = useLogin();

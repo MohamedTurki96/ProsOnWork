@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { useEffect, useState } from 'react';
 import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import QuoteModal from '../../common/modals/quote-modal';
+import HomeHeader from '../header/home-header';
+
+import FooterOne from './footer-one';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
-import FooterOne from './footer-one';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import HomeHeader from '../header/home-header';
-import QuoteModal from '../../common/modals/quote-modal';
+import 'aos/dist/aos.css';
 
 const HomeOne = () => {
   const routes = all_routes;

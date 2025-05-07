@@ -1,6 +1,7 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 import * as Icon from 'react-feather';
-import { Dropdown } from 'primereact/dropdown';
+
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import HomeHeader from '../header/home-header';
 

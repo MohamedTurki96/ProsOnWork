@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import BookingModals from '../../customers/common/bookingModals';
+
 import { customerOption, serviceOption, staffOption } from '../../../../core/data/json/dropDownData';
-import CustomDropdown from '../../common/dropdown/commonSelect';
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import CustomDropdown from '../../common/dropdown/commonSelect';
+import BookingModals from '../../customers/common/bookingModals';
 
 
 const ProviderBooking = () => {

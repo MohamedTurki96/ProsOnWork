@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
 
 const QuoteModal = () => {

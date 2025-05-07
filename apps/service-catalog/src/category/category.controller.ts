@@ -35,14 +35,6 @@ export class CategoryController {
         : undefined,
       where: {
         ...(query.where ?? {}),
-        ...(query.where.name
-          ? {
-              name: {
-                contains: query.where.name,
-                mode: 'insensitive',
-              },
-            }
-          : {}),
       },
     });
 

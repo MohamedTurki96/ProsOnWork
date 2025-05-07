@@ -1,15 +1,15 @@
 import React from 'react';
-
 import { Navigate, Route, Routes } from 'react-router-dom';
+
+import CreateService from './create-service/createServices';
 import ProviderDetails from './providers/provider-details';
-import ServiceDetails1 from './service-details/service-details1';
-import ServiceDetails2 from './service-details/service-details2';
-import ServiceList from './service-list/service-list';
-import ServiceGrid from './service-grid/service-grid';
+import ProvidersList from './providers/providers-list';
 import Search from './search/search';
 import SearchList from './search/search-list';
-import ProvidersList from './providers/providers-list';
-import CreateService from './create-service/createServices';
+import ServiceDetails1 from './service-details/service-details1';
+import ServiceDetails2 from './service-details/service-details2';
+import ServiceGrid from './service-grid/service-grid';
+import ServiceList from './service-list/service-list';
 import ServiceRequest from './service-request/serviceRequest';
 
 const ServicesRoutes = () => {

@@ -1,8 +1,10 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import ReactStarsRating from "react-awesome-stars-rating";
-import React, { useState } from 'react'
 import { TimePicker } from "antd";
+import React, { useState } from 'react'
+import ReactStarsRating from "react-awesome-stars-rating";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 import ImageWithBasePath from "../../../../core/img/ImageWithBasePath";
 
 const BookingModals = () => {

@@ -1,22 +1,26 @@
 import React from 'react'
-import QuoteModal from '../../common/modals/quote-modal'
+import { Link } from 'react-router-dom'
+
+import { all_routes } from '../../../../core/data/routes/all_routes'
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
 import BecomeProvider from '../../common/modals/provider-modal'
-import { Link } from 'react-router-dom'
-import { all_routes } from '../../../../core/data/routes/all_routes'
+import QuoteModal from '../../common/modals/quote-modal'
+import NewFooter from '../footer/newFooter'
+import HomeHeader from '../header/home-header'
+
+import AuthModals from './authModals'
+import BlogAndJoinus from './blogAndJoinus'
+import BussinessWithUs from './bussinessWithUs'
+import CustomerSection from './customerSection'
 import FeatureSection from './feature-section'
 import PopularSection from './popular-section'
-import WorkSection from './workSection'
 import PreferredSection from './preferredSection'
 import ProviderSection from './provider-section'
 import RateServiceSection from './rateServiceSection'
-import CustomerSection from './customerSection'
-import BlogAndJoinus from './blogAndJoinus'
-import BussinessWithUs from './bussinessWithUs'
 import ServiceCities from './serviceCities'
-import HomeHeader from '../header/home-header'
-import NewFooter from '../footer/newFooter'
-import AuthModals from './authModals'
+import WorkSection from './workSection'
+
+
 
 const NewHome = () => {
   const routes = all_routes

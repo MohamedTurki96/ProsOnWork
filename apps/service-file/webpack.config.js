@@ -24,6 +24,5 @@ module.exports = {
       outputHashing: 'none',
     }),
   ],
-  stats: 'errors-only',
-  watch: true,
+  stats: 'errors-only'
 };

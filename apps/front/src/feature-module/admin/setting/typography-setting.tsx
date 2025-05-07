@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import SettingsSidebar from '../common/settingssidebar'
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+
+import SettingsSidebar from '../common/settingssidebar'
 
 const TypographySetting = () => {
 

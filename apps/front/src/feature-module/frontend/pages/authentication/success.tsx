@@ -1,8 +1,11 @@
 import React from 'react'
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import PagesAuthHeader from './common/header';
 import { useNavigate } from 'react-router-dom';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+
+import PagesAuthHeader from './common/header';
+
 
 const Success = () => {
   const routes = all_routes;

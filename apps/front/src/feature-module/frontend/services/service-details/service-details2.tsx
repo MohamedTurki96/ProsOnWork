@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import StickyBox from 'react-sticky-box';
+import Lightbox from 'yet-another-react-lightbox';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import VideoModal from '../../../../core/hooks/video-modal';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { Link } from 'react-router-dom';
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
-import StickyBox from 'react-sticky-box';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'yet-another-react-lightbox/styles.css';
 
 const ServiceDetails2 = () => {
   const routes = all_routes;

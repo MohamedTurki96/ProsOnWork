@@ -4,13 +4,11 @@
   "sourceRoot": "apps/front/src",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project front --web",
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
-      "dependsOn": ["generate:api", "generate:file-api"],
       "options": {
-        "outputPath": "dist/apps/web"
+        "outputPath": "dist/apps/front"
       }
     },
     "serve": {
@@ -23,19 +21,22 @@
     "lint": {
       "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/front/src/**/*.{ts,tsx,js,jsx}",
+          "apps/front/package.json"
+        ]
       }
     },
     "generate:api": {
       "executor": "nx:run-commands",
-      "options": {
-        "command": "sh {projectRoot}/scripts/generate-api.sh main"
-      }
-    },
-    "generate:file-api": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "sh {projectRoot}/scripts/generate-api.sh file"
+      "defaultConfiguration": "main",
+      "configurations": {
+        "main": {
+          "command": "sh {projectRoot}/scripts/generate-api.sh main"
+        },
+        "file": {
+          "command": "sh {projectRoot}/scripts/generate-api.sh file"
+        }
       }
     }
   }

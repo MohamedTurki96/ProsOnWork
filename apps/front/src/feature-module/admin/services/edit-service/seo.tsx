@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TagsInput } from 'react-tag-input-component';
+
 import Edittaxmodalpopup from '../../common/modals/edit-tax-modal';
 
 type props = {

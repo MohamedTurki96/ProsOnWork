@@ -1,41 +1,38 @@
 import React from 'react';
 import { Navigate, Route } from 'react-router-dom';
+
 import { all_routes } from '../../core/data/routes/all_routes';
+import Admin from '../admin/admin';
+import Blog from '../frontend/blog/blog';
+import Customers from '../frontend/customers/customers';
+import HomeEight from '../frontend/home/home-eight';
 import HomeFive from '../frontend/home/home-five/home-five';
 import HomeFour from '../frontend/home/home-four/home-four';
+import HomeNine from '../frontend/home/home-nine';
 import HomeOne from '../frontend/home/home-one/home-one';
 import HomeSeven from '../frontend/home/home-seven/home-seven';
+import HomeSix from '../frontend/home/home-six';
 import HomeThree from '../frontend/home/home-three/home-three';
 import HomeTwo from '../frontend/home/home-two/home-two';
-import Pages from '../frontend/pages/pages';
-import Customers from '../frontend/customers/customers';
-import Services from '../frontend/services/services';
-import Blog from '../frontend/blog/blog';
-import Providers from '../frontend/providers/providers';
-
-import LoginPhone1 from '../frontend/pages/authentication/login-phone1';
-
-
-import PhoneOtp from '../frontend/pages/authentication/phone-otp';
-import HomeSix from '../frontend/home/home-six';
-import HomeEight from '../frontend/home/home-eight';
-import HomeNine from '../frontend/home/home-nine';
-import Admin from '../admin/admin';
-import Booking1 from '../frontend/pages/booking/booking-1';
-import ChooseSignup from '../frontend/pages/authentication/choose-signup';
-import Error404 from '../frontend/pages/Error page/error404';
-import UserSignup from '../frontend/pages/authentication/user-signup';
-import EmailOtp from '../frontend/pages/authentication/email-otp';
-import Login from '../frontend/pages/authentication/login';
-
-import PaymentSetting from '../frontend/providers/settings/payment-setting';
-import ResetPassword from '../frontend/pages/authentication/reset-password';
-import PasswordRecovery from '../frontend/pages/authentication/password-recovery';
-import Success from '../frontend/pages/authentication/success';
-import FreeTrail from '../frontend/pages/authentication/free-trail';
 import NewHome from '../frontend/home/new-home';
-import ProviderRegister from '../frontend/pages/authentication/provider-signup';
+import Error404 from '../frontend/pages/Error page/error404';
 import Error500 from '../frontend/pages/Error page/error500';
+import ChooseSignup from '../frontend/pages/authentication/choose-signup';
+import EmailOtp from '../frontend/pages/authentication/email-otp';
+import FreeTrail from '../frontend/pages/authentication/free-trail';
+import Login from '../frontend/pages/authentication/login';
+import LoginPhone1 from '../frontend/pages/authentication/login-phone1';
+import PasswordRecovery from '../frontend/pages/authentication/password-recovery';
+import PhoneOtp from '../frontend/pages/authentication/phone-otp';
+import ProviderRegister from '../frontend/pages/authentication/provider-signup';
+import ResetPassword from '../frontend/pages/authentication/reset-password';
+import Success from '../frontend/pages/authentication/success';
+import UserSignup from '../frontend/pages/authentication/user-signup';
+import Booking1 from '../frontend/pages/booking/booking-1';
+import Pages from '../frontend/pages/pages';
+import Providers from '../frontend/providers/providers';
+import PaymentSetting from '../frontend/providers/settings/payment-setting';
+import Services from '../frontend/services/services';
 const routes = all_routes;
 
 const publicRoutes = [

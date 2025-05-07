@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import TemplateDemo from '../../common/multi-select/multiSelect';
-import CustomDropdown from '../../common/dropdown/commonSelect';
-import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+import { Link } from 'react-router-dom';
 import DefaultEditor from 'react-simple-wysiwyg';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+import CustomDropdown from '../../common/dropdown/commonSelect';
+import TemplateDemo from '../../common/multi-select/multiSelect';
+
 
 const CreateService = () => {
   const routes = all_routes;

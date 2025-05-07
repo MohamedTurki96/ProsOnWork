@@ -1,13 +1,15 @@
+import AOS from 'aos';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import AOS from 'aos';
+
 import 'aos/dist/aos.css';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css'
 
 const AboutUs = () => {
   const routes = all_routes;

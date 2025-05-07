@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { Dropdown } from 'primereact/dropdown';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import UsersModal from '../common/modals/users-modal';
 import { rowdatas } from '../../../core/models/interface';
+import UsersModal from '../common/modals/users-modal';
 
 const Users = () => {
   const data = useSelector((state: any) => state.users);

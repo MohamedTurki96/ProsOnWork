@@ -1,9 +1,11 @@
 import React from 'react';
-import PagesAuthHeader from './common/header';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
-import AuthFooter from './common/footer';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import AuthFooter from './common/footer';
+import PagesAuthHeader from './common/header';
 
 const PasswordRecovery = () => {
   const routes = all_routes;

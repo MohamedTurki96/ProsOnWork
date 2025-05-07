@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import {ServiceSalesInterface } from '../../../core/models/interface';
 
 const ServiceSales = () => {

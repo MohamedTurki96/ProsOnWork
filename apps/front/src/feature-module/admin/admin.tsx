@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import PageLoader from '../../core/loader';
+
 import AdminRoutes from './admin.routes';
 import AdminHeader from './common/header';
 import AdminSidebar from './common/sidebar';
-import { useLocation } from 'react-router-dom';
-import PageLoader from '../../core/loader';
 // import '../../style/admin/css/admin.css'
 const Admin = () => {
   const location = useLocation();

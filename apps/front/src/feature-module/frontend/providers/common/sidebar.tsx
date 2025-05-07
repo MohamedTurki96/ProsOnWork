@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+
 import { set_mouseoversidebar_data } from '../../../../core/data/redux/action';
 import { all_routes } from '../../../../core/data/routes/all_routes';
 import { AppState } from '../../../../core/models/interface';

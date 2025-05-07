@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router';
-import { AuthHeader } from './Header';
+
 import { AuthFooter } from './Footer';
+import { AuthHeader } from './Header';
 
 export function AuthLayout() {
   useEffect(() => {

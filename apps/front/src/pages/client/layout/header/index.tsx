@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Routes } from '../../../../router/routes/routes';
+
 import { useConnectedUser, useLogout } from '../../../../hooks/useAuth';
+import { Routes } from '../../../../router/routes/routes';
 
 export function Header() {
   const { data: user } = useConnectedUser();

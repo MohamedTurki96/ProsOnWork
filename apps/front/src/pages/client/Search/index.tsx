@@ -1,7 +1,9 @@
-import { Filter } from './Filter';
-import { ServiceCard } from './Card';
 import { useCallback } from 'react';
+
 import { useFilteredServices } from '../../../hooks/useProducts';
+
+import { ServiceCard } from './Card';
+import { Filter } from './Filter';
 
 export function Search() {
   const { data: products, refetch, isLoading } = useFilteredServices();

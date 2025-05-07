@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2';
+import { Link } from 'react-router-dom'
+
 import 'react-phone-input-2/lib/style.css';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import PagesAuthHeader from './common/header';
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import PagesAuthHeader from './common/header';
 
 const LoginPhone1 = () => {
   const routes = all_routes;

@@ -99,5 +99,5 @@ export class UserListResultDTO extends PaginationResultDTO<UserDTO> {
   @Type(() => UserDTO)
   @Expose()
   @ApiProperty({ type: UserDTO, isArray: true })
-  items: UserDTO[];
+  override items: UserDTO[];
 }

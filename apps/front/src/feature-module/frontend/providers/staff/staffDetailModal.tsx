@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { all_routes } from '../../../../core/data/routes/all_routes'
-import CustomDropdown from '../../common/dropdown/commonSelect'
-import CommonDatePicker from '../../../../core/hooks/commonDatePicker'
+
 import { hrsOption, minsOption, numberOption } from '../../../../core/data/json/dropDownData'
+import { all_routes } from '../../../../core/data/routes/all_routes'
+import CommonDatePicker from '../../../../core/hooks/commonDatePicker'
+import CustomDropdown from '../../common/dropdown/commonSelect'
 
 const StaffDetailModal = () => {
     const routes= all_routes

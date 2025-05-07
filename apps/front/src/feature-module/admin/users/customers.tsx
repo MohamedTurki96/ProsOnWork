@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {useState } from 'react'
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable'
 import { Dropdown } from 'primereact/dropdown';
-import { Link } from 'react-router-dom';
+import React, {useState } from 'react'
 import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import CustomersModal from '../common/modals/customers-modal';
 import DeleteCustomersModal from '../common/modals/delete-customers-modal';
 

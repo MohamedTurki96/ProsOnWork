@@ -1,9 +1,11 @@
 import { RouteObject } from 'react-router-dom';
-import { Routes } from './routes';
-import Guest from '../components/Guest';
-import { AuthLayout } from '../../pages/auth/layout';
-import { Register } from '../../pages/auth/Register';
+
 import { Login } from '../../pages/auth/Login';
+import { Register } from '../../pages/auth/Register';
+import { AuthLayout } from '../../pages/auth/layout';
+import Guest from '../components/Guest';
+
+import { Routes } from './routes';
 
 export const authRoutes: RouteObject[] = [
   {

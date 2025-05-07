@@ -1,11 +1,15 @@
 import React from 'react'
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+
+
+import { serviceSlideData } from '../../../../core/data/json/services-slide';
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { serviceSlideData } from '../../../../core/data/json/services-slide';
+
 const FeatureSection = () => {
     const routes = all_routes;
     const imgslideroption = {

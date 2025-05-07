@@ -1,15 +1,18 @@
+import AOS from 'aos';
+import { Dropdown } from 'primereact/dropdown';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import FooterFour from './footer-four';
 import Slider from 'react-slick';
+
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import HomeHeader from '../header/home-header';
+
+import FooterFour from './footer-four';
+import 'aos/dist/aos.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { Dropdown } from 'primereact/dropdown';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import HomeHeader from '../header/home-header';
 
 const homeFour = () => {
   const routes = all_routes;

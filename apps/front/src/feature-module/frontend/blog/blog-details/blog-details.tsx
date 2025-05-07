@@ -1,10 +1,11 @@
+import AOS from 'aos';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
-import AOS from 'aos';
+
 import 'aos/dist/aos.css';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 
 const BlogDetails = () => {

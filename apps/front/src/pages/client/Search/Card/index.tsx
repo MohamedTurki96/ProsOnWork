@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Routes } from '../../../../router/routes/routes';
+
 import { ProductResource } from '../../../../api';
+import { Routes } from '../../../../router/routes/routes';
 import { renderPrice } from '../../../../utils/renderPrice';
 
 interface ServiceCardProps {

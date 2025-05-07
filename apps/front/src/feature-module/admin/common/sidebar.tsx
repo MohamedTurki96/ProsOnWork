@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import * as Icon from 'react-feather';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+
+import { adminSidebar } from '../../../core/data/json/admin_sidebar_data';
 import {
   set_mouseoversidebar_data,
   set_toggleSidebar_data_2,
 } from '../../../core/data/redux/action';
 import { all_routes } from '../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { adminSidebar } from '../../../core/data/json/admin_sidebar_data';
 import { AppState, SideBarData } from '../../../core/models/interface';
 
 const AdminSidebar = () => {

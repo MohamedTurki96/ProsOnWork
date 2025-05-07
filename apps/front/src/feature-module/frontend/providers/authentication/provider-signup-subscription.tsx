@@ -1,8 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import * as Icon from 'react-feather';
-import ProviderAuthHeader2 from './common/header2';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+
+import ProviderAuthHeader2 from './common/header2';
+
 
 const ProviderSignupSubscription = () => {
   const routes = all_routes;

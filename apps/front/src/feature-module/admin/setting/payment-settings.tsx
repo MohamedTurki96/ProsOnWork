@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import * as Icon from 'react-feather';
-import SettingsSidebar from '../common/settingssidebar';
+import { Link } from 'react-router-dom'
+
 import PaymentSettingModal from '../common/modals/payment-setting-modal';
+import SettingsSidebar from '../common/settingssidebar';
 
 const PaymentSettings = () => {
     return (

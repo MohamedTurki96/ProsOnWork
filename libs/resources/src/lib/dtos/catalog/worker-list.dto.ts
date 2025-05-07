@@ -82,5 +82,5 @@ export class WorkerListResultDTO extends PaginationResultDTO<WorkerDTO> {
   @Type(() => WorkerDTO)
   @Expose()
   @ApiProperty({ type: WorkerDTO, isArray: true })
-  items: WorkerDTO[];
+  override items: WorkerDTO[];
 }

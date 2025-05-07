@@ -1,12 +1,14 @@
-import { DataTable } from 'primereact/datatable';
-import React, { useState } from 'react';
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
-import SettingsSidebar from '../common/settingssidebar';
+import { DataTable } from 'primereact/datatable';
 import { Dropdown } from 'primereact/dropdown';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import TaxRatesModal from '../common/modals/tax-rates-modal';
+import SettingsSidebar from '../common/settingssidebar';
+
 
 const TaxRates = () => {
   const data = useSelector((state: any) => state.taxRates);

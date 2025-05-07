@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import * as Icon from 'react-feather';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import React, { useEffect, useState } from 'react';
+import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom';
+
 import { languageService } from '../../../core/data/service/admin/language';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import LanguageModal from '../common/modals/language-modal';
 import SettingsSidebar from '../common/settingssidebar';
-import { Link } from 'react-router-dom';
+
 
 const Language = () => {
   const [language, setLanguage] = useState([]);

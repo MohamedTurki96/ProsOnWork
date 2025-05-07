@@ -1,12 +1,13 @@
-import { DataTable } from 'primereact/datatable'
-import React, {useState}  from 'react'
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { useSelector } from 'react-redux';
+import { DataTable } from 'primereact/datatable'
 import { Dropdown } from 'primereact/dropdown';
-import { all_routes } from '../../../core/data/routes/all_routes';
+import React, {useState}  from 'react'
 import * as Icon from 'react-feather';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { CompletedBookingInterface } from '../../../core/models/interface';
 
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PagesAuthHeader from './common/header';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import PagesAuthHeader from './common/header';
 
 const LoginEmail = () => {
   const routes = all_routes;

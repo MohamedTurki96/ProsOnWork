@@ -1,9 +1,11 @@
 import React from 'react';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import PagesAuthHeader from './common/header';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 import AuthFooter from './common/footer';
+import PagesAuthHeader from './common/header';
 
 const Login2 = () => {
   const routes = all_routes;

@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+
 import {
   set_current_route,
   set_current_route_array,
   set_is_mobile_sidebar,
   set_toggleSidebar_data,
 } from '../core/data/redux/action';
-// import Progress from './frontend/common/progress/progress';
-import Cursor from './frontend/common/cursor/cursor';
 import {
   AppState,
   CurrentRoute,
   ProviderEarningsadmindatas,
 } from '../core/models/interface';
+
+// import Progress from './frontend/common/progress/progress';
+import Cursor from './frontend/common/cursor/cursor';
 // import '../style/scss/main.scss'
+
 const Feature = () => {
   const toggle_data = useSelector(
     (state: ProviderEarningsadmindatas) => state.ProviderEarningsAdmin,

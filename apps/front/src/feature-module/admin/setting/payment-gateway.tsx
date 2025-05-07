@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import * as Icon from 'react-feather';
-import SettingsSidebar from '../common/settingssidebar';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import { Link } from 'react-router-dom'
+
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import PaymentGateWayModal from '../common/modals/payment-gateway-modal';
+import SettingsSidebar from '../common/settingssidebar';
 
 const routes = all_routes;
 

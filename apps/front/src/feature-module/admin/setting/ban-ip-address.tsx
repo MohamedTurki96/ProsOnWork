@@ -1,11 +1,11 @@
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import React from 'react';
-
 import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
-import SettingsSidebar from '../common/settingssidebar';
+
 import Banipaddressmodal from '../common/modals/ban-ip-address-modal';
+import SettingsSidebar from '../common/settingssidebar';
 
 const BanIpAddress = () => {
   const data = useSelector((state: any) => state.ipaddressData);

@@ -69,5 +69,5 @@ export class ReservationListResultDTO extends PaginationResultDTO<ReservationDTO
   @Type(() => ReservationDTO)
   @Expose()
   @ApiProperty({ type: ReservationDTO, isArray: true })
-  items: ReservationDTO[];
+  override items: ReservationDTO[];
 }

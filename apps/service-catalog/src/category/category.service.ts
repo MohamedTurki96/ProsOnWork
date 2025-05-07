@@ -16,9 +16,9 @@ export class CategoryService {
       args.where = {};
     }
 
-    return await this.client.category.findMany({
+    return await this.client.category.findMany(/* {
       ...args,
-    });
+    } */);
   }
 
   async count(args: Prisma.CategoryCountArgs = {}) {

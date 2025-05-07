@@ -1,7 +1,8 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import SettingsSidebar from '../common/settingssidebar'
-import { Dropdown } from 'primereact/dropdown';
 
 const FooterSettings = () => {
     const [selectedValue, setSelectedValue] = useState(null);

@@ -1,10 +1,13 @@
-import React, {  useState } from 'react';
-import { Link } from 'react-router-dom';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { Dropdown } from 'primereact/dropdown';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import React, {  useState } from 'react';
+import DatePicker from "react-datepicker";
+import { Link } from 'react-router-dom';
+
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 const ProviderPlan = () => {
   const [active, setactive] = useState(true);

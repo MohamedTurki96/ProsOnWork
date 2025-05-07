@@ -77,5 +77,5 @@ export class ShopListResultDTO extends PaginationResultDTO<ShopDTO> {
   @Type(() => ShopDTO)
   @Expose()
   @ApiProperty({ type: ShopDTO, isArray: true })
-  items: ShopDTO[];
+  override items: ShopDTO[];
 }

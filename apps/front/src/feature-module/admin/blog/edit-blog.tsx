@@ -1,9 +1,10 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import DefaultEditor from 'react-simple-wysiwyg';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 
 const EditBlog = () => {
   const [values, setValue] = React.useState();

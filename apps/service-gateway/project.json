@@ -15,17 +15,14 @@
         "outputPath": "dist/apps/service-gateway",
         "main": "apps/service-gateway/src/main.ts",
         "tsConfig": "apps/service-gateway/tsconfig.app.json",
-        "assets": [
-          {
-            "input": "apps/service-gateway/assets",
-            "glob": "**/*",
-            "output": "assets"
-          }
-        ],
-        "isolatedConfig": true,
         "watch": true,
         "webpackConfig": "apps/service-gateway/webpack.config.js",
         "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {
+          "webpackConfig": "apps/service-gateway/webpack.config.dev.js"
+        }
       }
     },
     "serve": {

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { Dropdown } from 'primereact/dropdown';
-import { Link } from 'react-router-dom';
 import { MultiSelect } from 'primereact/multiselect';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import SettingsSidebar from '../common/settingssidebar';
 
 const Localization = () => {

@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath'
 import SettingsSidebar from '../common/settingssidebar'
-import { Link } from 'react-router-dom'
 
 const SiteInformation = () => {
   return (

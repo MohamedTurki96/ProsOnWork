@@ -1,28 +1,26 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import AboutUs from './about-us/about-us';
-import Categories from './categories/categories';
 
+import Invoice from '../customers/invoice/invoice';
+import PaymentSetting from '../providers/settings/payment-setting';
+
+import AboutUs from './about-us/about-us';
+import Booking1 from './booking/booking-1';
+import BookingDetails from './booking/booking-details';
+import BookingWizard from './booking/booking-wizard';
+import Categories from './categories/categories';
+import Categories2 from './categories/categories2';
+import CommingSoon from './comming-soon/comming-soon';
+import ContactUs from './contact-us/contact-us';
 import Faq from './faq/faq';
 import Howitworks from './how-it-works/how-it-works';
-import TermsCondition from './terms-condition/terms-condition';
-import ContactUs from './contact-us/contact-us';
 import Installer from './installer/installer';
 import InstallerNew from './installer-new/installer-new';
 import Maintenance from './maintenance/maintenance';
 import Pricing from './pricing/pricing';
 import PrivacyPolicy from './privacy-policy/privacy-policy';
-import Booking1 from './booking/booking-1';
 import SessionExpired from './session-expired/session-expired';
-import Error404 from './Error page/error404';
-import Error500 from './Error page/error500';
-
-import BookingDetails from './booking/booking-details';
-import PaymentSetting from '../providers/settings/payment-setting';
-import CommingSoon from './comming-soon/comming-soon';
-import BookingWizard from './booking/booking-wizard';
-import Invoice from '../customers/invoice/invoice';
-import Categories2 from './categories/categories2';
+import TermsCondition from './terms-condition/terms-condition';
 
 const PagesRoutes = () => {
   const all_pages_routes = [

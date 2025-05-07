@@ -1,9 +1,10 @@
-import { TypingEffect } from '../../../../components/TypingEffect/inedx';
 import { useCallback, useState } from 'react';
-import { GeoLocationMap } from '../../../../components/GeoLocation';
-import { GeoLocation } from '../../../../utils/getGeolocationText';
 import { useNavigate } from 'react-router-dom';
+
+import { GeoLocationMap } from '../../../../components/GeoLocation';
+import { TypingEffect } from '../../../../components/TypingEffect/inedx';
 import { Routes } from '../../../../router/routes/routes';
+import { GeoLocation } from '../../../../utils/getGeolocationText';
 
 export function Hero() {
   const [show, setShow] = useState(false);

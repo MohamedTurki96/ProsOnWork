@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import CustomDropdown from '../../common/dropdown/commonSelect'
+
 import { cityOption, countryOption, serviceOption, stateOption, statusOption } from '../../../../core/data/json/dropDownData'
+import CustomDropdown from '../../common/dropdown/commonSelect'
 
 const StaffModal = () => {
 

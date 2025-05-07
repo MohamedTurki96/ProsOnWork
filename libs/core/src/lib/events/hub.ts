@@ -97,7 +97,6 @@ export class EventHub implements OnModuleInit, OnModuleDestroy {
   }
 
   async addQueueJob(event: IQueueJob) {
-    // Currently specific for queues to overwrite msp
     const eventObj = EventSerializer.fromInstance(event);
 
     if (!eventObj) {

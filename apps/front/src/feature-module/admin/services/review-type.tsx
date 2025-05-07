@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
+import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
-import ReviewdatatypeModal from '../common/modals/review-datatype-modal';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { ReviewTypeInterface } from '../../../core/models/interface';
+import ReviewdatatypeModal from '../common/modals/review-datatype-modal';
 
 const ReviewType = () => {
   const data = useSelector((state: any) => state.review_data_type);

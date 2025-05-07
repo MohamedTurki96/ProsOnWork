@@ -1,7 +1,8 @@
+import { InputOtp } from 'primereact/inputotp';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
-import { InputOtp } from 'primereact/inputotp';
 
 const AuthModals = () => {
     const [token, setTokens] = useState<any>();

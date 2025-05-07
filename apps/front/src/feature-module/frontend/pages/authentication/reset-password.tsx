@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import PagesAuthHeader from './common/header';
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import {  useNavigate } from 'react-router-dom';
-import AuthFooter from './common/footer';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import AuthFooter from './common/footer';
+import PagesAuthHeader from './common/header';
 
 const ResetPassword = () => {
   const routes = all_routes;

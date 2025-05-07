@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
 import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useEffect, useState } from 'react';
 import * as Icon from 'react-feather';
-import { AbuseReportData } from '../../../core/models/interface';
+import { Link } from 'react-router-dom';
+
 import { AbuseData } from '../../../core/data/json/abuse_report';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import { AbuseReportData } from '../../../core/models/interface';
 
 export const AbuseReport = () => {
   const [selectedValue, setSelectedValue] = useState(null);

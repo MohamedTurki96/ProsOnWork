@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import * as Icon from 'react-feather';
-import { Dropdown } from 'primereact/dropdown';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import ProviderCouponsModal from '../../common/modals/provider-coupons-modal';
 import { useSelector } from 'react-redux';
-import { Coupons } from '../../../../core/models/interface';
+import { Link } from 'react-router-dom';
+
 import { companyOption, numberOption, offerOption, serviceOption, staffOption, statusOption2 } from '../../../../core/data/json/dropDownData';
-import CustomDropdown from '../../common/dropdown/commonSelect';
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+import { Coupons } from '../../../../core/models/interface';
+import CustomDropdown from '../../common/dropdown/commonSelect';
 
 const ProviderCoupons = () => {
   const [selectedValue1, setSelectedValue1] = useState(null);

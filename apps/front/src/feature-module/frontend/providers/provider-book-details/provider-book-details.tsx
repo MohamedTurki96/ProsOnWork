@@ -1,15 +1,16 @@
-import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { customerOption, serviceOption, staffOption } from '../../../../core/data/json/dropDownData';
-import CustomDropdown from '../../common/dropdown/commonSelect';
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import CustomDropdown from '../../common/dropdown/commonSelect';
 interface EventDetails {
   title: string;
 }

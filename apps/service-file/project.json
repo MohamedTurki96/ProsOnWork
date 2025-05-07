@@ -16,15 +16,19 @@
         "tsConfig": "apps/service-file/tsconfig.app.json",
         "assets": [
           {
-            "input": "apps/service-file/assets",
+            "input": "apps/service-file/media",
             "glob": "**/*",
-            "output": "assets"
+            "output": "media"
           }
         ],
-        "isolatedConfig": true,
         "watch": true,
         "webpackConfig": "apps/service-file/webpack.config.js",
         "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {
+          "webpackConfig": "apps/service-file/webpack.config.dev.js"
+        }
       }
     },
     "serve": {
@@ -98,7 +102,8 @@
     "prisma-reset": {
       "executor": "@nx-tools/nx-prisma:reset",
       "options": {
-        "schema": "apps/service-file/prisma/schema.prisma"
+        "schema": "apps/service-file/prisma/schema.prisma",
+        "force": true
       }
     },
     "prisma-resolve": {

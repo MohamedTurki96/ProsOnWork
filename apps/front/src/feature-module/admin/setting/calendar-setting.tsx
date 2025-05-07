@@ -1,10 +1,11 @@
-import FullCalendar from '@fullcalendar/react'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import dayGridPlugin from '@fullcalendar/daygrid';
+import FullCalendar from '@fullcalendar/react'
 import { Dropdown } from 'primereact/dropdown';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import React, { useState } from 'react'
 import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom'
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import SettingsSidebar from '../common/settingssidebar';
 
 const CalendarSetting = () => {

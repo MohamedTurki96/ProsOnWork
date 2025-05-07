@@ -1,7 +1,8 @@
 import React from 'react'
-import BreadCrumb from '../../common/breadcrumb/breadCrumb'
 import { Link } from 'react-router-dom'
+
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+import BreadCrumb from '../../common/breadcrumb/breadCrumb'
 
 const Categories2 = () => {
   return (

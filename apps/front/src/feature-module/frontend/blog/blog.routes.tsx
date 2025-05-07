@@ -1,6 +1,7 @@
 import React from 'react';
-import BlogDetails from './blog-details/blog-details';
 import { Navigate, Route, Routes } from 'react-router-dom';
+
+import BlogDetails from './blog-details/blog-details';
 import BlogGrid from './blog-grid/blog-grid';
 import BlogList from './blog-list/blog-list';
 

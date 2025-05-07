@@ -1,7 +1,8 @@
 import React from 'react'
-import SettingsSidebar from '../common/settingssidebar'
 import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
+
+import SettingsSidebar from '../common/settingssidebar'
 
 const EmailSettings = () => {
   return (

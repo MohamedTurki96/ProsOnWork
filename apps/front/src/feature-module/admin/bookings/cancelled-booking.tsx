@@ -1,13 +1,13 @@
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-
 import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
-import * as Icon from 'react-feather';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { CancelledBookingInterface } from '../../../core/models/interface';
 
 const CancelledBooking = () => {

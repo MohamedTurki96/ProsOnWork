@@ -1,17 +1,18 @@
-import React from 'react';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import ReactApexChart from 'react-apexcharts';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { AdminDashboardThree } from '../../../core/data/json/admin-dashboard3';
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import {
   AdminDashboardInterface,
   AdminDashboardOne,
   AdminDashboardTwo,
 } from '../../../core/models/interface';
-import { AdminDashboardThree } from '../../../core/data/json/admin-dashboard3';
 
 const Dashboard = () => {
   const routes = all_routes;

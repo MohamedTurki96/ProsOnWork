@@ -1,12 +1,13 @@
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { menuManagement } from '../../../core/data/service/admin/menu-management';
-import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { Dropdown } from 'react-bootstrap';
+import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
+import { menuManagement } from '../../../core/data/service/admin/menu-management';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import DeleteModal from '../common/modals/delete-modal';
 
 const MenuManagement = () => {

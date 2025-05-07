@@ -1,11 +1,10 @@
 import { Dropdown } from 'primereact/dropdown';
 import React, { useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
 import { Link } from 'react-router-dom';
 
-import 'react-datepicker/dist/react-datepicker.css';
-
-import Calendar from 'react-calendar';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Booking2 = () => {
   const [value, onChange] = useState(new Date());

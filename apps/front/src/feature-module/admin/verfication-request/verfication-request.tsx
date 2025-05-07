@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import React from 'react';
 import { useSelector } from 'react-redux';
+
 import { VerficationRequestInterface } from '../../../core/models/interface';
 
 const VerficationRequest = () => {

@@ -14,9 +14,13 @@
         "outputPath": "dist/apps/service-user",
         "main": "apps/service-user/src/main.ts",
         "tsConfig": "apps/service-user/tsconfig.app.json",
-        "isolatedConfig": true,
         "webpackConfig": "apps/service-user/webpack.config.js",
         "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {
+          "webpackConfig": "apps/service-user/webpack.config.dev.js"
+        }
       }
     },
     "serve": {
@@ -90,7 +94,8 @@
     "prisma-reset": {
       "executor": "@nx-tools/nx-prisma:reset",
       "options": {
-        "schema": "apps/service-user/prisma/schema.prisma"
+        "schema": "apps/service-user/prisma/schema.prisma",
+        "force": true
       }
     },
     "prisma-resolve": {

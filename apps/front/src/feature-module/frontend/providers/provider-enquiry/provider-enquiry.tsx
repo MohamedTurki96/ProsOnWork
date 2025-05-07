@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import { serviceOption, staffOption } from '../../../../core/data/json/dropDownData';
 import CommonDatePicker from '../../../../core/hooks/commonDatePicker';
 import CustomDropdown from '../../common/dropdown/commonSelect';
-import { serviceOption, staffOption } from '../../../../core/data/json/dropDownData';
 
 const ProviderEnquiry = () => {
     const [showFilter, setShowFilter] = useState(false);

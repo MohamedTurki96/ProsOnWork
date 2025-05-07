@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
 import { DataTable } from 'primereact/datatable';
-import DefaultEditor from 'react-simple-wysiwyg';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
 import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import DefaultEditor from 'react-simple-wysiwyg';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { NewslettersItem } from '../../../core/models/interface';
 
 const EmailNewsletter = () => {

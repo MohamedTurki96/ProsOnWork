@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
+import { Link, useLocation } from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 const CustomerSideBar = () => {
   const routes = all_routes;
   const location = useLocation();

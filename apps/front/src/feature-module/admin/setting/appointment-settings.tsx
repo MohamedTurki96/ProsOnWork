@@ -1,4 +1,5 @@
 import React from 'react'
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import SettingsSidebar from '../common/settingssidebar';
 const AppointmentSettings = () => {

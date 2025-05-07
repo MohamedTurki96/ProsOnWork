@@ -1,15 +1,17 @@
+import AOS from 'aos';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'aos/dist/aos.css';
 import Slider from 'react-slick';
-import HeaderFive from './header-five';
-import FooterFive from './footer-five';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import FooterFive from './footer-five';
+import HeaderFive from './header-five';
 
 const HomeFive = () => {
   const routes = all_routes;

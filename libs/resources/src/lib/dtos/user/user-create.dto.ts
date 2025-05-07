@@ -23,7 +23,7 @@ export class UserCreateDTO {
   password: string
 
   @IsOptional()
-  @IsString(null)
+  @IsString()
   @Expose()
   @ApiPropertyOptional()
   phone?: string

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import Lightbox from "yet-another-react-lightbox";
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
-import { all_routes } from '../../../core/data/routes/all_routes';
-import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+
+import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+
 const ViewService = () => {
   const routes = all_routes;
 

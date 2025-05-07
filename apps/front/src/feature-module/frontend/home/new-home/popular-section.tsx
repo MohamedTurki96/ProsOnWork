@@ -1,18 +1,21 @@
 import React from 'react';
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+
+import { computerServices } from '../../../../core/data/json/computerServices';
+import { construction } from '../../../../core/data/json/construction';
+import { electrical } from '../../../../core/data/json/electrical';
+import { furniture } from '../../../../core/data/json/furniture';
+import { manVan } from '../../../../core/data/json/manvan';
+import { moreServices } from '../../../../core/data/json/moreService';
+import { plumbing } from '../../../../core/data/json/plumbing';
+import { removals } from '../../../../core/data/json/removals';
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { computerServices } from '../../../../core/data/json/computerServices';
-import { removals } from '../../../../core/data/json/removals';
-import { manVan } from '../../../../core/data/json/manvan';
-import { furniture } from '../../../../core/data/json/furniture';
-import { electrical } from '../../../../core/data/json/electrical';
-import { construction } from '../../../../core/data/json/construction';
-import { plumbing } from '../../../../core/data/json/plumbing';
-import { moreServices } from '../../../../core/data/json/moreService';
+
 const PopularSection = () => {
   const routes = all_routes;
   const imgslideroption = {

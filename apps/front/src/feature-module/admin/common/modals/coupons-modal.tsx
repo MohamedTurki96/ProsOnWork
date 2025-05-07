@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import * as Icon from 'react-feather';
 import { Calendar } from 'primereact/calendar';
 import { MultiSelect } from 'primereact/multiselect';
+import React, { useState } from 'react'
+import * as Icon from 'react-feather';
 
 const CouponsModal = () => {
 

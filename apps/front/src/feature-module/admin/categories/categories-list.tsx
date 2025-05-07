@@ -1,12 +1,13 @@
-import { DataTable } from 'primereact/datatable'
-import React, { useState } from 'react'
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
+import { DataTable } from 'primereact/datatable'
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react'
 import * as Icon from 'react-feather';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import CatogriesModal from '../common/modals/catogries-modal';
-import { useSelector } from 'react-redux';
 import DeleteCategoriesModal from '../common/modals/delete-categories-modal';
 
 const CategoriesList = () => {

@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+
 import { all_routes } from '../../../../core/data/routes/all_routes'
-import BookConfirmation from './wizard-content/book-confirmation'
-import BookPayment from './wizard-content/book-payment'
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath'
+
 import BookCart from './wizard-content/book-cart'
-import BookInfo from './wizard-content/book-info'
+import BookConfirmation from './wizard-content/book-confirmation'
 import BookDateTime from './wizard-content/book-dateTime'
+import BookInfo from './wizard-content/book-info'
+import BookLocation from './wizard-content/book-location'
+import BookPayment from './wizard-content/book-payment'
 import BookServices from './wizard-content/book-services'
 import BookStaff from './wizard-content/book-staff'
-import BookLocation from './wizard-content/book-location'
 
 const BookingWizard = () => {
     const routes = all_routes

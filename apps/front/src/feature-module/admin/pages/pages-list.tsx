@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-
+import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react';
 import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import DeletePageModal from '../common/modals/delete-paage-modal';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
-import { Dropdown } from 'primereact/dropdown';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import DeletePageModal from '../common/modals/delete-paage-modal';
+
 const routes = all_routes;
 
 const PagesList = () => {

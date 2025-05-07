@@ -1,11 +1,12 @@
-import React from 'react';
-import SettingsSidebar from '../common/settingssidebar';
-import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
+import { DataTable } from 'primereact/datatable';
+import React from 'react';
 import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import DatabasebackupModal from '../common/modals/database-backup-modal';
+import SettingsSidebar from '../common/settingssidebar';
 
 const Databasebackup = () => {
   const actionButton = () => {

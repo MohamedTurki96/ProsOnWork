@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Slider, SliderSingleProps } from 'antd';
 import { Dropdown } from 'primereact/dropdown';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import BreadCrumb from '../../common/breadcrumb/breadCrumb';
+
 
 const ServiceList = () => {
   const routes = all_routes;

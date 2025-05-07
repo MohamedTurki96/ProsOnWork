@@ -1,7 +1,8 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
-import { Dropdown } from 'primereact/dropdown';
 
 const Editpage = () => {
   const [selectedValue, setSelectedValue] = useState(null);

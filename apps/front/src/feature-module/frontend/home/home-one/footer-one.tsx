@@ -1,9 +1,10 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Dropdown } from 'primereact/dropdown';
+
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 
 const FooterOne = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(null);

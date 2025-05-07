@@ -1,13 +1,14 @@
+
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
+import * as Icon from 'react-feather';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import * as Icon from 'react-feather';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Dropdown } from 'primereact/dropdown';
-import { useSelector } from 'react-redux';
 import { all_routes } from '../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { SMSTemp } from '../../../core/models/interface';
 import EmailTemplateModal from '../common/modals/email-template-modal';
 

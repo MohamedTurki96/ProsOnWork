@@ -1,13 +1,17 @@
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
 import React from 'react';
 import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom';
+
+import { all_routes } from '../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import FilterDropDown from '../../components/filter-dropdown';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+
 import AddRole from './add-role-modal';
 import EditRole from './edit-role-modal';
-import { Link } from 'react-router-dom';
-import { all_routes } from '../../../core/data/routes/all_routes';
+
+
 
 const Roles = () => {
   const routes = all_routes;

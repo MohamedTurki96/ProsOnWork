@@ -5,6 +5,7 @@ import {
   HealthIndicatorResult,
 } from "@nestjs/terminus"
 import { connect } from "nats"
+
 import { loadNatsConnectionOptions } from "../nats-transport/nats.config"
 
 @Injectable()

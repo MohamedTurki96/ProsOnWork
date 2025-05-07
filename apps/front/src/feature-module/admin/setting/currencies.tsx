@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable'
 import React from 'react'
-import { Column } from 'primereact/column';
-import { Link } from 'react-router-dom';
-import SettingsSidebar from '../common/settingssidebar';
 import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
-import CurrenciesModal from '../common/modals/currencies-modal';
+import { Link } from 'react-router-dom';
+
 import { all_routes } from '../../../core/data/routes/all_routes';
+import CurrenciesModal from '../common/modals/currencies-modal';
 import DeleteCurrenciesModal from '../common/modals/delete-currencies-modal';
+import SettingsSidebar from '../common/settingssidebar';
 const routes = all_routes;
 
 const Currencies = () => {

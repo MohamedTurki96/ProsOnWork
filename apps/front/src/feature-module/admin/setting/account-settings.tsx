@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import SettingsSidebar from '../common/settingssidebar';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { TagsInput } from 'react-tag-input-component';
 import { Link } from 'react-router-dom';
+import { TagsInput } from 'react-tag-input-component';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
+import SettingsSidebar from '../common/settingssidebar';
+
 
 const AccountSettings = () => {
   const [tags] = useState(['English', 'French']);

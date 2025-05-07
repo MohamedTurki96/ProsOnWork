@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import * as Icon from 'react-feather';
 import { Dropdown } from 'primereact/dropdown';
+import React, { useState } from 'react'
+import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom'
+
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 
 const UsersModal = () => {

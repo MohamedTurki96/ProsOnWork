@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import { Link } from 'react-router-dom';
+import ReactApexChart from 'react-apexcharts';
 import { Modal } from 'react-bootstrap';
-import CustomDropdown from '../../common/dropdown/commonSelect';
+import Calendar from 'react-calendar';
+import { Link } from 'react-router-dom';
+
 import {
   cityOption,
   countryOption,
@@ -11,11 +11,11 @@ import {
   stateOption,
   statusOption,
 } from '../../../../core/data/json/dropDownData';
-import ReactApexChart from 'react-apexcharts';
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+import CustomDropdown from '../../common/dropdown/commonSelect';
 
 import 'react-datepicker/dist/react-datepicker.css';
-
-import Calendar from 'react-calendar';
 
 const ProviderDashboard = () => {
   const routes = all_routes;

@@ -1,8 +1,10 @@
 import React from 'react'
+import * as Icon from 'react-feather';
+import { Link } from 'react-router-dom'
+
 import ImageWithBasePath from '../../../core/img/ImageWithBasePath'
 import SettingsSidebar from '../common/settingssidebar'
-import { Link } from 'react-router-dom'
-import * as Icon from 'react-feather';
+
 
 const SmsSettings = () => {
   return (

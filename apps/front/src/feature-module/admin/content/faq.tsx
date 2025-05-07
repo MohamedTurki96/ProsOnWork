@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { Dropdown } from 'primereact/dropdown';
-import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import * as Icon from 'react-feather';
 import { useSelector } from 'react-redux';
-import FaqModal from '../common/modals/faq-modal';
-import DeleteFaqModal from '../common/modals/delete-faq-modal';
+import { Link } from 'react-router-dom';
+
+import ImageWithBasePath from '../../../core/img/ImageWithBasePath';
 import { FaqItem } from '../../../core/models/interface';
+import DeleteFaqModal from '../common/modals/delete-faq-modal';
+import FaqModal from '../common/modals/faq-modal';
 
 const Faq = () => {
   const [selectedValue, setSelectedValue] = useState(null);

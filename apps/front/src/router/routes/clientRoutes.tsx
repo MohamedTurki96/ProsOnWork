@@ -1,10 +1,12 @@
 import { RouteObject } from 'react-router-dom';
-import { ClientLayout } from '../../pages/client/layout';
-import { Routes } from './routes';
-import { Home } from '../../pages/client/Home';
+
 import { Categories } from '../../pages/client/Categories';
+import { Home } from '../../pages/client/Home';
 import { Search } from '../../pages/client/Search';
 import { ServiceDetails } from '../../pages/client/ServiceDetails';
+import { ClientLayout } from '../../pages/client/layout';
+
+import { Routes } from './routes';
 
 export const clientRoutes: RouteObject[] = [
   {

@@ -77,5 +77,5 @@ export class CategoryListResultDTO extends PaginationResultDTO<CategoryDTO> {
   @Type(() => CategoryDTO)
   @Expose()
   @ApiProperty({ type: CategoryDTO, isArray: true })
-  items: CategoryDTO[];
+  override items: CategoryDTO[];
 }

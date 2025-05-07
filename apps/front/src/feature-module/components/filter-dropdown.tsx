@@ -1,6 +1,6 @@
+import { Dropdown } from 'primereact/dropdown';
 import React, { useState } from 'react';
 
-import { Dropdown } from 'primereact/dropdown';
 import { FilterDropDownProps } from '../../core/models/interface';
 
 const FilterDropDown = (props: FilterDropDownProps) => {

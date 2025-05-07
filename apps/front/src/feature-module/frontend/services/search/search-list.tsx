@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import 'aos/dist/aos.css';
 import AOS from 'aos';
-import * as Icon from 'react-feather';
-import { Slider } from 'primereact/slider';
 import { Dropdown } from 'primereact/dropdown';
+import { Slider } from 'primereact/slider';
+import React, { useEffect, useState } from 'react';
+import * as Icon from 'react-feather';
 import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
-import { all_routes } from '../../../../core/data/routes/all_routes';
 import StickyBox from 'react-sticky-box';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import 'aos/dist/aos.css';
 
 const SearchList = () => {
   const routes = all_routes;

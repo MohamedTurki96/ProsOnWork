@@ -1,11 +1,11 @@
 import { Type } from "@nestjs/common"
 import { plainToInstance, Transform } from "class-transformer"
-import { Matches, registerDecorator } from "class-validator"
+import { Matches } from "class-validator"
 import Decimal from "decimal.js"
 
 import { TRANSFORM_OPTIONS } from "./constants"
 
-type ValidateFunc = (value: any) => boolean
+/* type ValidateFunc = (value: any) => boolean
 
 export function OneOf(validators: ValidateFunc[]): PropertyDecorator {
   return function (target: Type, propertyName: PropertyKey) {
@@ -23,7 +23,7 @@ export function OneOf(validators: ValidateFunc[]): PropertyDecorator {
       },
     })
   }
-}
+} */
 
 export function TransformCondition<T = any>(
   validate: (e: T) => Type
@@ -100,8 +100,8 @@ export function TransfromDecimal() {
 }
 
 export function getResourceChanges(
-  oldObj: unknown,
-  newObj: unknown,
+  oldObj: any,
+  newObj: any,
   path?: string
 ): [key: string, value: { oldValue: string; newValue: string }][] {
   let toReturn: [key: string, value: { oldValue: string; newValue: string }][] =

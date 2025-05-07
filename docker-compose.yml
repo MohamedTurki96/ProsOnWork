@@ -6,7 +6,7 @@ services:
     image: postgres:16
     restart: unless-stopped
     environment:
-      POSTGRES_DB: prosonwork
+      POSTGRES_DB: pros-on-work
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     volumes:

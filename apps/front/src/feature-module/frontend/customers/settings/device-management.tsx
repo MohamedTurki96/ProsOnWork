@@ -1,9 +1,8 @@
 import React from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import { CustomerDevicemanage } from '../../../../core/models/interface';
 import BreadCrumb from '../../common/breadcrumb/breadCrumb';
 import CustomerSideBar from '../common/sidebar';

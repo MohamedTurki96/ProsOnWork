@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Calendar } from 'primereact/calendar';
 import AOS from 'aos';
-import 'aos/dist/aos.css';
-import * as Icon from 'react-feather';
-import FooterSix from './footer-six';
-import { Link } from 'react-router-dom';
 import { Dropdown } from 'primereact/dropdown';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { all_routes } from '../../../../core/data/routes/all_routes';
 import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import HomeHeader from '../header/home-header';
-import { all_routes } from '../../../../core/data/routes/all_routes';
+
+import FooterSix from './footer-six';
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'aos/dist/aos.css';
+
 
 const HomeSix = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(null);

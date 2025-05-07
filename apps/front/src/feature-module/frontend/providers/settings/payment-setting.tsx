@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import ProviderHeader from '../common/header';
 import ProviderSidebar from '../common/sidebar';
-import { Link } from 'react-router-dom';
 
 const PaymentSetting = () => {
 

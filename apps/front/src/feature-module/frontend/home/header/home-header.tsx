@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import * as Icon from 'react-feather';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { all_routes } from '../../../../core/data/routes/all_routes';
-import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
+
+import { header } from '../../../../core/data/json/header';
 import {
   set_header_data,
   set_toggleSidebar_data,
 } from '../../../../core/data/redux/action';
-import * as Icon from 'react-feather';
+import { all_routes } from '../../../../core/data/routes/all_routes';
+import ImageWithBasePath from '../../../../core/img/ImageWithBasePath';
 import { AppState, Header } from '../../../../core/models/interface';
-import { header } from '../../../../core/data/json/header';
 
 type props = {
   type: number;
