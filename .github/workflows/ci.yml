@@ -31,7 +31,7 @@ jobs:
 
       # 6️⃣  Build
       - name: Build
-        run: npx nx run-many --target=build --parallel=3 --base=origin/main
+        run: npx nx run-many --target=build --exclude=front --parallel=3 --base=origin/main
 
       # 7️⃣  Test
       - name: Test

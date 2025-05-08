@@ -7,6 +7,7 @@
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["prisma-generate"],
       "defaultConfiguration": "production",
       "options": {
         "target": "node",
