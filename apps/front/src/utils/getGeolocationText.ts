@@ -1,4 +1,4 @@
-import { Address } from '../api';
+import { Address } from '../core/Interface/interface';
 
 export async function getGeolocationText(
   geolocation?: Address,
@@ -18,4 +18,21 @@ export async function getGeolocationText(
   }
 
   return '';
+}
+
+export function stringToAddress(address: string): Address {
+  const [longitude, latitude] = address.split('|').map(Number);
+
+  if (isNaN(latitude) || isNaN(longitude)) {
+    throw new Error('Address not valid');
+  }
+
+  return {
+    latitude,
+    longitude,
+  };
+}
+
+export function addressToString(address: Address): string {
+  return `${address.longitude}|${address.latitude}`;
 }

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { UserRole } from '../../api';
 import { useConnectedUser } from '../../hooks/useAuth';
@@ -12,14 +12,9 @@ type GrantedProps = {
 
 export default function Granted({ children, roles }: GrantedProps) {
   const { data: user } = useConnectedUser();
-  const location = useLocation();
 
   if (!user) {
-    const to = location.pathname.includes('/admin')
-      ? Routes.adminLogin
-      : Routes.login;
-
-    return <Navigate to={to} />;
+    return <Navigate to={Routes.login} />;
   }
 
   if (!roles.includes(user.role!)) {

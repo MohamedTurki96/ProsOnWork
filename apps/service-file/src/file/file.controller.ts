@@ -42,7 +42,7 @@ export class FileController {
       },
     },
   })
-  @ApiResponse({ status: HttpStatus.CREATED })
+  @ApiResponse({ status: HttpStatus.CREATED, type: MediaDTO })
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({

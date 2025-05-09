@@ -1,29 +1,30 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-import { LoginRequest, RegisterRequest } from '../api';
+import { UserCreateDTO, UserLoginDTO } from '../api';
 import { Routes } from '../router/routes/routes';
 
-import { useApi } from './useApi';
-
-const clearData = () => {
-  localStorage.removeItem('access_token');
-  document.cookie =
-    'laravel_session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
+import { useApi, useLocalStorage } from './useApi';
+import { toastError } from './utils';
 
 export function useLogin() {
   const api = useApi();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: LoginRequest) => api.authentication.login(data),
+    mutationFn: (data: UserLoginDTO) => api.auth.login(data),
     onSuccess: (data) => {
-      localStorage.setItem('access_token', data.access_token || '');
-      setTimeout(() => navigate('/'), 1000);
+      localStorage.setItem('access_token', data.token || '');
+      queryClient.setQueriesData({ queryKey: ['me'] }, data.user);
+      setTimeout(() => navigate(Routes.base), 1000);
+      toast.success('Welcome back');
     },
     onError: (error) => {
       console.log('Error logging in', error);
+      toastError();
     },
   });
 }
@@ -33,43 +34,43 @@ export function useRegister() {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (data: RegisterRequest) => api.authentication.register(data),
+    mutationFn: (data: UserCreateDTO) => api.users.register(data),
     onError: (error) => {
       console.log('Error registering', error);
+      toastError();
     },
     onSuccess: () => {
+      toast.success('User registered successfully');
       navigate(Routes.login);
     },
   });
 }
 
 export function useLogout() {
-  const api = useApi();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const [_, setToken] = useLocalStorage();
 
-  return useMutation({
-    mutationFn: () => api.authentication.logout(),
-    onSuccess: () => {
-      clearData();
-      queryClient.invalidateQueries({ queryKey: ['me'] });
-    },
-    onError: (error) => {
-      console.log('Error logging out', error);
-    },
-  });
+  return useCallback(() => {
+    setToken(null);
+    queryClient.setQueriesData({ queryKey: ['me'] }, null);
+    navigate(Routes.home);
+    toast.success('Goodbye!');
+  }, [navigate, queryClient]);
 }
 
 export function useConnectedUser() {
   const api = useApi();
+  const [token, setToken] = useLocalStorage();
 
   const query = useQuery({
     queryKey: ['me'],
-    queryFn: () => api.authentication.me(),
-    enabled: !!localStorage.getItem('access_token'),
+    queryFn: () => api.users.me(),
+    enabled: !!token,
   });
 
   if (query.isError) {
-    clearData();
+    setToken(null);
   }
 
   return query;

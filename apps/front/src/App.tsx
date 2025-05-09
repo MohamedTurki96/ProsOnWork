@@ -28,6 +28,12 @@ export function App() {
     };
   }, [handleScroll]);
 
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    import('./style/scss/main.scss');
+  }, []);
+
   if (isInitialized) {
     return content;
   }

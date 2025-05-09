@@ -1,5 +1,6 @@
 /* eslint-disable */
 /* tslint:disable */
+// @ts-nocheck
 /*
  * ---------------------------------------------------------------
  * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
@@ -8,6 +9,64 @@
  * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
  * ---------------------------------------------------------------
  */
+
+export enum ReclamationStatus {
+  Open = 'open',
+  InProgress = 'inProgress',
+  Resolved = 'resolved',
+}
+
+export enum ReservationStatus {
+  Pending = 'pending',
+  Confirmed = 'confirmed',
+  Canceled = 'canceled',
+}
+
+/** @default "createdAt" */
+export enum ReservationListSortProperty {
+  CreatedAt = 'createdAt',
+}
+
+export enum PriceType {
+  Hour = 'hour',
+  Package = 'package',
+}
+
+export enum ProductType {
+  Service = 'service',
+  Equipment = 'equipment',
+}
+
+/** @default "createdAt" */
+export enum ProductListSortProperty {
+  CreatedAt = 'createdAt',
+}
+
+/** @default "createdAt" */
+export enum WorkerListSortProperty {
+  CreatedAt = 'createdAt',
+}
+
+/** @default "createdAt" */
+export enum ShopListSortProperty {
+  CreatedAt = 'createdAt',
+}
+
+/** @default "createdAt" */
+export enum CategoryListSortProperty {
+  CreatedAt = 'createdAt',
+}
+
+/** @default "desc" */
+export enum QuerySortOrder {
+  Asc = 'asc',
+  Desc = 'desc',
+}
+
+/** @default "createdAt" */
+export enum UserListSortProperty {
+  CreatedAt = 'createdAt',
+}
 
 export enum UserRole {
   Admin = 'admin',
@@ -20,17 +79,6 @@ export interface UserListWhereDTO {
   email?: string;
   phone?: string;
   role?: UserRole;
-}
-
-/** @default "createdAt" */
-export enum UserListSortProperty {
-  CreatedAt = 'createdAt',
-}
-
-/** @default "desc" */
-export enum QuerySortOrder {
-  Asc = 'asc',
-  Desc = 'desc',
 }
 
 export interface UserListSortDTO {
@@ -55,8 +103,8 @@ export interface UserDTO {
   emailVerifiedAt?: string;
   phone?: string;
   role: UserRole;
-  avatarId?: string;
-  address: number;
+  avatarId?: number;
+  address?: string;
   /** @format date-time */
   createdAt: string;
 }
@@ -66,7 +114,20 @@ export interface UserListResultDTO {
   items: UserDTO[];
 }
 
-export type UserUpdateCommand = object;
+export interface UserUpdateDTO {
+  name?: string;
+  phone?: string;
+  avatarId?: number;
+  address?: string;
+}
+
+export interface UserCreateDTO {
+  name: string;
+  email: string;
+  password: string;
+  phone?: string;
+  isClient: string;
+}
 
 export interface UserLoginDTO {
   email: string;
@@ -104,11 +165,6 @@ export interface CategoryListWhereDTO {
   name?: string;
 }
 
-/** @default "createdAt" */
-export enum CategoryListSortProperty {
-  CreatedAt = 'createdAt',
-}
-
 export interface CategoryListSortDTO {
   property?: CategoryListSortProperty;
   order?: QuerySortOrder;
@@ -144,11 +200,6 @@ export interface ShopListWhereDTO {
   name?: string;
 }
 
-/** @default "createdAt" */
-export enum ShopListSortProperty {
-  CreatedAt = 'createdAt',
-}
-
 export interface ShopListSortDTO {
   property?: ShopListSortProperty;
   order?: QuerySortOrder;
@@ -182,11 +233,6 @@ export interface ShopUpdateDTO {
 export interface WorkerListWhereDTO {
   name?: string;
   phone?: string;
-}
-
-/** @default "createdAt" */
-export enum WorkerListSortProperty {
-  CreatedAt = 'createdAt',
 }
 
 export interface WorkerListSortDTO {
@@ -227,11 +273,6 @@ export interface ProductListWhereDTO {
   name?: string;
 }
 
-/** @default "createdAt" */
-export enum ProductListSortProperty {
-  CreatedAt = 'createdAt',
-}
-
 export interface ProductListSortDTO {
   property?: ProductListSortProperty;
   order?: QuerySortOrder;
@@ -240,16 +281,6 @@ export interface ProductListSortDTO {
 export interface FaqDTO {
   question: string;
   answer: string;
-}
-
-export enum ProductType {
-  Service = 'service',
-  Equipment = 'equipment',
-}
-
-export enum PriceType {
-  Hour = 'hour',
-  Package = 'package',
 }
 
 export interface ProductDTO {
@@ -303,20 +334,9 @@ export interface ProductUpdateDTO {
 
 export type ReservationListWhereDTO = object;
 
-/** @default "createdAt" */
-export enum ReservationListSortProperty {
-  CreatedAt = 'createdAt',
-}
-
 export interface ReservationListSortDTO {
   property?: ReservationListSortProperty;
   order?: QuerySortOrder;
-}
-
-export enum ReservationStatus {
-  Pending = 'pending',
-  Confirmed = 'confirmed',
-  Canceled = 'canceled',
 }
 
 export interface ReservationDTO {
@@ -370,12 +390,6 @@ export interface ReclamationCreateDTO {
   userId: number;
   productId: number;
   comment: string;
-}
-
-export enum ReclamationStatus {
-  Open = 'open',
-  InProgress = 'inProgress',
-  Resolved = 'resolved',
 }
 
 export interface ReclamationDTO {
@@ -504,9 +518,9 @@ export class HttpClient<SecurityDataType = unknown> {
       input !== null && typeof input !== 'string'
         ? JSON.stringify(input)
         : input,
-    [ContentType.FormData]: (input: FormData) =>
-      (Array.from(input.keys()) || []).reduce((formData, key) => {
-        const property = input.get(key);
+    [ContentType.FormData]: (input: any) =>
+      Object.keys(input || {}).reduce((formData, key) => {
+        const property = input[key];
         formData.append(
           key,
           property instanceof Blob
@@ -676,6 +690,42 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags Users
+     * @name UpdateOwnUser
+     * @request PUT:/users
+     * @secure
+     */
+    updateOwnUser: (data: UserUpdateDTO, params: RequestParams = {}) =>
+      this.http.request<UserDTO, void>({
+        path: `/users`,
+        method: 'PUT',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
+     * @name Register
+     * @request POST:/users
+     */
+    register: (data: UserCreateDTO, params: RequestParams = {}) =>
+      this.http.request<UserDTO, any>({
+        path: `/users`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
      * @name Me
      * @request GET:/users/me
      * @secure
@@ -685,25 +735,6 @@ export class Api<SecurityDataType extends unknown> {
         path: `/users/me`,
         method: 'GET',
         secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Users
-     * @name UpdateOwnUser
-     * @request PUT:/users/me
-     * @secure
-     */
-    updateOwnUser: (data: UserUpdateCommand, params: RequestParams = {}) =>
-      this.http.request<UserDTO, void>({
-        path: `/users/me`,
-        method: 'PUT',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
         format: 'json',
         ...params,
       }),
@@ -752,7 +783,7 @@ export class Api<SecurityDataType extends unknown> {
      * @secure
      */
     changePassword: (data: ChangePasswordDTO, params: RequestParams = {}) =>
-      this.http.request<UserUpdateCommand, void>({
+      this.http.request<ReservationListWhereDTO, void>({
         path: `/auth/change-password`,
         method: 'POST',
         body: data,
@@ -770,7 +801,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/request-password-reset
      */
     requestReset: (data: RequestPasswordResetDTO, params: RequestParams = {}) =>
-      this.http.request<UserUpdateCommand, any>({
+      this.http.request<ReservationListWhereDTO, any>({
         path: `/auth/request-password-reset`,
         method: 'POST',
         body: data,
@@ -787,7 +818,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/reset-password
      */
     resetPassword: (data: ResetPasswordDTO, params: RequestParams = {}) =>
-      this.http.request<UserUpdateCommand, any>({
+      this.http.request<ReservationListWhereDTO, any>({
         path: `/auth/reset-password`,
         method: 'POST',
         body: data,
@@ -804,7 +835,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/verify-email
      */
     verifyEmail: (data: VerifyEmailDTO, params: RequestParams = {}) =>
-      this.http.request<UserUpdateCommand, any>({
+      this.http.request<ReservationListWhereDTO, any>({
         path: `/auth/verify-email`,
         method: 'POST',
         body: data,

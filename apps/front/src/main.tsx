@@ -1,11 +1,10 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
-import store from './core/data/redux/store';
 import { getQueryClient } from './utils/getQueryClient';
 
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -21,7 +20,6 @@ import './index.css';
 import '../src/style/icon/tabler-icons/webfont/tabler-icons.css';
 import '../src/style/icon/feather/css/iconfont.css';
 
-
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
@@ -29,11 +27,10 @@ if (rootElement) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={getQueryClient()}>
-        <Provider store={store}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </Provider>
+        <BrowserRouter>
+          <App />
+          <Toaster position="top-right" />
+        </BrowserRouter>
       </QueryClientProvider>
     </React.StrictMode>,
   );

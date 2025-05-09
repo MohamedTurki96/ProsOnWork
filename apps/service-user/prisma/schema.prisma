@@ -17,7 +17,7 @@ model User {
   password        String
   role            UserRole  @default(client)
   phone           String?
-  avatarId        Int?
+  avatarId        Int?      @default(25)
   address         String?
 
   createdAt DateTime @default(now())

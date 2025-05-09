@@ -62,13 +62,13 @@ export class UserDTO {
   @IsNumber()
   @Expose()
   @ApiPropertyOptional()
-  avatarId?: string;
+  avatarId?: number;
 
   @IsOptional()
   @IsGeoLocation()
   @Expose()
-  @ApiProperty()
-  address?: number;
+  @ApiPropertyOptional()
+  address?: string;
 
   @IsNotEmpty()
   @IsDate()

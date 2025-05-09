@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  Post,
   Put,
   Query,
 } from '@nestjs/common';
@@ -12,6 +13,8 @@ import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentUser, EventHub } from '@pros-on-work/core';
 import {
   CurrentUserDTO,
+  UserCreateCommand,
+  UserCreateDTO,
   UserDTO,
   UserGetQuery,
   UserListQuery,
@@ -20,12 +23,14 @@ import {
   UserListWhereDTO,
   UserRole,
   UserUpdateCommand,
+  UserUpdateDTO,
 } from '@pros-on-work/resources';
 
 import {
   ApiListQuery,
   ApiNeedsAuthentication,
 } from '../decorators/api.decorator';
+import { Public } from '../decorators/public.decorator';
 import { Roles } from '../decorators/roles.decorator';
 
 @ApiTags('Users')
@@ -61,14 +66,14 @@ export class UserController {
     return this.eventHub.sendQuery(new UserGetQuery({ id: user.id }));
   }
 
-  @Put('me')
+  @Put()
   @ApiNeedsAuthentication()
   @HttpCode(HttpStatus.OK)
-  @ApiBody({ type: UserUpdateCommand })
+  @ApiBody({ type: UserUpdateDTO })
   @ApiResponse({ status: HttpStatus.OK, type: UserDTO })
   updateOwnUser(
     @CurrentUser() user: CurrentUserDTO,
-    @Body() dto: UserUpdateCommand,
+    @Body() dto: UserUpdateDTO,
   ) {
     return this.eventHub.sendCommand(
       new UserUpdateCommand({ id: user.id, ...dto }),
@@ -81,5 +86,14 @@ export class UserController {
   @ApiResponse({ status: HttpStatus.OK, type: UserDTO })
   getUser(@Param('id') id: number) {
     return this.eventHub.sendQuery(new UserGetQuery({ id }));
+  }
+
+  @Post()
+  @Public()
+  @HttpCode(HttpStatus.CREATED)
+  @ApiBody({ type: UserCreateDTO })
+  @ApiResponse({ status: HttpStatus.OK, type: UserDTO })
+  register(@Body() dto: UserCreateDTO) {
+    return this.eventHub.sendCommand(new UserCreateCommand(dto));
   }
 }

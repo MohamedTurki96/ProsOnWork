@@ -24,5 +24,5 @@ case "$TARGET" in
 esac
 
 
-npx swagger-typescript-api -p "$URL" -o "$FOLDER" -n "$NAME.ts" --extract-enums --unwrap-response-data --single-http-client --module-name-first-tag
+npx swagger-typescript-api generate -p "$URL" -o "$FOLDER" -n "$NAME.ts" --extract-enums --unwrap-response-data --single-http-client --module-name-first-tag
 npx prettier --write "$FOLDER"

@@ -3,6 +3,7 @@ import { PRISMA_CLIENT } from '@pros-on-work/core';
 import {
   UserCreateDTO,
   UserGetDTO,
+  UserRole,
   UserUpdateDTO,
 } from '@pros-on-work/resources';
 import * as bcrypt from 'bcrypt';
@@ -50,10 +51,14 @@ export class UserService {
 
   async create(dto: UserCreateDTO) {
     const passwordHash = await bcrypt.hash(dto.password, 10);
+  
+
     return this.client.user.create({
       data: {
-        ...dto,
+        name: dto.name,
+        email: dto.email,
         password: passwordHash,
+        role: dto.isClient ? UserRole.Client : UserRole.ServiceProvider
       },
     });
   }

@@ -5,6 +5,7 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { EventHub, PRISMA_CLIENT } from '@pros-on-work/core';
 import {
@@ -34,7 +35,7 @@ export class AuthService {
     });
 
     if (!user || !(await bcrypt.compare(dto.password, user.password))) {
-      throw new BadRequestException('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     return user.toDTO();
@@ -43,7 +44,7 @@ export class AuthService {
   async changePassword(userId: number, dto: ChangePasswordDTO) {
     const user = await this.client.user.findUnique({ where: { id: userId } });
     if (!user || !(await bcrypt.compare(dto.currentPassword, user.password))) {
-      throw new BadRequestException('Current password is incorrect');
+      throw new UnauthorizedException('Current password is incorrect');
     }
 
     const newHash = await bcrypt.hash(dto.newPassword, 10);

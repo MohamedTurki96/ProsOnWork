@@ -10,7 +10,7 @@ export function useAppInit() {
     const timeout = setTimeout(() => setTimeoutLoading(false), 2000);
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [isLoading]);
 
   return useMemo(
     () => !timeoutLoading && (!isFetching || !isLoading),

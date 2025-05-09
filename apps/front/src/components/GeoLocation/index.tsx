@@ -2,17 +2,22 @@ import * as L from 'leaflet';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
+import { Address } from '../../core/Interface/interface';
 import { useConnectedUser } from '../../hooks/useAuth';
-import { getGeolocationText } from '../../utils/getGeolocationText';
+import {
+  getGeolocationText,
+  stringToAddress,
+} from '../../utils/getGeolocationText';
 
 import 'leaflet/dist/leaflet.css';
-
-type Address = any;
 
 interface GeoLocationProps {
   show: boolean;
   onHide: () => void;
-  handleSave?: (geoLocation: Address | null, text: string) => void;
+  handleSave?: (
+    geoLocation: Address | null,
+    text: string,
+  ) => any | Promise<any>;
   geoLocation?: Address | null;
 }
 
@@ -20,7 +25,7 @@ export function GeoLocationMap(
   { onHide, show, handleSave, geoLocation }: GeoLocationProps = {
     onHide: () => {},
     show: false,
-    handleSave: () => {},
+    handleSave: (geoLocation: Address | null, text: string) => {},
     geoLocation: null,
   },
 ) {
@@ -30,7 +35,7 @@ export function GeoLocationMap(
   const markerRef = useRef<L.Marker | null>(null);
   const [text, setText] = useState('');
   const [geoLoc, setGeoLoc] = useState<Address | null>(
-    geoLocation ?? (user?.address as Address) ?? null,
+    geoLocation ?? (user?.address ? stringToAddress(user?.address!) : null),
   );
 
   const setMarkerOnMap = useCallback(() => {
@@ -51,10 +56,6 @@ export function GeoLocationMap(
   useEffect(() => {
     setMarkerOnMap();
   }, [setMarkerOnMap, geoLoc]);
-
-  useEffect(() => {
-    handleSave?.(geoLoc, text);
-  }, [geoLoc, text, handleSave]);
 
   const init = useCallback(() => {
     if (containerRef.current) {
@@ -98,8 +99,12 @@ export function GeoLocationMap(
     mapRef.current?.remove();
     mapRef.current = null;
 
+    (async function () {
+      await handleSave?.(geoLoc, text);
+    })();
+
     onHide();
-  }, [onHide, mapRef.current, markerRef.current]);
+  }, [onHide, mapRef.current, markerRef.current, geoLoc, text]);
 
   return (
     <Modal show={show} onHide={hide} size="xl" centered onEntered={init}>

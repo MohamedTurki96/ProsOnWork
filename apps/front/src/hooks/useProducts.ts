@@ -8,10 +8,12 @@ import { useApi } from './useApi';
 export function useFilteredServices() {
   const api = useApi();
   const [searchParams] = useSearchParams();
+  const query = queryToObject(searchParams);
+  console.log(query)
 
   return useQuery({
     queryKey: ['products', 'filtered'],
-    queryFn: () => api.products.listProducts(queryToObject(searchParams)),
+    queryFn: () => api.products.list(),
   });
 }
 
@@ -20,6 +22,6 @@ export function useProduct(id: number) {
 
   return useQuery({
     queryKey: ['products', id],
-    queryFn: () => api.products.getProduct(id),
+    queryFn: () => api.products.get(id),
   });
 }

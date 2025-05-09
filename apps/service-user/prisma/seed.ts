@@ -17,31 +17,34 @@ async function seed() {
     /* ---------- Users ---------- */
     const users = await Promise.all(
       Array.from({ length: 10 }, (_, i) => {
-        // Role mix: 1 admin, 2 service providers, rest clients
-        let role: UserRole = UserRole.client;
-        if (i === 0) role = UserRole.admin;
-        else if (i <= 2) role = UserRole.serviceProvider;
+        const role: UserRole =
+          i === 0
+            ? UserRole.admin
+            : i <= 2
+              ? UserRole.serviceProvider
+              : UserRole.client;
 
-        const plainPassword = faker.internet.password({ length: 12 });
+        const email =
+          i == 0
+            ? 'admin@dev.com'
+            : i <= 2
+              ? `provider${i}@dev.com`
+              : `client${i}@dev.com`;
 
         return client.user.create({
           data: {
-            name: faker.person.fullName(),
-            email: faker.internet.email({
-              firstName: `user${i + 1}`,
-              lastName: 'demo',
-              provider: 'example.com',
-            }),
-            password: bcrypt.hashSync(plainPassword, 10),
+            name: faker.person.firstName(),
+            email: email,
+            password: bcrypt.hashSync('password', 10),
             role,
-            phone: faker.phone.number({style: "international"}),
-            avatarId: i,
-            // ~60 % of users get a geolocation address
+            phone: faker.phone.number({ style: 'international' }),
+            avatarId: 25,
             address: Math.random() < 0.6 ? randomGeoLocation() : null,
-            emailVerifiedAt: i % 2 === 0 ? faker.date.recent({ days: 30 }) : null,
+            emailVerifiedAt:
+              i % 2 === 0 ? faker.date.recent({ days: 30 }) : null,
           },
         });
-      })
+      }),
     );
 
     /* ---------- Email‑verification tokens (for unverified users) ---------- */
@@ -54,22 +57,20 @@ async function seed() {
               email: u.email,
               token: faker.string.alphanumeric(32),
             },
-          })
-        )
+          }),
+        ),
     );
 
     /* ---------- Password‑reset tokens (three random users) ---------- */
     await Promise.all(
-      faker.helpers
-        .arrayElements(users, 3)
-        .map((u) =>
-          client.passwordResetToken.create({
-            data: {
-              email: u.email,
-              token: faker.string.alphanumeric(32),
-            },
-          })
-        )
+      faker.helpers.arrayElements(users, 3).map((u) =>
+        client.passwordResetToken.create({
+          data: {
+            email: u.email,
+            token: faker.string.alphanumeric(32),
+          },
+        }),
+      ),
     );
   });
 }

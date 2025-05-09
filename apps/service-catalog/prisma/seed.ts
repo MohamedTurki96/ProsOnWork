@@ -5,7 +5,6 @@ import { PriceType, PrismaClient, ProductType } from '../src/prisma';
 
 const prisma = new PrismaClient();
 
-/* ---------- helpers ---------- */
 const sampleIncludes = [
   'Installation',
   'Spare parts',
@@ -15,19 +14,34 @@ const sampleIncludes = [
   'Extended warranty',
 ];
 function randId() {
-  return faker.number.int({ min: 1, max: 10 }); // for ownerId / iconId / imageId
+  return faker.number.int({ min: 1, max: 10 }); 
 }
+
+const categoriesData = [
+  { name: 'Construction',  imageId: 1,  iconId: 2  },
+  { name: 'Electrical',    imageId: 3,  iconId: 4  },
+  { name: 'Plumber',       imageId: 5,  iconId: 6  },
+  { name: 'Carpenter',     imageId: 7,  iconId: 8  },
+  { name: 'Interior',      imageId: 9,  iconId: 10 },
+  { name: 'Cleaning',      imageId: 11, iconId: 12 },
+  { name: 'Delivery',      imageId: 13, iconId: 14 },
+  { name: 'Car Transport', imageId: 15, iconId: 16 },
+  { name: 'Car Wash',      imageId: 17, iconId: 18 },
+  { name: 'Barber',        imageId: 19, iconId: 20 },
+  { name: 'Nails',         imageId: 21, iconId: 22 },
+  { name: 'Computer',      imageId: 23, iconId: 24 },
+] as const;
 
 async function seed() {
   await prisma.$transaction(async (client) => {
     /* ----------------- CATEGORIES ----------------- */
     const categories = await Promise.all(
-      Array.from({ length: 10 }, () =>
+      categoriesData.map((category) =>
         client.category.create({
           data: {
-            name: faker.commerce.department(),
-            iconId: randId(),
-            imageId: randId(),
+            name: category.name,
+            iconId: category.iconId,
+            imageId: category.imageId,
           },
         }),
       ),

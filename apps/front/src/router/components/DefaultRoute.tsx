@@ -11,7 +11,7 @@ export default function DefaultRoute() {
     return <Navigate to={Routes.home} replace />;
   }
 
-  switch (user?.role) {
+  switch (user.role) {
     case UserRole.Admin:
       return <Navigate to={Routes.admin} replace />;
     case UserRole.ServiceProvider:

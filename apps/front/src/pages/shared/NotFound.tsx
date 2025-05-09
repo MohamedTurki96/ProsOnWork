@@ -1,8 +1,15 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Routes } from '../../router/routes/routes';
 
 export function NotFound() {
+  useEffect(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      import('../../style/scss/main.scss');
+    }, []);
+
   return (
     <div className="d-flex justify-content-center vh-100 overflow-auto flex-column error-404">
       <div className="contacts-overlay-img d-none d-md-block">
