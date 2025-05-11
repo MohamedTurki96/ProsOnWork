@@ -111,6 +111,7 @@ async function seed() {
             ]),
             categoryId: category.id,
             shopId: shop.id,
+            medias: [1]
           },
         });
       }),

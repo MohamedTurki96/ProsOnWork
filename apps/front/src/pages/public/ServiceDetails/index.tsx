@@ -1,31 +1,53 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import StickyBox from 'react-sticky-box';
 import Lightbox from 'yet-another-react-lightbox';
 
-import { UserRole } from '../../../api';
 import { AppLoader } from '../../../components/AppLoader';
+import { Img } from '../../../components/Img';
+import { RatingDisplay } from '../../../components/Rating/RatingDisplay';
 import VideoModal from '../../../core/hooks/video-modal';
-import { useGranted } from '../../../hooks/useGranted';
+import { useConnectedUser } from '../../../hooks/useAuth';
+import { useCategory } from '../../../hooks/useCategory';
+import { useFeedbackForProduct } from '../../../hooks/useFeedback';
 import { useProduct } from '../../../hooks/useProducts';
 import { Routes } from '../../../router/routes/routes';
+import { renderPrice } from '../../../utils/renderPrice';
+
 import 'yet-another-react-lightbox/styles.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { getGeolocationText } from '../../../utils/getGeolocationText';
+import {
+  getGeolocationText,
+  stringToAddress,
+} from '../../../utils/getGeolocationText';
+import { useShop } from '../../../hooks/useShop';
+import { useUser } from '../../../hooks/useUser';
+import { useReservations } from '../../../hooks/useReservations';
 import { renderDate } from '../../../utils/renderDate';
-import { renderPrice } from '../../../utils/renderPrice';
 
 export function ServiceDetails() {
   const params = useParams<{ id: string }>();
   const id = parseInt(params.id!);
-  const { data: product, isLoading } = useProduct(id);
+  const { data: product } = useProduct(id);
+  const { data: shop } = useShop(product?.shopId);
+  const { data: provider } = useUser(shop?.ownerId);
+  const { data: category } = useCategory(product?.categoryId);
+  const { data: reservations } = useReservations(
+    product?.id
+      ? {
+          productId: product?.id,
+        }
+      : {},
+  );
+  const { data: feedback } = useFeedbackForProduct(product?.id);
+  const { data: user } = useConnectedUser();
+
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const sliderRef1 = useRef(null);
   const sliderRef2 = useRef(null);
-  const show = useGranted([UserRole.CLIENT], true);
   const [addressText, setAddressText] = useState('');
 
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +55,7 @@ export function ServiceDetails() {
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   const two = {
     dots: false,
@@ -88,20 +111,40 @@ export function ServiceDetails() {
     asNavFor: nav1 || undefined, // Link to the first slider
     ref: (slider: any) => (sliderRef2.current = slider), // Assign the slider ref
   };
+
   useEffect(() => {
     setNav1(sliderRef1.current);
     setNav2(sliderRef2.current);
   }, []);
 
   useEffect(() => {
-    (async function () {
-      setAddressText(await getGeolocationText(product?.address));
-    })();
-  }, [setAddressText, product]);
+    if (shop?.address) {
+      (async function () {
+        setAddressText(
+          await getGeolocationText(stringToAddress(shop.address!)),
+        );
+      })();
+    }
+  }, [setAddressText, shop]);
 
-  if (!product || isLoading) {
+  if (
+    !product ||
+    !shop ||
+    !provider ||
+    !category ||
+    !reservations ||
+    !feedback
+  ) {
     return <AppLoader />;
   }
+
+  const total = feedback.items.reduce(
+    (sum, feedback) => sum + (feedback.rating ?? 0),
+    0,
+  );
+
+  const avg = feedback.items.length ? total / feedback.items.length : 0;
+
   return (
     <>
       <div className="page-wrapper">
@@ -116,7 +159,10 @@ export function ServiceDetails() {
                         <h3 className="mb-2">{product.name}</h3>
                         <span className="badge badge-purple-transparent mb-2">
                           <i className="ti ti-calendar-check me-1" />
-                          6000+ Bookings
+                          <span className="me-1">
+                            {reservations.items.length}
+                          </span>{' '}
+                          Bookings
                         </span>
                       </div>
                       <div className="d-flex align-items-center justify-content-between flex-wrap mb-2">
@@ -125,17 +171,12 @@ export function ServiceDetails() {
                             <p className="me-3 mb-2">
                               <i className="ti ti-map-pin me-2" />
                               {addressText}
-                              <Link
-                                to="#"
-                                className="link-primary text-decoration-underline ms-1"
-                              >
-                                View Location
-                              </Link>
                             </p>
                           )}
                           <p className="mb-2">
                             <i className="ti ti-star-filled text-warning me-2" />
-                            <span className="text-gray-9">4.9</span>(255
+                            <span className="text-gray-9">{avg}</span>(
+                            {feedback.items.length}
                             reviews)
                           </p>
                         </div>
@@ -147,48 +188,15 @@ export function ServiceDetails() {
                           {...settings1}
                           className="owl-carousel reactslick service-carousel nav-center mb-3"
                         >
-                          <div className="service-img">
-                            <img
-                              src="/assets/img/services/service-slider-01.jpg"
-                              className="img-fluid"
-                              alt="Slider Img"
-                            />
-                          </div>
-                          <div className="service-img">
-                            <img
-                              src="/assets/img/services/service-slider-02.jpg"
-                              className="img-fluid"
-                              alt="Slider Img"
-                            />
-                          </div>
-                          <div className="service-img">
-                            <img
-                              src="/assets/img/services/service-slider-03.jpg"
-                              className="img-fluid"
-                              alt="Slider Img"
-                            />
-                          </div>
-                          <div className="service-img">
-                            <img
-                              src="/assets/img/services/service-slider-04.jpg"
-                              className="img-fluid"
-                              alt="Slider Img"
-                            />
-                          </div>
-                          <div className="service-img">
-                            <img
-                              src="/assets/img/services/service-slider-05.jpg"
-                              className="img-fluid"
-                              alt="Slider Img"
-                            />
-                          </div>
-                          <div className="service-img">
-                            <img
-                              src="/assets/img/services/service-slider-06.jpg"
-                              className="img-fluid"
-                              alt="Slider Img"
-                            />
-                          </div>
+                          {product.medias?.map((media) => (
+                            <div className="service-img">
+                              <Img
+                                mediaId={media}
+                                className="img-fluid"
+                                alt="Slider Img"
+                              />
+                            </div>
+                          ))}
                         </Slider>
                         <Link
                           to="#"
@@ -203,41 +211,24 @@ export function ServiceDetails() {
                         {...settings2}
                         className="owl-carousel slider-nav-thumbnails reactslick nav-center"
                       >
-                        <div>
-                          <img
-                            src="/assets/img/services/service-thumb-01.jpg"
-                            className="img-fluid"
-                            alt="Slider Img"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/assets/img/services/service-thumb-02.jpg"
-                            className="img-fluid"
-                            alt="Slider Img"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/assets/img/services/service-thumb-03.jpg"
-                            className="img-fluid"
-                            alt="Slider Img"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/assets/img/services/service-thumb-04.jpg"
-                            className="img-fluid"
-                            alt="Slider Img"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/assets/img/services/service-thumb-05.jpg"
-                            className="img-fluid"
-                            alt="Slider Img"
-                          />
-                        </div>
+                        {product.medias?.map((media) => (
+                          <div key={media}>
+                            <Img
+                              mediaId={media}
+                              className="img-fluid"
+                              alt="Slider Img"
+                            />
+                          </div>
+                        ))}
+                        {product.medias?.map((media) => (
+                          <div key={media}>
+                            <Img
+                              mediaId={media}
+                              className="img-fluid"
+                              alt="Slider Img"
+                            />
+                          </div>
+                        ))}
                         <div>
                           <img
                             src="/assets/img/services/service-thumb-06.jpg"
@@ -269,139 +260,39 @@ export function ServiceDetails() {
                           </div>
                         </div>
                       </div>
-                      <div className="accordion-item mb-4">
-                        <h2 className="accordion-header">
-                          <button
-                            className="accordion-button p-0"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#include"
-                            aria-expanded="false"
+                      {product.includes && (
+                        <div className="accordion-item mb-4">
+                          <h2 className="accordion-header">
+                            <button
+                              className="accordion-button p-0"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#include"
+                              aria-expanded="false"
+                            >
+                              Ceci comprend
+                            </button>
+                          </h2>
+                          <div
+                            id="include"
+                            className="accordion-collapse collapse show"
                           >
-                            Ceci comprend
-                          </button>
-                        </h2>
-                        <div
-                          id="include"
-                          className="accordion-collapse collapse show"
-                        >
-                          <div className="accordion-body border-0 p-0 pt-3">
-                            <div className="bg-light-200 p-3 pb-2 br-10">
-                              {product.includes.map((inc, index) => (
-                                <p
-                                  key={index}
-                                  className="d-inline-flex align-items-center mb-2 me-4"
-                                >
-                                  <i className="feather icon-check-circle text-success me-2" />
-                                  {inc}
-                                </p>
-                              ))}
+                            <div className="accordion-body border-0 p-0 pt-3">
+                              <div className="bg-light-200 p-3 pb-2 br-10">
+                                {product.includes.map((inc, index) => (
+                                  <p
+                                    key={index}
+                                    className="d-inline-flex align-items-center mb-2 me-4"
+                                  >
+                                    <i className="feather icon-check-circle text-success me-2" />
+                                    {inc}
+                                  </p>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="accordion-item mb-4">
-                        <h2 className="accordion-header">
-                          <button
-                            className="accordion-button p-0"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#gallery"
-                            aria-expanded="false"
-                          >
-                            Gallery
-                          </button>
-                        </h2>
-                        <div
-                          id="gallery"
-                          className="accordion-collapse collapse show"
-                        >
-                          <div className="accordion-body border-0 p-0 pt-3">
-                            <Slider
-                              {...two}
-                              className="gallery-slider reactslick owl-carousel nav-center"
-                            >
-                              <Link
-                                to="#"
-                                data-fancybox="gallery"
-                                onClick={() => setOpen(true)}
-                                className="gallery-item"
-                              >
-                                <img
-                                  src="/assets/img/services/service-thumb-01.jpg"
-                                  alt="img"
-                                />
-                              </Link>
-                              <Link
-                                to="#"
-                                data-fancybox="gallery"
-                                onClick={() => setOpen(true)}
-                                className="gallery-item"
-                              >
-                                <img
-                                  src="/assets/img/services/service-thumb-02.jpg"
-                                  alt="img"
-                                />
-                              </Link>
-                              <Link
-                                to="#"
-                                data-fancybox="gallery"
-                                onClick={() => setOpen(true)}
-                                className="gallery-item"
-                              >
-                                <img
-                                  src="/assets/img/services/service-thumb-03.jpg"
-                                  alt="img"
-                                />
-                              </Link>
-                              <Link
-                                to="#"
-                                data-fancybox="gallery"
-                                onClick={() => setOpen(true)}
-                                className="gallery-item"
-                              >
-                                <img
-                                  src="/assets/img/services/service-thumb-04.jpg"
-                                  alt="img"
-                                />
-                              </Link>
-                              <Link
-                                to="#"
-                                data-fancybox="gallery"
-                                onClick={() => setOpen(true)}
-                                className="gallery-item"
-                              >
-                                <img
-                                  src="/assets/img/services/service-thumb-05.jpg"
-                                  alt="img"
-                                />
-                              </Link>
-                              <Link
-                                to="#"
-                                data-fancybox="gallery"
-                                onClick={() => setOpen(true)}
-                                className="gallery-item"
-                              >
-                                <img
-                                  src="/assets/img/services/service-thumb-06.jpg"
-                                  alt="img"
-                                />
-                              </Link>
-                              <Link
-                                to="#"
-                                data-fancybox="gallery"
-                                onClick={() => setOpen(true)}
-                                className="gallery-item"
-                              >
-                                <img
-                                  src="/assets/img/services/service-thumb-03.jpg"
-                                  alt="img"
-                                />
-                              </Link>
-                            </Slider>
-                          </div>
-                        </div>
-                      </div>
+                      )}
                       <div className="accordion-item mb-4">
                         <h2 className="accordion-header">
                           <button
@@ -449,45 +340,47 @@ export function ServiceDetails() {
                             FAQ
                           </button>
                         </h2>
-                        <div
-                          id="faq"
-                          className="accordion-collapse collapse show"
-                        >
-                          <div className="accordion-body border-0 p-0 pt-3">
-                            <div
-                              className="accordion accordion-customicon1 faq-accordion"
-                              id="accordionfaq"
-                            >
-                              {product.faq.map((faq, index) => (
-                                <div
-                                  key={index}
-                                  className="accordion-item bg-light-200"
-                                >
-                                  <h2 className="accordion-header">
-                                    <button
-                                      className="accordion-button bg-light-200 br-10 fs-16 fw-medium collapsed"
-                                      type="button"
-                                      data-bs-toggle="collapse"
-                                      data-bs-target="#faq4"
-                                      aria-expanded="false"
-                                    >
-                                      {faq.question}
-                                    </button>
-                                  </h2>
+                        {product.faq && (
+                          <div
+                            id="faq"
+                            className="accordion-collapse collapse show"
+                          >
+                            <div className="accordion-body border-0 p-0 pt-3">
+                              <div
+                                className="accordion accordion-customicon1 faq-accordion"
+                                id="accordionfaq"
+                              >
+                                {product.faq.map((faq, index) => (
                                   <div
-                                    id="faq4"
-                                    className="accordion-collapse collapse"
-                                    data-bs-parent="#accordionfaq"
+                                    key={faq.question}
+                                    className="accordion-item bg-light-200"
                                   >
-                                    <div className="accordion-body border-0 pt-0">
-                                      <p>{faq.answer}</p>
+                                    <h2 className="accordion-header">
+                                      <button
+                                        className="accordion-button bg-light-200 br-10 fs-16 fw-medium collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#faq4"
+                                        aria-expanded="false"
+                                      >
+                                        {faq.question}
+                                      </button>
+                                    </h2>
+                                    <div
+                                      id="faq4"
+                                      className="accordion-collapse collapse"
+                                      data-bs-parent="#accordionfaq"
+                                    >
+                                      <div className="accordion-body border-0 pt-0">
+                                        <p>{faq.answer}</p>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              ))}
+                                ))}
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -495,17 +388,9 @@ export function ServiceDetails() {
                 <div className="card border-0 mb-xl-0 mb-4">
                   <div className="card-body">
                     <div className="d-flex align-items-center justify-content-between flex-wrap">
-                      <h4 className="mb-3">Reviews (45)</h4>
-                      {show && (
-                        <Link
-                          to="#"
-                          data-bs-toggle="modal"
-                          data-bs-target="#add-review"
-                          className="btn btn-dark btn-sm mb-3"
-                        >
-                          Write a Review
-                        </Link>
-                      )}
+                      <h4 className="mb-3">
+                        Reviews ({feedback.items.length})
+                      </h4>
                     </div>
                     <div className="row align-items-center">
                       <div className="col-md-5">
@@ -514,14 +399,12 @@ export function ServiceDetails() {
                             Customer Reviews &amp; Ratings
                           </h5>
                           <div className="d-inline-flex align-items-center justify-content-center">
-                            <i className="ti ti-star-filled text-warning me-1" />
-                            <i className="ti ti-star-filled text-warning me-1" />
-                            <i className="ti ti-star-filled text-warning me-1" />
-                            <i className="ti ti-star-filled text-warning me-1" />
-                            <i className="ti ti-star-filled text-warning" />
+                            <RatingDisplay rating={avg} />
                           </div>
-                          <p className="mb-3">(4.9 out of 5.0)</p>
-                          <p className="text-gray-9">Based On 2,459 Reviews</p>
+                          <p className="mb-3">({avg} out of 5.0)</p>
+                          <p className="text-gray-9">
+                            Based On {feedback.items.length} Reviews
+                          </p>
                         </div>
                       </div>
                       <div className="col-md-7">
@@ -619,280 +502,162 @@ export function ServiceDetails() {
                         </div>
                       </div>
                     </div>
-                    <div className="card review-item mb-3">
-                      <div className="card-body p-3">
-                        <div className="review-info">
-                          <div className="d-flex align-items-center justify-content-between flex-wrap">
-                            <div className="d-flex align-items-center mb-2">
-                              <span className="avatar avatar-lg me-2 flex-shrink-0">
-                                <img
-                                  src="/assets/img/profiles/avatar-01.jpg"
-                                  className="rounded-circle"
-                                  alt="img"
-                                />
-                              </span>
-                              <div>
-                                <h6 className="fs-16 fw-medium">
-                                  Adrian Hendriques
-                                </h6>
-                                <div className="d-flex align-items-center flex-wrap date-info">
-                                  <p className="fs-14 mb-0">2 days ago</p>
-                                  <p className="fs-14 mb-0">
-                                    Excellent service!
-                                  </p>
+                    {feedback.items.map((feedback) => {
+                      return (
+                        <div
+                          className="card review-item mb-3"
+                          key={feedback.id}
+                        >
+                          <div className="card-body p-3">
+                            <div className="review-info">
+                              <div className="d-flex align-items-center justify-content-between flex-wrap">
+                                <div className="d-flex align-items-center mb-2">
+                                  <span className="avatar avatar-lg me-2 flex-shrink-0">
+                                    <img
+                                      src="/assets/img/profiles/avatar-01.jpg"
+                                      className="rounded-circle"
+                                      alt="img"
+                                    />
+                                  </span>
+                                  <div>
+                                    <h6 className="fs-16 fw-medium">
+                                      Adrian Hendriques
+                                    </h6>
+                                    <div className="d-flex align-items-center flex-wrap date-info">
+                                      <p className="fs-14 mb-0">2 days ago</p>
+                                      <p className="fs-14 mb-0">
+                                        Excellent service!
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <span className="badge bg-success d-inline-flex align-items-center mb-2">
+                                  <i className="ti ti-star-filled me-1" />5
+                                </span>
+                              </div>
+                              <p className="mb-2">
+                                The electricians were prompt, professional, and
+                                resolved our issues quickly.did a fantastic job
+                                upgrading our electrical panel. Highly recommend
+                                them for any electrical work.
+                              </p>
+                              <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
+                                <div className="d-inline-flex align-items-center">
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-up me-2" />
+                                    Reply
+                                  </Link>
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-up me-2" />
+                                    Like
+                                  </Link>
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center"
+                                  >
+                                    <i className="ti ti-thumb-down me-2" />
+                                    Dislike
+                                  </Link>
+                                </div>
+                                <div className="d-inline-flex align-items-center">
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-up me-2" />
+                                    45
+                                  </Link>
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-down me-2" />
+                                    21
+                                  </Link>
                                 </div>
                               </div>
                             </div>
-                            <span className="badge bg-success d-inline-flex align-items-center mb-2">
-                              <i className="ti ti-star-filled me-1" />5
-                            </span>
-                          </div>
-                          <p className="mb-2">
-                            The electricians were prompt, professional, and
-                            resolved our issues quickly.did a fantastic job
-                            upgrading our electrical panel. Highly recommend
-                            them for any electrical work.
-                          </p>
-                          <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
-                            <div className="d-inline-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                Reply
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                Like
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center"
-                              >
-                                <i className="ti ti-thumb-down me-2" />
-                                Dislike
-                              </Link>
-                            </div>
-                            <div className="d-inline-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                45
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-down me-2" />
-                                21
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="review-info reply mt-2 p-3">
-                          <div className="d-flex align-items-center justify-content-between flex-wrap">
-                            <div className="d-flex align-items-center mb-2">
-                              <span className="avatar avatar-lg me-2 flex-shrink-0">
-                                <img
-                                  src="/assets/img/profiles/avatar-02.jpg"
-                                  className="rounded-circle"
-                                  alt="img"
-                                />
-                              </span>
-                              <div>
-                                <h6 className="fs-16 fw-medium">
-                                  Stephen Vance
-                                </h6>
-                                <div className="d-flex align-items-center flex-wrap date-info">
-                                  <p className="fs-14 mb-0">2 days ago</p>
-                                  <p className="fs-14 mb-0">
-                                    Excellent service!
-                                  </p>
+                            <div className="review-info reply mt-2 p-3">
+                              <div className="d-flex align-items-center justify-content-between flex-wrap">
+                                <div className="d-flex align-items-center mb-2">
+                                  <span className="avatar avatar-lg me-2 flex-shrink-0">
+                                    <img
+                                      src="/assets/img/profiles/avatar-02.jpg"
+                                      className="rounded-circle"
+                                      alt="img"
+                                    />
+                                  </span>
+                                  <div>
+                                    <h6 className="fs-16 fw-medium">
+                                      Stephen Vance
+                                    </h6>
+                                    <div className="d-flex align-items-center flex-wrap date-info">
+                                      <p className="fs-14 mb-0">2 days ago</p>
+                                      <p className="fs-14 mb-0">
+                                        Excellent service!
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <span className="badge bg-success d-inline-flex align-items-center mb-2">
+                                  <i className="ti ti-star-filled me-1" />4
+                                </span>
+                              </div>
+                              <p className="mb-2">
+                                Thank You!!! For Your Appreciation!!!
+                              </p>
+                              <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
+                                <div className="d-inline-flex align-items-center flex-wrap">
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-up me-2" />
+                                    Reply
+                                  </Link>
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-up me-2" />
+                                    Like
+                                  </Link>
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center"
+                                  >
+                                    <i className="ti ti-thumb-down me-2" />
+                                    Dislike
+                                  </Link>
+                                </div>
+                                <div className="d-inline-flex align-items-center">
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-up me-2" />
+                                    45
+                                  </Link>
+                                  <Link
+                                    to="#"
+                                    className="d-inline-flex align-items-center me-2"
+                                  >
+                                    <i className="ti ti-thumb-down me-2" />
+                                    20
+                                  </Link>
                                 </div>
                               </div>
                             </div>
-                            <span className="badge bg-success d-inline-flex align-items-center mb-2">
-                              <i className="ti ti-star-filled me-1" />4
-                            </span>
-                          </div>
-                          <p className="mb-2">
-                            Thank You!!! For Your Appreciation!!!
-                          </p>
-                          <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
-                            <div className="d-inline-flex align-items-center flex-wrap">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                Reply
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                Like
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center"
-                              >
-                                <i className="ti ti-thumb-down me-2" />
-                                Dislike
-                              </Link>
-                            </div>
-                            <div className="d-inline-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                45
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-down me-2" />
-                                20
-                              </Link>
-                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div className="card review-item mb-3">
-                      <div className="card-body p-3">
-                        <div className="review-info">
-                          <div className="d-flex align-items-center justify-content-between flex-wrap">
-                            <div className="d-flex align-items-center mb-2">
-                              <span className="avatar avatar-lg me-2 flex-shrink-0">
-                                <img
-                                  src="/assets/img/profiles/avatar-03.jpg"
-                                  className="rounded-circle"
-                                  alt="img"
-                                />
-                              </span>
-                              <div>
-                                <h6 className="fs-16 fw-medium">Don Rosales</h6>
-                                <div className="d-flex align-items-center flex-wrap date-info">
-                                  <p className="fs-14 mb-0">2 days ago</p>
-                                  <p className="fs-14 mb-0">Great Service!</p>
-                                </div>
-                              </div>
-                            </div>
-                            <span className="badge bg-danger d-inline-flex align-items-center mb-2">
-                              <i className="ti ti-star-filled me-1" />1
-                            </span>
-                          </div>
-                          <p className="mb-2">
-                            The quality of work was exceptional, and they left
-                            the site clean and tidy. I was impressed by their
-                            attention to detail and commitment to safety
-                            standards. Highly recommend their services!
-                          </p>
-                          <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
-                            <div className="d-inline-flex align-items-center flex-wrap">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                Reply
-                              </Link>
-                            </div>
-                            <div className="d-inline-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                15
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-down me-2" />1
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card review-item mb-3">
-                      <div className="card-body p-3">
-                        <div className="review-info">
-                          <div className="d-flex align-items-center justify-content-between flex-wrap">
-                            <div className="d-flex align-items-center mb-2">
-                              <span className="avatar avatar-lg me-2 flex-shrink-0">
-                                <img
-                                  src="/assets/img/profiles/avatar-04.jpg"
-                                  className="rounded-circle"
-                                  alt="img"
-                                />
-                              </span>
-                              <div>
-                                <h6 className="fs-16 fw-medium">Paul Bronk</h6>
-                                <div className="d-flex align-items-center flex-wrap date-info">
-                                  <p className="fs-14 mb-0">2 days ago</p>
-                                  <p className="fs-14 mb-0">
-                                    Reliable and Trustworthy!
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <span className="badge bg-success d-inline-flex align-items-center mb-2">
-                              <i className="ti ti-star-filled me-1" />1
-                            </span>
-                          </div>
-                          <p className="mb-2">
-                            The quality of work was exceptional, and they left
-                            the site clean and tidy. I was impressed by their
-                            attention to detail and commitment to safety
-                            standards. Highly recommend their services!
-                          </p>
-                          <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
-                            <div className="d-inline-flex align-items-center flex-wrap">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                Reply
-                              </Link>
-                            </div>
-                            <div className="d-inline-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-up me-2" />
-                                10
-                              </Link>
-                              <Link
-                                to="#"
-                                className="d-inline-flex align-items-center me-2"
-                              >
-                                <i className="ti ti-thumb-down me-2" />2
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <Link to="#" className="btn btn-light btn-sm">
-                        Load More
-                      </Link>
-                    </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -905,15 +670,13 @@ export function ServiceDetails() {
                           {renderPrice(product.price, product.priceType)}
                         </h4>
                       </div>
-                      {show && (
-                        <Link
-                          to={Routes.home}
-                          className="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center"
-                        >
-                          <i className="ti ti-calendar me-2" />
-                          Book Service
-                        </Link>
-                      )}
+                      <Link
+                        to={Routes.home}
+                        className="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center"
+                      >
+                        <i className="ti ti-calendar me-2" />
+                        Book Service
+                      </Link>
                     </div>
                   </div>
                   <div className="card border-0">
@@ -921,8 +684,8 @@ export function ServiceDetails() {
                       <h4 className="mb-3">Prestatire</h4>
                       <div className="provider-info text-center bg-light-500 p-3 mb-3">
                         <div className="avatar avatar-xl mb-3">
-                          <img
-                            src={product.serviceProvider.avatar?.filePath}
+                          <Img
+                            mediaId={provider.avatarId}
                             alt="img"
                             className="img-fluid rounded-circle"
                           />
@@ -930,22 +693,15 @@ export function ServiceDetails() {
                             <i className="ti ti-check" />
                           </span>
                         </div>
-                        <h5>Thomas Herzberg</h5>
-                        <p className="fs-14">
-                          <i className="ti ti-star-filled text-warning me-2" />
-                          <span className="text-gray-9 fw-semibold">
-                            4.9
-                          </span>{' '}
-                          (255 reviews)
-                        </p>
+                        <h5>{provider.name}</h5>
                       </div>
                       <div className="d-flex align-items-center justify-content-between mb-3">
                         <h6 className="fs-16 fw-medium mb-0">
                           <i className="ti ti-user text-default me-2" />
                           Membre depuis
                         </h6>
-                        {product.serviceProvider.createdAt && (
-                          <p>{renderDate(product.serviceProvider.createdAt)}</p>
+                        {provider.createdAt && (
+                          <p>{renderDate(provider.createdAt)}</p>
                         )}
                       </div>
                       <div className="d-flex align-items-center justify-content-between mb-3">
@@ -953,38 +709,34 @@ export function ServiceDetails() {
                           <i className="ti ti-mail me-1" />
                           Email
                         </h6>
-                        <p>{product.serviceProvider.email}</p>
+                        <p>{provider.email}</p>
                       </div>
                       <div className="d-flex align-items-center justify-content-between mb-3">
                         <h6 className="fs-16 fw-medium mb-0">
                           <i className="ti ti-phone me-1" />
                           Téléphone
                         </h6>
-                        <p>{product.serviceProvider.phone}</p>
+                        <p>{provider.phone}</p>
                       </div>
-                      {show && (
-                        <div className="row border-top pt-3 g-2">
-                          <div className="col-sm-12">
-                            <Link
-                              to="#"
-                              data-bs-toggle="modal"
-                              data-bs-target="#add-contact"
-                              className="btn btn-dark btn-lg fs-14 px-1 w-100"
-                            >
-                              <i className="ti ti-user me-2" />
-                              Contact Provider
-                            </Link>
-                          </div>
+                      <div className="row border-top pt-3 g-2">
+                        <div className="col-sm-12">
+                          <Link
+                            to="#"
+                            data-bs-toggle="modal"
+                            data-bs-target="#add-contact"
+                            className="btn btn-dark btn-lg fs-14 px-1 w-100"
+                          >
+                            <i className="ti ti-user me-2" />
+                            Contact Provider
+                          </Link>
                         </div>
-                      )}
+                      </div>
                     </div>
                   </div>
-                  {show && (
-                    <Link to="#" className="text-danger fs-14">
-                      <i className="ti ti-pennant-filled me-2" />
-                      Report Service
-                    </Link>
-                  )}
+                  <a href={"#"} className="text-danger fs-14" onClick={() => navigate(Routes.login)}>
+                    <i className="ti ti-pennant-filled me-2" />
+                    Report Service
+                  </a>
                 </StickyBox>
               </div>
             </div>

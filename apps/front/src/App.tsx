@@ -3,6 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 
 import { AppLoader } from './components/AppLoader';
+import Cursor from './components/Cursor';
 import { useAppInit } from './hooks/useAppInit';
 import { router } from './router';
 
@@ -28,14 +29,13 @@ export function App() {
     };
   }, [handleScroll]);
 
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    import('./style/scss/main.scss');
-  }, []);
-
   if (isInitialized) {
-    return content;
+    return (
+      <>
+        {content}
+        <Cursor />
+      </>
+    );
   }
 
   return <AppLoader />;

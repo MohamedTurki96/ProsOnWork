@@ -6,15 +6,25 @@ import { UserUpdateDTO } from '../api';
 import { useApi } from './useApi';
 import { toastError } from './utils';
 
-export function useUser(id: number) {
-    const api = useApi();
-  
-    return useQuery({
-      queryKey: ['users', id],
-      queryFn: () => api.users.getUser(id),
-      enabled: !!id
-    });
-  }
+export function useUser(id?: number) {
+  const api = useApi();
+
+  return useQuery({
+    queryKey: ['users', id],
+    queryFn: () => api.users.getUser(id!),
+    enabled: !!id,
+  });
+}
+
+
+export function usePlans() {
+  const api = useApi();
+
+  return useQuery({
+    queryKey: ['plans'],
+    queryFn: () => api.users.plans(),
+  });
+}
 
 export function useUpdateUser(toaster?: boolean) {
   const api = useApi();
@@ -24,12 +34,12 @@ export function useUpdateUser(toaster?: boolean) {
     mutationFn: (data: UserUpdateDTO) => api.users.updateOwnUser(data),
     onError: (error) => {
       console.log('Error updating user', error);
-      toastError();
+      toastError(error);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['me'] });
       if (toaster) {
-        toast.success("User updated!")
+        toast.success('User updated!');
       }
     },
   });

@@ -19,20 +19,19 @@ import 'aos/dist/aos.css';
 import './index.css';
 import '../src/style/icon/tabler-icons/webfont/tabler-icons.css';
 import '../src/style/icon/feather/css/iconfont.css';
+import './style/scss/main.scss';
 
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <React.StrictMode>
-      <QueryClientProvider client={getQueryClient()}>
-        <BrowserRouter>
-          <App />
-          <Toaster position="top-right" />
-        </BrowserRouter>
-      </QueryClientProvider>
-    </React.StrictMode>,
+    <QueryClientProvider client={getQueryClient()}>
+      <BrowserRouter>
+        <App />
+        <Toaster position="top-right" />
+      </BrowserRouter>
+    </QueryClientProvider>,
   );
 } else {
   console.error("Element with id 'root' not found.");

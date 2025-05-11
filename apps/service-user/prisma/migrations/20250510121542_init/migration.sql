@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('admin', 'client', 'serviceProvider');
 
+-- CreateEnum
+CREATE TYPE "UserPlan" AS ENUM ('basic', 'business', 'premium');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -10,8 +13,9 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "role" "UserRole" NOT NULL DEFAULT 'client',
     "phone" TEXT,
-    "avatarId" INTEGER,
+    "avatarId" INTEGER DEFAULT 25,
     "address" TEXT,
+    "plan" "UserPlan",
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

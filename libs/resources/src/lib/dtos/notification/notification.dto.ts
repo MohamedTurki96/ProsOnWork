@@ -187,7 +187,7 @@ export class NotificationCreateDTO {
   @IsNotEmpty()
   @IsEnum(NotificationType)
   @Expose()
-  @ApiProperty({ enum: NotificationType })
+  @ApiProperty({ enum: NotificationType, enumName: "NotificationType" })
   type: NotificationType;
 
   @IsNotEmpty()

@@ -24,11 +24,7 @@ async function seed() {
             productId: randId(),
             startDate,
             endDate,
-            status: faker.helpers.arrayElement([
-              ReservationStatus.pending,
-              ReservationStatus.confirmed,
-              ReservationStatus.canceled,
-            ]),
+            status: ReservationStatus.pending,
           },
         });
       }),

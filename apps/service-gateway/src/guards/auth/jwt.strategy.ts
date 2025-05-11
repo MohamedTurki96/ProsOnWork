@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { EventHub } from '@pros-on-work/core';
-import { CurrentUserDTO, UserGetQuery } from '@pros-on-work/resources';
+import { CurrentUserDTO, UserGetActiveQuery } from '@pros-on-work/resources';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: CurrentUserDTO): Promise<CurrentUserDTO> {
     const user = this.eventHub.sendQuery(
-      new UserGetQuery({
+      new UserGetActiveQuery({
         id: payload.id,
       }),
     );

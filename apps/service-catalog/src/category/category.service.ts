@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PRISMA_CLIENT } from '@pros-on-work/core';
 import { CategoryCreateDTO, CategoryUpdateDTO } from '@pros-on-work/resources';
 
@@ -16,9 +21,15 @@ export class CategoryService {
       args.where = {};
     }
 
-    return await this.client.category.findMany(/* {
-      ...args,
-    } */);
+    if (!args.skip) {
+      delete args.skip;
+    }
+
+    if (!args.take) {
+      delete args.take;
+    }
+
+    return await this.client.category.findMany(args);
   }
 
   async count(args: Prisma.CategoryCountArgs = {}) {
@@ -45,6 +56,20 @@ export class CategoryService {
     return this.client.category.update({
       where: { id },
       data: dto,
+    });
+  }
+
+  async delete(id: number) {
+    const products = await this.client.product.exists({
+      categoryId: id,
+    });
+
+    if (products) {
+      throw new BadRequestException('There is products using this category');
+    }
+
+    return await this.client.category.delete({
+      where: { id },
     });
   }
 }

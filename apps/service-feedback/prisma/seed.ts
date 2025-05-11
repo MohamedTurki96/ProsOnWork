@@ -60,7 +60,7 @@ async function seed() {
         client.reclamation.create({
           data: {
             userId: faker.number.int({ min: 1, max: 10 }),
-            productId: faker.number.int({ min: 1, max: 100 }),
+            productId: faker.number.int({ min: 1, max: 10 }),
             comment: faker.helpers.arrayElement(reclamationSamples),
             status: faker.helpers.arrayElement([
               ReclamationStatus.open,

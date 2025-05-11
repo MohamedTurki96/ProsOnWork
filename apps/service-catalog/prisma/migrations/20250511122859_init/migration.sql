@@ -24,6 +24,7 @@ CREATE TABLE "Product" (
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "includes" JSONB,
     "faq" JSONB,
+    "medias" JSONB,
     "type" "ProductType" NOT NULL,
     "priceType" "PriceType" NOT NULL,
     "categoryId" INTEGER NOT NULL,

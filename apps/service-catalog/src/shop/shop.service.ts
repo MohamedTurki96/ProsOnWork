@@ -16,9 +16,15 @@ export class ShopService {
       args.where = {};
     }
 
-    return await this.client.shop.findMany({
-      ...args,
-    });
+    if (!args.skip) {
+      delete args.skip;
+    }
+
+    if (!args.take) {
+      delete args.take;
+    }
+
+    return await this.client.shop.findMany(args);
   }
 
   async count(args: Prisma.ShopCountArgs = {}) {

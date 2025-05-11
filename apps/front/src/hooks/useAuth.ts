@@ -3,7 +3,14 @@ import { useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-import { UserCreateDTO, UserLoginDTO } from '../api';
+import {
+  ChangePasswordDTO,
+  RequestPasswordResetDTO,
+  ResetPasswordDTO,
+  UserCreateDTO,
+  UserLoginDTO,
+  VerifyEmailDTO,
+} from '../api';
 import { Routes } from '../router/routes/routes';
 
 import { useApi, useLocalStorage } from './useApi';
@@ -24,7 +31,7 @@ export function useLogin() {
     },
     onError: (error) => {
       console.log('Error logging in', error);
-      toastError();
+      toastError(error);
     },
   });
 }
@@ -35,13 +42,14 @@ export function useRegister() {
 
   return useMutation({
     mutationFn: (data: UserCreateDTO) => api.users.register(data),
-    onError: (error) => {
-      console.log('Error registering', error);
-      toastError();
-    },
+
     onSuccess: () => {
       toast.success('User registered successfully');
       navigate(Routes.login);
+    },
+    onError: (error) => {
+      console.log('Error registering', error);
+      toastError(error);
     },
   });
 }
@@ -59,6 +67,23 @@ export function useLogout() {
   }, [navigate, queryClient]);
 }
 
+export function useRequestPasswordReset() {
+  const api = useApi();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationFn: (data: RequestPasswordResetDTO) => api.auth.requestReset(data),
+    onError: (error) => {
+      console.log('Error requesting', error);
+      toastError(error);
+    },
+    onSuccess: () => {
+      toast.success('Request sent');
+      navigate(Routes.login);
+    },
+  });
+}
+
 export function useConnectedUser() {
   const api = useApi();
   const [token, setToken] = useLocalStorage();
@@ -74,4 +99,48 @@ export function useConnectedUser() {
   }
 
   return query;
+}
+
+export function useVerifyEmail(onSuccess: () => any, onError: () => any) {
+  const api = useApi();
+
+  return useMutation({
+    mutationFn: (data: VerifyEmailDTO) => api.auth.verifyEmail(data),
+    onError: (error) => {
+      onError();
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+  });
+}
+
+export function useResetPassword(onSuccess: () => any, onError: () => any) {
+  const api = useApi();
+
+  return useMutation({
+    mutationFn: (data: ResetPasswordDTO) => api.auth.resetPassword(data),
+    onError: (error) => {
+      onError();
+    },
+    onSuccess: () => {
+      onSuccess();
+    },
+  });
+}
+
+export function useChangePassword(onSuccess?: () => any) {
+  const api = useApi();
+
+  return useMutation({
+    mutationFn: (data: ChangePasswordDTO) => api.auth.changePassword(data),
+    onError: (error) => {
+      console.log('Error requesting', error);
+      toastError(error);
+    },
+    onSuccess: () => {
+      toast.success('Password changed');
+      onSuccess?.();
+    },
+  });
 }

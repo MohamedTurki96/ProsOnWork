@@ -5,6 +5,7 @@ import {
   ChangePasswordCommandDTO,
   RequestPasswordResetDTO,
   ResetPasswordDTO,
+  ResetPasswordRequestedEvent,
   UserChangePasswordCommand,
   UserLoginCommand,
   UserLoginDTO,
@@ -47,7 +48,14 @@ export class AuthController {
 
   @CommandPattern(UserRequestPasswordResetCommand)
   async handleRequestReset(@Payload('payload') dto: RequestPasswordResetDTO) {
-    return await this.authService.requestReset(dto);
+    const result = await this.authService.requestReset(dto);
+
+    await this.eventHub.emitEvent(new ResetPasswordRequestedEvent({
+      email: dto.email,
+      resetToken: result.token
+    }))
+
+    return result;
   }
 
   @CommandPattern(UserResetPasswordCommand)

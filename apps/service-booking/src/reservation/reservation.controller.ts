@@ -24,7 +24,7 @@ export class ReservationController {
     if (!query.where) {
       query.where = {};
     }
-
+    
     const reservations = await this.reservationService.findMany({
       skip: query.skip,
       take: query.take,

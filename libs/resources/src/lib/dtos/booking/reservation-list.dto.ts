@@ -6,6 +6,7 @@ import {
   IsArray,
   IsDefined,
   IsEnum,
+  IsNumber,
   IsObject,
   IsOptional,
   ValidateNested,
@@ -15,7 +16,19 @@ import { PaginationDTO, PaginationResultDTO } from '../../pagination.dto';
 
 import { ReservationDTO } from './reservation.dto';
 
-export class ReservationListWhereDTO {}
+export class ReservationListWhereDTO {
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  userId?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  productId?: number;
+}
 
 export enum ReservationListSortProperty {
   CreatedAt = 'createdAt',

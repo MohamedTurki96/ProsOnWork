@@ -4,6 +4,7 @@ import { CommandPattern, QueryPattern } from '@pros-on-work/core';
 import {
   CategoryCreateCommand,
   CategoryCreateDTO,
+  CategoryDeleteCommand,
   CategoryGetDTO,
   CategoryGetQuery,
   CategoryListDTO,
@@ -62,5 +63,10 @@ export class CategoryController {
     const result = await this.categoryService.update(dto.id, dto);
 
     return result.toDTO();
+  }
+
+  @CommandPattern(CategoryDeleteCommand)
+  async handleDelete(@Payload('payload') dto: CategoryGetDTO) {
+    return await this.categoryService.delete(dto.id);
   }
 }

@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { Routes } from '../../../../router/routes/routes';
+
 export function Provider() {
   return (
     <section className="section provide-section bg-black">
@@ -20,7 +22,7 @@ export function Provider() {
             className="col-md-6 text-md-end wow fadeInUp"
             data-wow-delay="0.2s"
           >
-            <Link to="/register" className="btn btn-primary">
+            <Link to={Routes.providerRegister} className="btn btn-primary">
               <i className="ti ti-user-filled me-2" />
               Rejoignez-nous
             </Link>

@@ -1,16 +1,64 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
+import { ProductListWhereDTO } from '../../../api';
 import { useFilteredServices } from '../../../hooks/useProducts';
 
 import { ServiceCard } from './Card';
 import { Filter } from './Filter';
 
-export function Search() {
-  const { data: products, refetch, isLoading } = useFilteredServices();
+function extractFilter(searchParams: URLSearchParams) {
+  const data: ProductListWhereDTO = {};
 
-  const onFilter = useCallback(() => {
-    refetch();
-  }, [refetch]);
+  Array.from(searchParams).map(([key, value]) => {
+    if (key == 'q' && searchParams.get(key)) {
+      data.q = value!;
+    }
+
+    if (key == 'minPrice' && value) {
+      data.minPrice = Number(value);
+    }
+
+    if (key == 'maxPrice' && value) {
+      data.minPrice = Number(value);
+    }
+
+    if (key == 'latitude' && value) {
+      data.latitude = Number(value);
+    }
+
+    if (key == 'longitude' && value) {
+      data.longitude = Number(value);
+    }
+
+    if (key == 'rating') {
+      if (!data.rating) {
+        data.rating = [];
+      }
+      data.rating.push(Number(value));
+    }
+
+    if (key == 'categories') {
+      if (!data.categories) {
+        data.categories = [];
+      }
+      data.categories.push(Number(value));
+    }
+  });
+
+  return data;
+}
+
+export function Search() {
+  const [searchParams] = useSearchParams();
+  const [where, setWhere] = useState<ProductListWhereDTO>(
+    extractFilter(searchParams),
+  );
+  const { data: products, isLoading } = useFilteredServices(where);
+
+  const onFilter = useCallback(async () => {
+    setWhere(extractFilter(searchParams));
+  }, [searchParams, setWhere]);
 
   return (
     <div className="page-wrapper">

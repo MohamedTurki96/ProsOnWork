@@ -1,6 +1,10 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { PRISMA_CLIENT } from '@pros-on-work/core';
-import { ReservationCreateDTO, ReservationUpdateDTO } from '@pros-on-work/resources';
+import {
+  ReservationCreateDTO,
+  ReservationStatus,
+  ReservationUpdateDTO,
+} from '@pros-on-work/resources';
 
 import { ExtendedPrismaClient } from '../db';
 import { Prisma } from '../prisma';
@@ -14,6 +18,13 @@ export class ReservationService {
   async findMany(args: Prisma.ReservationFindManyArgs = {}) {
     if (!args.where) {
       args.where = {};
+    }
+    if (!args.skip) {
+      delete args.skip;
+    }
+
+    if (!args.take) {
+      delete args.take;
     }
 
     return await this.client.reservation.findMany({
@@ -44,7 +55,14 @@ export class ReservationService {
   async update(id: number, dto: ReservationUpdateDTO) {
     return this.client.reservation.update({
       where: { id },
-      data: dto,
+      data: {
+        status: dto.status,
+        ...(dto.status == ReservationStatus.Canceled
+          ? { canceledAt: new Date() }
+          : dto.status == ReservationStatus.Confirmed
+            ? { acceptedAt: new Date() }
+            : {}),
+      },
     });
   }
 }

@@ -1,29 +1,24 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Routes } from '../../router/routes/routes';
 
 export function NotFound() {
-  useEffect(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      import('../../style/scss/main.scss');
-    }, []);
-
   return (
     <div className="d-flex justify-content-center vh-100 overflow-auto flex-column error-404">
       <div className="contacts-overlay-img d-none d-md-block">
         <img src="/assets/img/bg/bg-07.png" alt="img" className="img-fluid" />
       </div>
-      <div className="authentication-header">
-        <div className="container">
-          <div className="col-md-12">
-            <div className="text-center">
-              <img className="w-25 h-25" src="/logo.svg" alt="logo" />
+        <div className="authentication-header">
+          <div className="container">
+            <div className="col-md-12">
+              <div className="text-center">
+                <Link to={Routes.home}>
+                  <img src="/logo.svg" alt="logo" className="h-50 w-25" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
       <div className="main-wrapper">
         <div className="container">

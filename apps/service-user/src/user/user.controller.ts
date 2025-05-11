@@ -3,13 +3,16 @@ import { Payload } from '@nestjs/microservices';
 import { CommandPattern, EventHub, QueryPattern } from '@pros-on-work/core';
 import {
   PaginationResponse,
+  PlansGetQuery,
   UserCreateCommand,
   UserCreatedEvent,
   UserCreateDTO,
+  UserGetActiveQuery,
   UserGetDTO,
   UserGetQuery,
   UserListDTO,
   UserListQuery,
+  UserPlan,
   UserUpdateCommand,
   UserUpdateCommandDTO,
   UserUpdatedEvent,
@@ -63,17 +66,32 @@ export class UserController {
     return await this.userService.get(query);
   }
 
+  @QueryPattern(UserGetActiveQuery)
+  async getActiveUser(@Payload('payload') query: UserGetDTO) {
+    return await this.userService.getActive(query);
+  }
+
+  @QueryPattern(PlansGetQuery)
+  async getPlans() {
+    return {
+      [UserPlan.Basic]: 50,
+      [UserPlan.Business]: 100,
+      [UserPlan.Premium]: 150,
+    };
+  }
+
   @CommandPattern(UserCreateCommand)
   async handleCreate(@Payload('payload') dto: UserCreateDTO) {
     const result = await this.userService.create(dto);
 
     await this.eventHub.emitEvent(
       new UserCreatedEvent({
-        id: result.id,
+        id: result.user.id,
+        verificationToken: result.emailVerificationToken.token
       }),
     );
 
-    return result.toDTO();
+    return result.user.toDTO();
   }
 
   @CommandPattern(UserUpdateCommand)

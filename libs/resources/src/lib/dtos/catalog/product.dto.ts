@@ -92,6 +92,14 @@ export class ProductDTO {
   @IsOptional()
   @ValidateNested({ each: true })
   @IsArray()
+  @Type(() => Number)
+  @ApiPropertyOptional({ isArray: true, type: Number })
+  @Expose()
+  medias?: number[];
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @IsArray()
   @Type(() => FaqDTO)
   @ApiPropertyOptional({ isArray: true, type: FaqDTO })
   @Expose()
@@ -169,6 +177,14 @@ export class ProductCreateDTO {
   @ApiPropertyOptional({ isArray: true, type: String })
   @Expose()
   includes?: string[];
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @IsArray()
+  @Type(() => Number)
+  @ApiPropertyOptional({ isArray: true, type: Number })
+  @Expose()
+  medias?: number[];
 
   @IsOptional()
   @ValidateNested({ each: true })
@@ -251,6 +267,14 @@ export class ProductUpdateDTO {
   @ApiPropertyOptional({ isArray: true, type: FaqDTO })
   @Expose()
   faq?: FaqDTO[];
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @IsArray()
+  @Type(() => Number)
+  @ApiPropertyOptional({ isArray: true, type: Number })
+  @Expose()
+  medias?: number[];
 
   @IsOptional()
   @IsEnum(ProductType)

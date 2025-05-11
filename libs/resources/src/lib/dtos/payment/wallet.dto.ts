@@ -1,6 +1,22 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumber, IsOptional, ValidateIf } from 'class-validator';
+
+export class WalletGetDTO {
+  @ValidateIf((o: WalletGetDTO) => !o.userId)
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  id?: number;
+
+  @ValidateIf((o: WalletGetDTO) => !o.id)
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  userId?: number;
+}
 
 export class WalletDTO {
   @IsNotEmpty()

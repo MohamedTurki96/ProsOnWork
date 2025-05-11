@@ -1,27 +1,28 @@
 import { useQuery } from '@tanstack/react-query';
-import { useSearchParams } from 'react-router-dom';
 
-import { queryToObject } from '../utils/queryToObject';
+
+import { ProductListWhereDTO } from '../api';
 
 import { useApi } from './useApi';
 
-export function useFilteredServices() {
+
+export function useFilteredServices(where: ProductListWhereDTO) {
   const api = useApi();
-  const [searchParams] = useSearchParams();
-  const query = queryToObject(searchParams);
-  console.log(query)
+  console.log(where)
 
   return useQuery({
-    queryKey: ['products', 'filtered'],
-    queryFn: () => api.products.list(),
+    queryKey: ['products', where],
+    queryFn: () => api.products.list({ where }),
+    enabled: !!Object.keys(where)?.length
   });
 }
 
-export function useProduct(id: number) {
+export function useProduct(id?: number) {
   const api = useApi();
 
   return useQuery({
     queryKey: ['products', id],
-    queryFn: () => api.products.get(id),
+    queryFn: () => api.products.get(id!),
+    enabled: !!id
   });
 }

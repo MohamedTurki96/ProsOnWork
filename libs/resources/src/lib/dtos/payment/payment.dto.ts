@@ -34,7 +34,7 @@ export class PaymentDTO {
   @IsNotEmpty()
   @IsEnum(PaymentType)
   @Expose()
-  @ApiProperty({ enum: PaymentType })
+  @ApiProperty({ enum: PaymentType, enumName: 'PaymentType' })
   type: PaymentType;
 
   @IsNotEmpty()
@@ -46,7 +46,7 @@ export class PaymentDTO {
   @IsNotEmpty()
   @IsEnum(PaymentStatus)
   @Expose()
-  @ApiProperty({ enum: PaymentStatus })
+  @ApiProperty({ enum: PaymentStatus, enumName: 'PaymentStatus' })
   status: PaymentStatus;
 
   @IsDate()
@@ -66,7 +66,7 @@ export class PaymentCreateDTO {
   @IsNotEmpty()
   @IsEnum(PaymentType)
   @Expose()
-  @ApiProperty({ enum: PaymentType })
+  @ApiProperty({ enum: PaymentType, enumName: 'PaymentType' })
   type: PaymentType;
 
   @IsNotEmpty()
@@ -74,4 +74,18 @@ export class PaymentCreateDTO {
   @ApiProperty()
   @Expose()
   amount: number;
+}
+
+export class PaymentUpdateDTO {
+  @IsNotEmpty()
+  @IsNumber()
+  @Expose()
+  @ApiProperty()
+  id: number;
+
+  @IsNotEmpty()
+  @IsEnum(PaymentStatus)
+  @Expose()
+  @ApiProperty({ enum: PaymentStatus, enumName: 'PaymentStatus' })
+  status: PaymentStatus;
 }

@@ -26,6 +26,7 @@ import {
 } from '@pros-on-work/resources';
 
 import { ApiListQuery, ApiNeedsAuthentication } from '../decorators/api.decorator';
+import { Public } from '../decorators/public.decorator';
 import { Roles } from '../decorators/roles.decorator';
 
 @ApiTags('Reservations')
@@ -34,8 +35,7 @@ export class ReservationController {
   constructor(private readonly eventHub: EventHub) {}
 
   @Get()
-  @Roles(UserRole.Admin, UserRole.ServiceProvider, UserRole.Client)
-  @ApiNeedsAuthentication()
+  @Public()
   @HttpCode(HttpStatus.OK)
   @ApiListQuery({
     response: ReservationListResultDTO,
@@ -86,7 +86,7 @@ export class ReservationController {
   }
 
   @Put(':id/cancel')
-  @Roles(UserRole.Admin, UserRole.ServiceProvider)
+  @Roles(UserRole.Admin, UserRole.ServiceProvider, UserRole.Client)
   @ApiNeedsAuthentication()
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, type: ReservationDTO })

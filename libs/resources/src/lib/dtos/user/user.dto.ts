@@ -8,6 +8,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  ValidateIf,
 } from 'class-validator';
 
 import { IsGeoLocation } from '../../validators/isGeoLocation';
@@ -19,6 +20,14 @@ export const UserRole = {
 } as const;
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole];
+
+export const UserPlan = {
+  Basic: 'basic',
+  Business: 'business',
+  Premium: 'premium',
+} as const;
+
+export type UserPlan = (typeof UserPlan)[keyof typeof UserPlan];
 
 export class UserDTO {
   @IsNotEmpty()
@@ -56,7 +65,14 @@ export class UserDTO {
   @IsEnum(UserRole)
   @Expose()
   @ApiProperty({ enum: UserRole, enumName: 'UserRole' })
-  role: string;
+  role: UserRole;
+
+  @ValidateIf((o: UserDTO) => o.role == UserRole.ServiceProvider)
+  @IsNotEmpty()
+  @IsEnum(UserPlan)
+  @Expose()
+  @ApiPropertyOptional({ enum: UserPlan, enumName: 'UserPlan' })
+  plan?: UserPlan;
 
   @IsOptional()
   @IsNumber()

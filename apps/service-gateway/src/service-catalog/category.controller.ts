@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -14,6 +15,7 @@ import { EventHub } from '@pros-on-work/core';
 import {
   CategoryCreateCommand,
   CategoryCreateDTO,
+  CategoryDeleteCommand,
   CategoryDTO,
   CategoryGetQuery,
   CategoryListQuery,
@@ -25,7 +27,10 @@ import {
   UserRole,
 } from '@pros-on-work/resources';
 
-import { ApiListQuery, ApiNeedsAuthentication } from '../decorators/api.decorator';
+import {
+  ApiListQuery,
+  ApiNeedsAuthentication,
+} from '../decorators/api.decorator';
 import { Public } from '../decorators/public.decorator';
 import { Roles } from '../decorators/roles.decorator';
 
@@ -72,6 +77,15 @@ export class CategoryController {
   @ApiParam({ name: 'id', type: Number })
   async update(@Param('id') id: number, @Body() dto: CategoryUpdateDTO) {
     return this.eventHub.sendCommand(new CategoryUpdateCommand({ id, ...dto }));
+  }
+
+  @Delete(':id')
+  @ApiNeedsAuthentication()
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({ status: HttpStatus.OK })
+  @ApiParam({ name: 'id', type: Number })
+  async delete(@Param('id') id: number) {
+    return this.eventHub.sendQuery(new CategoryDeleteCommand({ id }));
   }
 
   @Get(':id')

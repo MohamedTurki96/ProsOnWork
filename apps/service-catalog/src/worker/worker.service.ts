@@ -16,9 +16,15 @@ export class WorkerService {
       args.where = {};
     }
 
-    return await this.client.worker.findMany({
-      ...args,
-    });
+    if (!args.skip) {
+      delete args.skip;
+    }
+
+    if (!args.take) {
+      delete args.take;
+    }
+
+    return await this.client.worker.findMany(args);
   }
 
   async count(args: Prisma.WorkerCountArgs = {}) {

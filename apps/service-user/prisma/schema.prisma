@@ -19,6 +19,7 @@ model User {
   phone           String?
   avatarId        Int?      @default(25)
   address         String?
+  plan            UserPlan?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -42,4 +43,10 @@ enum UserRole {
   admin
   client
   serviceProvider
+}
+
+enum UserPlan {
+  basic
+  business
+  premium
 }

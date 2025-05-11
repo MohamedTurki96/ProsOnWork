@@ -23,6 +23,8 @@ import { ChatController } from './service-chat/chat.controller';
 import { MessageController } from './service-chat/message.controller';
 import { FeedbackController } from './service-feedback/feedback.controller';
 import { ReclamationController } from './service-feedback/reclamation.controller';
+import { PaymentController } from './service-payment/payment.controller';
+import { WalletController } from './service-payment/wallet.controller';
 import { AuthController } from './service-user/auth.controller';
 import { UserController } from './service-user/user.controller';
 
@@ -54,6 +56,8 @@ import { UserController } from './service-user/user.controller';
     ReclamationController,
     ChatController,
     MessageController,
+    PaymentController,
+    WalletController
   ],
 })
 export class GatewayModule {}

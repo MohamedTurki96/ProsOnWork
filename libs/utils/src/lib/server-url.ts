@@ -7,6 +7,10 @@ export class ServerURL {
     return process.env['SERVER_HOST']!;
   }
 
+  static get frontendUrl() {
+    return process.env['FRONTEND_URL']!;
+  }
+
   static get basepath() {
     return process.env['SERVER_BASE_PATH']!;
   }

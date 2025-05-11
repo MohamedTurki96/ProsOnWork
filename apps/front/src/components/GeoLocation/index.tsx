@@ -99,12 +99,16 @@ export function GeoLocationMap(
     mapRef.current?.remove();
     mapRef.current = null;
 
-    (async function () {
-      await handleSave?.(geoLoc, text);
-    })();
-
     onHide();
   }, [onHide, mapRef.current, markerRef.current, geoLoc, text]);
+
+  useEffect(() => {
+    if (geoLoc) {
+      (async function () {
+        await handleSave?.(geoLoc, text);
+      })();
+    }
+  }, [geoLoc, text]);
 
   return (
     <Modal show={show} onHide={hide} size="xl" centered onEntered={init}>

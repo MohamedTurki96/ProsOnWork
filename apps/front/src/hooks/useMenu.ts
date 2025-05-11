@@ -42,6 +42,16 @@ export function useSidebarMenu(): MenuItem[] {
             icon: 'ti ti-wallet',
             path: Routes.reclamations,
           },
+          {
+            label: 'Settings',
+            icon: 'ti ti-settings',
+            path: Routes.adminSettigs,
+          },
+          {
+            label: 'Security',
+            icon: 'ti ti-shield',
+            path: Routes.adminSecurity,
+          },
         ];
       case UserRole.Client:
         return [
@@ -64,6 +74,11 @@ export function useSidebarMenu(): MenuItem[] {
             label: 'Settings',
             icon: 'ti ti-settings',
             path: Routes.settings,
+          },
+          {
+            label: 'Security',
+            icon: 'ti ti-shield',
+            path: Routes.security,
           },
         ];
       case UserRole.ServiceProvider:
@@ -97,6 +112,11 @@ export function useSidebarMenu(): MenuItem[] {
             label: 'Settings',
             icon: 'ti ti-settings',
             path: Routes.providerSettings,
+          },
+          {
+            label: 'Security',
+            icon: 'ti ti-shield',
+            path: Routes.providerSecurity,
           },
         ];
     }

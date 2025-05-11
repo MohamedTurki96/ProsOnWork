@@ -1,13 +1,15 @@
 import { ITXClientDenyList } from '@prisma/client/runtime/library';
-// eslint-disable-next-line unused-imports/no-unused-imports
 import { prismaExtensionExists, prismaToDTO } from '@pros-on-work/core';
+import { PaymentDTO, WalletDTO } from '@pros-on-work/resources';
 
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { PrismaClient } from './prisma';
 
 export function createPrismaClient() {
   return new PrismaClient().$extends(prismaExtensionExists).$extends({
-    result: {},
+    result: {
+      payment: { toDTO: prismaToDTO(PaymentDTO) },
+      wallet: { toDTO: prismaToDTO(WalletDTO) },
+    },
   });
 }
 

@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 
-import { PrismaClient, UserRole } from '../src/prisma';
+import { PrismaClient, UserPlan, UserRole } from '../src/prisma';
 
 const prisma = new PrismaClient();
 
@@ -40,37 +40,11 @@ async function seed() {
             phone: faker.phone.number({ style: 'international' }),
             avatarId: 25,
             address: Math.random() < 0.6 ? randomGeoLocation() : null,
-            emailVerifiedAt:
-              i % 2 === 0 ? faker.date.recent({ days: 30 }) : null,
+            emailVerifiedAt: faker.date.recent({ days: 30 }),
+            plan: role == UserRole.serviceProvider ? UserPlan.basic : null,
           },
         });
       }),
-    );
-
-    /* ---------- Email‑verification tokens (for unverified users) ---------- */
-    await Promise.all(
-      users
-        .filter((u) => !u.emailVerifiedAt)
-        .map((u) =>
-          client.emailVerificationToken.create({
-            data: {
-              email: u.email,
-              token: faker.string.alphanumeric(32),
-            },
-          }),
-        ),
-    );
-
-    /* ---------- Password‑reset tokens (three random users) ---------- */
-    await Promise.all(
-      faker.helpers.arrayElements(users, 3).map((u) =>
-        client.passwordResetToken.create({
-          data: {
-            email: u.email,
-            token: faker.string.alphanumeric(32),
-          },
-        }),
-      ),
     );
   });
 }

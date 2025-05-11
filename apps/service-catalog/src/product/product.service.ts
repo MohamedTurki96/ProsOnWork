@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { EventHub, PRISMA_CLIENT } from '@pros-on-work/core';
+import { PRISMA_CLIENT } from '@pros-on-work/core';
 
 import { ExtendedPrismaClient } from '../db';
 import { Prisma } from '../prisma';
@@ -8,7 +8,6 @@ import { Prisma } from '../prisma';
 export class ProductService {
   constructor(
     @Inject(PRISMA_CLIENT) private readonly client: ExtendedPrismaClient,
-    private readonly evetnHub: EventHub
   ) {}
 
   async findMany(args: Prisma.ProductFindManyArgs = {}) {
@@ -16,9 +15,15 @@ export class ProductService {
       args.where = {};
     }
 
-    return await this.client.product.findMany({
-      ...args,
-    });
+    if (!args.skip) {
+      delete args.skip;
+    }
+
+    if (!args.take) {
+      delete args.take;
+    }
+
+    return await this.client.product.findMany(args);
   }
 
   async count(args: Prisma.ProductCountArgs = {}) {
@@ -35,7 +40,7 @@ export class ProductService {
     return result.toDTO();
   }
 
- /*  async create(dto: ProductCreateDTO) {
+  /*  async create(dto: ProductCreateDTO) {
     const workersId = dto.workers;
     
 

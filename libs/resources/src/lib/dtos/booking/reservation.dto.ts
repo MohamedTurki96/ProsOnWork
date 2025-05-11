@@ -1,6 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { IsDate, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 export const ReservationStatus = {
   Pending: 'pending',
@@ -49,12 +49,26 @@ export class ReservationDTO {
   @ApiProperty({ enum: ReservationStatus, enumName: 'ReservationStatus' })
   status: ReservationStatus;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsDate()
   @Type(() => Date)
   @Expose()
   @ApiProperty({ type: Date })
   createdAt: Date;
+
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  @Expose()
+  @ApiPropertyOptional({ type: Date })
+  canceledAt?: Date;
+
+  @IsNotEmpty()
+  @IsDate()
+  @Type(() => Date)
+  @Expose()
+  @ApiPropertyOptional({ type: Date })
+  acceptedAT?: Date;
 }
 
 export class ReservationCreateDTO {
@@ -90,6 +104,7 @@ export class ReservationUpdateDTO {
 
   @IsEnum(ReservationStatus)
   @IsNotEmpty()
-  @ApiProperty({ enum: ReservationStatus })
+  @ApiProperty({ enum: ReservationStatus, enumName: 'ReservationStatus' })
+  @Expose()
   status: ReservationStatus;
 }

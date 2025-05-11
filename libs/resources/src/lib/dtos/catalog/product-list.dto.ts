@@ -6,6 +6,7 @@ import {
   IsArray,
   IsDefined,
   IsEnum,
+  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -16,13 +17,52 @@ import { PaginationDTO, PaginationResultDTO } from '../../pagination.dto';
 
 import { ProductDTO } from './product.dto';
 
-
 export class ProductListWhereDTO {
   @IsOptional()
   @IsString()
   @Expose()
   @ApiPropertyOptional()
-  name?: string;
+  q?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  latitude?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  longitude?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  minPrice?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  maxPrice?: number;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @IsArray()
+  @Type(() => Number)
+  @ApiPropertyOptional({ isArray: true, type: Number })
+  @Expose()
+  categories?: number[];
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @IsArray()
+  @Type(() => Number)
+  @ApiPropertyOptional({ isArray: true, type: Number })
+  @Expose()
+  rating?: string;
 }
 
 export enum ProductListSortProperty {

@@ -10,10 +10,37 @@
  * ---------------------------------------------------------------
  */
 
+/** @default "createdAt" */
+export enum WalletListSortProperty {
+  CreatedAt = 'createdAt',
+}
+
+export enum PaymentStatus {
+  Pending = 'pending',
+  Completed = 'completed',
+  Failed = 'failed',
+}
+
+/** @default "createdAt" */
+export enum PaymentListSortProperty {
+  CreatedAt = 'createdAt',
+}
+
+export enum PaymentType {
+  CashIn = 'cashIn',
+  CashOut = 'cashOut',
+  Reservation = 'reservation',
+}
+
 export enum ReclamationStatus {
   Open = 'open',
   InProgress = 'inProgress',
   Resolved = 'resolved',
+}
+
+/** @default "createdAt" */
+export enum ReclamationListSortProperty {
+  CreatedAt = 'createdAt',
 }
 
 export enum ReservationStatus {
@@ -55,6 +82,12 @@ export enum ShopListSortProperty {
 /** @default "createdAt" */
 export enum CategoryListSortProperty {
   CreatedAt = 'createdAt',
+}
+
+export enum UserPlan {
+  Basic = 'basic',
+  Business = 'business',
+  Premium = 'premium',
 }
 
 /** @default "desc" */
@@ -103,6 +136,7 @@ export interface UserDTO {
   emailVerifiedAt?: string;
   phone?: string;
   role: UserRole;
+  plan?: UserPlan;
   avatarId?: number;
   address?: string;
   /** @format date-time */
@@ -112,6 +146,12 @@ export interface UserDTO {
 export interface UserListResultDTO {
   meta: PaginationMetaDTO;
   items: UserDTO[];
+}
+
+export interface UserPlans {
+  basic: number;
+  business: number;
+  premium: number;
 }
 
 export interface UserUpdateDTO {
@@ -126,7 +166,8 @@ export interface UserCreateDTO {
   email: string;
   password: string;
   phone?: string;
-  isClient: string;
+  plan?: UserPlan;
+  isClient: boolean;
 }
 
 export interface UserLoginDTO {
@@ -270,7 +311,13 @@ export interface WorkerUpdateDTO {
 }
 
 export interface ProductListWhereDTO {
-  name?: string;
+  q?: string;
+  latitude?: number;
+  longitude?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  categories?: number[];
+  rating?: number[];
 }
 
 export interface ProductListSortDTO {
@@ -290,6 +337,7 @@ export interface ProductDTO {
   price: number;
   isActive: boolean;
   includes?: string[];
+  medias?: number[];
   faq?: FaqDTO[];
   type: ProductType;
   priceType: PriceType;
@@ -311,6 +359,7 @@ export interface ProductCreateDTO {
   price: number;
   isActive: boolean;
   includes?: string[];
+  medias?: number[];
   faq?: FaqDTO[];
   type: ProductType;
   priceType: PriceType;
@@ -326,13 +375,17 @@ export interface ProductUpdateDTO {
   isActive?: boolean;
   includes?: string[];
   faq?: FaqDTO[];
+  medias?: number[];
   type?: ProductType;
   priceType?: PriceType;
   categoryId?: number;
   workers?: number[];
 }
 
-export type ReservationListWhereDTO = object;
+export interface ReservationListWhereDTO {
+  userId?: number;
+  productId?: number;
+}
 
 export interface ReservationListSortDTO {
   property?: ReservationListSortProperty;
@@ -350,6 +403,10 @@ export interface ReservationDTO {
   status: ReservationStatus;
   /** @format date-time */
   createdAt: string;
+  /** @format date-time */
+  canceledAt?: string;
+  /** @format date-time */
+  acceptedAT?: string;
 }
 
 export interface ReservationListResultDTO {
@@ -386,10 +443,17 @@ export interface FeedbackDTO {
   createdAt: string;
 }
 
-export interface ReclamationCreateDTO {
-  userId: number;
-  productId: number;
-  comment: string;
+export interface FeedbackGetForProductResultDTO {
+  items: FeedbackDTO[];
+}
+
+export interface ReclamationListWhereDTO {
+  comment?: string;
+}
+
+export interface ReclamationListSortDTO {
+  property?: ReclamationListSortProperty;
+  order?: QuerySortOrder;
 }
 
 export interface ReclamationDTO {
@@ -400,6 +464,68 @@ export interface ReclamationDTO {
   status: ReclamationStatus;
   /** @format date-time */
   createdAt: string;
+}
+
+export interface ReclamationListResultDTO {
+  meta: PaginationMetaDTO;
+  items: ReclamationDTO[];
+}
+
+export interface ReclamationCreateDTO {
+  userId: number;
+  productId: number;
+  comment: string;
+}
+
+export interface PaymentListWhereDTO {
+  type?: PaymentType;
+  walletId?: number;
+}
+
+export interface PaymentListSortDTO {
+  property?: PaymentListSortProperty;
+  order?: QuerySortOrder;
+}
+
+export interface PaymentDTO {
+  id: number;
+  walletId: number;
+  type: PaymentType;
+  amount: number;
+  status: PaymentStatus;
+  /** @format date-time */
+  createdAt: string;
+}
+
+export interface PaymentListResultDTO {
+  meta: PaginationMetaDTO;
+  items: PaymentDTO[];
+}
+
+export interface PaymentCreateCashInDTO {
+  amount: number;
+}
+
+export interface WalletListWhereDTO {
+  userId?: number;
+}
+
+export interface WalletListSortDTO {
+  property?: WalletListSortProperty;
+  order?: QuerySortOrder;
+}
+
+export interface WalletDTO {
+  id: number;
+  userId: number;
+  balance: number;
+  /** @format date-time */
+  createdAt: string;
+}
+
+export interface WalletListResultDTO {
+  meta: PaginationMetaDTO;
+  items: WalletDTO[];
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -743,6 +869,21 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags Users
+     * @name Plans
+     * @request GET:/users/plans
+     */
+    plans: (params: RequestParams = {}) =>
+      this.http.request<UserPlans, any>({
+        path: `/users/plans`,
+        method: 'GET',
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Users
      * @name GetUser
      * @request GET:/users/{id}
      * @secure
@@ -783,7 +924,7 @@ export class Api<SecurityDataType extends unknown> {
      * @secure
      */
     changePassword: (data: ChangePasswordDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, void>({
+      this.http.request<object, void>({
         path: `/auth/change-password`,
         method: 'POST',
         body: data,
@@ -801,7 +942,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/request-password-reset
      */
     requestReset: (data: RequestPasswordResetDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, any>({
+      this.http.request<object, any>({
         path: `/auth/request-password-reset`,
         method: 'POST',
         body: data,
@@ -818,7 +959,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/reset-password
      */
     resetPassword: (data: ResetPasswordDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, any>({
+      this.http.request<object, any>({
         path: `/auth/reset-password`,
         method: 'POST',
         body: data,
@@ -835,7 +976,7 @@ export class Api<SecurityDataType extends unknown> {
      * @request POST:/auth/verify-email
      */
     verifyEmail: (data: VerifyEmailDTO, params: RequestParams = {}) =>
-      this.http.request<ReservationListWhereDTO, any>({
+      this.http.request<object, any>({
         path: `/auth/verify-email`,
         method: 'POST',
         body: data,
@@ -904,6 +1045,22 @@ export class Api<SecurityDataType extends unknown> {
         secure: true,
         type: ContentType.Json,
         format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Categories
+     * @name Delete
+     * @request DELETE:/categories/{id}
+     * @secure
+     */
+    delete: (id: number, params: RequestParams = {}) =>
+      this.http.request<void, void>({
+        path: `/categories/${id}`,
+        method: 'DELETE',
+        secure: true,
         ...params,
       }),
 
@@ -1283,14 +1440,59 @@ export class Api<SecurityDataType extends unknown> {
      * @request GET:/feedback/product/{productId}
      */
     listByProduct: (productId: number, params: RequestParams = {}) =>
-      this.http.request<FeedbackDTO[], any>({
+      this.http.request<FeedbackGetForProductResultDTO, any>({
         path: `/feedback/product/${productId}`,
+        method: 'GET',
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Feedback
+     * @name GetFeedbackFor
+     * @request GET:/feedback/product/{productId}/users/{userId}
+     */
+    getFeedbackFor: (
+      productId: number,
+      userId: number,
+      params: RequestParams = {},
+    ) =>
+      this.http.request<FeedbackDTO, any>({
+        path: `/feedback/product/${productId}/users/${userId}`,
         method: 'GET',
         format: 'json',
         ...params,
       }),
   };
   reclamations = {
+    /**
+     * No description
+     *
+     * @tags Reclamations
+     * @name List
+     * @request GET:/reclamations
+     * @secure
+     */
+    list: (
+      query?: {
+        where?: ReclamationListWhereDTO;
+        sort?: ReclamationListSortDTO;
+        skip?: number;
+        take?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.http.request<ReclamationListResultDTO, void>({
+        path: `/reclamations`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
     /**
      * No description
      *
@@ -1321,6 +1523,181 @@ export class Api<SecurityDataType extends unknown> {
     get: (id: number, params: RequestParams = {}) =>
       this.http.request<ReclamationDTO, void>({
         path: `/reclamations/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reclamations
+     * @name Progress
+     * @request PUT:/reclamations/{id}/progress
+     * @secure
+     */
+    progress: (id: number, params: RequestParams = {}) =>
+      this.http.request<ReclamationDTO, void>({
+        path: `/reclamations/${id}/progress`,
+        method: 'PUT',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Reclamations
+     * @name Solve
+     * @request PUT:/reclamations/{id}/solve
+     * @secure
+     */
+    solve: (id: number, params: RequestParams = {}) =>
+      this.http.request<ReclamationDTO, void>({
+        path: `/reclamations/${id}/solve`,
+        method: 'PUT',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+  };
+  payments = {
+    /**
+     * No description
+     *
+     * @tags Payments
+     * @name List
+     * @request GET:/payments
+     * @secure
+     */
+    list: (
+      query?: {
+        where?: PaymentListWhereDTO;
+        sort?: PaymentListSortDTO;
+        skip?: number;
+        take?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.http.request<PaymentListResultDTO, void>({
+        path: `/payments`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Payments
+     * @name AcceptCashout
+     * @request PUT:/payments/{id}/accept-cashout
+     * @secure
+     */
+    acceptCashout: (id: number, params: RequestParams = {}) =>
+      this.http.request<PaymentDTO, void>({
+        path: `/payments/${id}/accept-cashout`,
+        method: 'PUT',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Payments
+     * @name DeclineCashout
+     * @request PUT:/payments/{id}/decline-cashout
+     * @secure
+     */
+    declineCashout: (id: number, params: RequestParams = {}) =>
+      this.http.request<PaymentDTO, void>({
+        path: `/payments/${id}/decline-cashout`,
+        method: 'PUT',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Payments
+     * @name CreateCashIn
+     * @request POST:/payments/cash-in
+     * @secure
+     */
+    createCashIn: (data: PaymentCreateCashInDTO, params: RequestParams = {}) =>
+      this.http.request<PaymentDTO, void>({
+        path: `/payments/cash-in`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+  };
+  wallets = {
+    /**
+     * No description
+     *
+     * @tags Wallets
+     * @name List
+     * @request GET:/wallets
+     * @secure
+     */
+    list: (
+      query?: {
+        where?: WalletListWhereDTO;
+        sort?: WalletListSortDTO;
+        skip?: number;
+        take?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.http.request<WalletListResultDTO, void>({
+        path: `/wallets`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Wallets
+     * @name GetByUser
+     * @request GET:/wallets/users
+     * @secure
+     */
+    getByUser: (params: RequestParams = {}) =>
+      this.http.request<WalletDTO, void>({
+        path: `/wallets/users`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Wallets
+     * @name Get
+     * @request GET:/wallets/{id}
+     * @secure
+     */
+    get: (id: number, params: RequestParams = {}) =>
+      this.http.request<WalletDTO, void>({
+        path: `/wallets/${id}`,
         method: 'GET',
         secure: true,
         format: 'json',

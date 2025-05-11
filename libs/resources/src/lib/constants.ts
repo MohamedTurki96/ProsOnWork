@@ -2,4 +2,5 @@
 export const TRANSFORM_OPTIONS = {
   excludeExtraneousValues: true,
   exposeUnsetFields: false,
+   enableImplicitConversion: true
 }

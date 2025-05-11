@@ -17,4 +17,8 @@ export async function setupEnvironmentVariables(options: SetupOptions) {
   if (!process.env["SERVER_HOST"]) {
     process.env["SERVER_HOST"] = `http://localhost:${port}`
   }
+
+    if (!process.env["FRONTEND_URL"]) {
+    process.env["FRONTEND_URL"] = `http://localhost:3000`
+  }
 }

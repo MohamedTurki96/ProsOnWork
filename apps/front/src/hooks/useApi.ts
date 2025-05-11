@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { Api, HttpClient } from '../api';
+import { Api, HttpClient, QueryParamsType } from '../api';
 import { Api as FileApi, HttpClient as FileHttpClient } from '../api/file';
 
 export function useLocalStorage(key = 'access_token') {
@@ -30,6 +30,53 @@ export function useLocalStorage(key = 'access_token') {
   return [value, saveValue] as const;
 }
 
+export class ProsOnWorkHttpClient extends HttpClient {
+  protected addObjectQueryParam(query: QueryParamsType, key: string): string {
+    const obj = query[key];
+
+    return Object.keys(obj)
+      .map((prop) => {
+        const value = obj[prop];
+        if (Array.isArray(value)) {
+          return value
+            .map((v: any, idx: number) =>
+              this.encodeQueryParam(`${key}[${prop}[${idx}]]`, v),
+            )
+            .join('&');
+        }
+
+        return this.encodeQueryParam(`${key}[${prop}]`, value);
+      })
+      .join('&');
+  }
+
+  protected addArrayQueryParam(query: QueryParamsType, key: string) {
+    const value = query[key];
+
+    return value
+      .map((v: any, index: number) =>
+        this.encodeQueryParam(`${key}[${index}]`, v),
+      )
+      .join('&');
+  }
+
+  protected toQueryString(rawQuery?: QueryParamsType): string {
+    const query = rawQuery || {};
+    const keys = Object.keys(query).filter(
+      (key) => 'undefined' !== typeof query[key],
+    );
+    return keys
+      .map((key) =>
+        Array.isArray(query[key])
+          ? this.addArrayQueryParam(query, key)
+          : typeof query[key] == 'object'
+            ? this.addObjectQueryParam(query, key)
+            : this.addQueryParam(query, key),
+      )
+      .join('&');
+  }
+}
+
 export function useApi() {
   const [token] = useLocalStorage();
 
@@ -42,7 +89,7 @@ export function useApi() {
     }
 
     return new Api(
-      new HttpClient({
+      new ProsOnWorkHttpClient({
         baseApiParams: {
           credentials: 'include',
           headers,

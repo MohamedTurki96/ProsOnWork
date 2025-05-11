@@ -6,13 +6,12 @@ import { Bookings } from '../../pages/serviceProvider/Bookings';
 import { Dashboard } from '../../pages/serviceProvider/Dashboard';
 import { Reviews } from '../../pages/serviceProvider/Reviews';
 import { Services } from '../../pages/serviceProvider/Services';
+import { Security } from '../../pages/shared/Security';
 import { Settings } from '../../pages/shared/Settings';
 import { Wallet } from '../../pages/shared/Wallet';
 import Granted from '../components/Granted';
 
 import { Routes } from './routes';
-
-
 
 export const professionalRoutes: RouteObject[] = [
   {
@@ -29,6 +28,7 @@ export const professionalRoutes: RouteObject[] = [
       { path: Routes.providerWallet, element: <Wallet /> },
       { path: Routes.reviews, element: <Reviews /> },
       { path: Routes.providerSettings, element: <Settings /> },
+      { path: Routes.providerSecurity, element: <Security /> },
     ],
   },
 ];

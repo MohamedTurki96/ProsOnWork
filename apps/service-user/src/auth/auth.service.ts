@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import crypto from 'crypto';
 
 import {
   BadRequestException,
@@ -38,6 +38,10 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
+    if (!user?.emailVerifiedAt) {
+      throw new UnauthorizedException('User not verified !');
+    }
+
     return user.toDTO();
   }
 
@@ -62,7 +66,7 @@ export class AuthService {
     });
     if (!user) throw new NotFoundException('User not found');
 
-    const token = randomUUID();
+    const token = crypto.randomBytes(10).toString('hex');
 
     await this.client.passwordResetToken.upsert({
       where: { email: dto.email },

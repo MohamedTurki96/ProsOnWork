@@ -9,6 +9,8 @@ CREATE TABLE "Reservation" (
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3) NOT NULL,
     "status" "ReservationStatus" NOT NULL DEFAULT 'pending',
+    "canceledAt" TIMESTAMP(3),
+    "acceptedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

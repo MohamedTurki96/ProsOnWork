@@ -13,14 +13,17 @@ import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentUser, EventHub } from '@pros-on-work/core';
 import {
   CurrentUserDTO,
+  PlansGetQuery,
   UserCreateCommand,
   UserCreateDTO,
   UserDTO,
+  UserGetActiveQuery,
   UserGetQuery,
   UserListQuery,
   UserListResultDTO,
   UserListSortDTO,
   UserListWhereDTO,
+  UserPlans,
   UserRole,
   UserUpdateCommand,
   UserUpdateDTO,
@@ -39,7 +42,7 @@ export class UserController {
   constructor(private readonly eventHub: EventHub) {}
 
   @Get()
-  @ApiNeedsAuthentication()
+  @Public()
   @Roles(UserRole.Admin)
   @HttpCode(HttpStatus.OK)
   @ApiListQuery({
@@ -63,7 +66,15 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, type: UserDTO })
   me(@CurrentUser() user: CurrentUserDTO) {
-    return this.eventHub.sendQuery(new UserGetQuery({ id: user.id }));
+    return this.eventHub.sendQuery(new UserGetActiveQuery({ id: user.id }));
+  }
+
+  @Get('plans')
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({ status: HttpStatus.OK, type: UserPlans })
+  async plans(): Promise<UserPlans> {
+    return this.eventHub.sendQuery(new PlansGetQuery());
   }
 
   @Put()
@@ -81,7 +92,7 @@ export class UserController {
   }
 
   @Get(':id')
-  @ApiNeedsAuthentication()
+  @Public()
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, type: UserDTO })
   getUser(@Param('id') id: number) {

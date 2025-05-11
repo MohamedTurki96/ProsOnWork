@@ -31,7 +31,7 @@ export function Sidebar() {
 
   return (
     <StickyBox>
-      <div className="card user-sidebar mb-4 mb-lg-0">
+      <div className="card user-sidebar mb-4 mb-lg-0 mt-4">
         <div className="card-header user-sidebar-header mb-4">
           <div className="d-flex justify-content-center align-items-center flex-column">
             <span className="user rounded-circle avatar avatar-xxl mb-2">

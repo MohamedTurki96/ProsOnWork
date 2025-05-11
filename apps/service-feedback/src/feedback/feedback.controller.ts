@@ -5,6 +5,8 @@ import {
   FeedbackCreateCommand,
   FeedbackCreateDTO,
   FeedbackGetDTO,
+  FeedbackGetForDTO,
+  FeedbackGetForQuery,
   FeedbackGetQuery,
 } from '@pros-on-work/resources';
 
@@ -17,6 +19,11 @@ export class FeedbackController {
   @QueryPattern(FeedbackGetQuery)
   async getFeedback(@Payload('payload') query: FeedbackGetDTO) {
     return await this.feedbackService.get(query.productId);
+  }
+
+  @QueryPattern(FeedbackGetForQuery)
+  async getFeedbackFor(@Payload('payload') query: FeedbackGetForDTO) {
+    return await this.feedbackService.getFor(query);
   }
 
   @CommandPattern(FeedbackCreateCommand)
