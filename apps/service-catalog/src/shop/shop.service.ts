@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PRISMA_CLIENT } from '@pros-on-work/core';
 import { ShopCreateDTO, ShopUpdateDTO } from '@pros-on-work/resources';
 
@@ -51,6 +56,20 @@ export class ShopService {
     return this.client.shop.update({
       where: { id },
       data: dto,
+    });
+  }
+
+  async delete(id: number) {
+    const products = await this.client.product.exists({
+      shopId: id,
+    });
+
+    if (products) {
+      throw new BadRequestException('There is products using this shop');
+    }
+
+    return await this.client.shop.delete({
+      where: { id },
     });
   }
 }

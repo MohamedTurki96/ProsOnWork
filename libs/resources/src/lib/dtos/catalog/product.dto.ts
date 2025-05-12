@@ -9,10 +9,8 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  ValidateNested,
 } from 'class-validator';
 
-import { WorkerDTO } from './worker.dto';
 
 export const ProductType = {
   Service: 'service',
@@ -82,7 +80,6 @@ export class ProductDTO {
   isActive: boolean;
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => String)
   @ApiPropertyOptional({ isArray: true, type: String })
@@ -90,7 +87,6 @@ export class ProductDTO {
   includes?: string[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => Number)
   @ApiPropertyOptional({ isArray: true, type: Number })
@@ -98,7 +94,6 @@ export class ProductDTO {
   medias?: number[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => FaqDTO)
   @ApiPropertyOptional({ isArray: true, type: FaqDTO })
@@ -128,14 +123,6 @@ export class ProductDTO {
   @ApiProperty()
   @Expose()
   shopId: number;
-
-  @IsNotEmpty()
-  @ValidateNested({ each: true })
-  @IsArray()
-  @Type(() => WorkerDTO)
-  @ApiProperty({ isArray: true, type: WorkerDTO })
-  @Expose()
-  workers: WorkerDTO[];
 
   @IsNotEmpty()
   @IsDate()
@@ -171,7 +158,6 @@ export class ProductCreateDTO {
   isActive: boolean;
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => String)
   @ApiPropertyOptional({ isArray: true, type: String })
@@ -179,7 +165,6 @@ export class ProductCreateDTO {
   includes?: string[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => Number)
   @ApiPropertyOptional({ isArray: true, type: Number })
@@ -187,7 +172,6 @@ export class ProductCreateDTO {
   medias?: number[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => FaqDTO)
   @ApiPropertyOptional({ isArray: true, type: FaqDTO })
@@ -217,14 +201,6 @@ export class ProductCreateDTO {
   @ApiProperty()
   @Expose()
   shopId: number;
-
-  @IsNotEmpty()
-  @ValidateNested({ each: true })
-  @IsArray()
-  @Type(() => Number)
-  @ApiProperty({ isArray: true, type: Number })
-  @Expose()
-  workers: number[];
 }
 
 export class ProductUpdateDTO {
@@ -253,7 +229,6 @@ export class ProductUpdateDTO {
   isActive?: boolean;
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => String)
   @ApiPropertyOptional({ isArray: true, type: String })
@@ -261,7 +236,6 @@ export class ProductUpdateDTO {
   includes?: string[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => FaqDTO)
   @ApiPropertyOptional({ isArray: true, type: FaqDTO })
@@ -269,7 +243,6 @@ export class ProductUpdateDTO {
   faq?: FaqDTO[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => Number)
   @ApiPropertyOptional({ isArray: true, type: Number })
@@ -293,14 +266,6 @@ export class ProductUpdateDTO {
   @ApiPropertyOptional()
   @Expose()
   categoryId?: number;
-
-  @IsOptional()
-  @ValidateNested({ each: true })
-  @IsArray()
-  @Type(() => Number)
-  @ApiPropertyOptional({ isArray: true, type: Number })
-  @Expose()
-  workers?: number[];
 }
 
 export class ProductUpdateCommandDTO extends ProductUpdateDTO {

@@ -5,6 +5,7 @@ import {
   PaginationResponse,
   ShopCreateCommand,
   ShopCreateDTO,
+  ShopDeleteCommand,
   ShopGetDTO,
   ShopGetQuery,
   ShopListDTO,
@@ -70,5 +71,10 @@ export class ShopController {
     const result = await this.shopService.update(dto.id, dto);
 
     return result.toDTO();
+  }
+
+  @CommandPattern(ShopDeleteCommand)
+  async handleDelete(@Payload('payload') dto: ShopGetDTO) {
+    return await this.shopService.delete(dto.id);
   }
 }

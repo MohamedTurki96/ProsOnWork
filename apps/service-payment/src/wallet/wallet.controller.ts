@@ -1,7 +1,15 @@
 import { Controller } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
-import { QueryPattern } from '@pros-on-work/core';
-import { PaginationResponse, WalletGetDTO, WalletGetQuery, WalletListDTO, WalletListQuery } from '@pros-on-work/resources';
+import { CommandPattern, QueryPattern } from '@pros-on-work/core';
+import {
+  PaginationResponse,
+  WalletGetDTO,
+  WalletGetQuery,
+  WalletListDTO,
+  WalletListQuery,
+  WalletUpdateCommand,
+  WalletUpdateDTO,
+} from '@pros-on-work/resources';
 
 import { WalletService } from './wallet.service';
 
@@ -36,7 +44,12 @@ export class WalletController {
   }
 
   @QueryPattern(WalletGetQuery)
-  async getCategory(@Payload('payload') query: WalletGetDTO) {
+  async getWallet(@Payload('payload') query: WalletGetDTO) {
     return await this.walletService.get(query);
+  }
+
+  @CommandPattern(WalletUpdateCommand)
+  async updateWallet(@Payload('payload') query: WalletUpdateDTO) {
+    return await this.walletService.update(query);
   }
 }

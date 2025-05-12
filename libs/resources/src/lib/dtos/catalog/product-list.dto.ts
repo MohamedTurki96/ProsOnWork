@@ -49,7 +49,6 @@ export class ProductListWhereDTO {
   maxPrice?: number;
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => Number)
   @ApiPropertyOptional({ isArray: true, type: Number })
@@ -57,12 +56,17 @@ export class ProductListWhereDTO {
   categories?: number[];
 
   @IsOptional()
-  @ValidateNested({ each: true })
   @IsArray()
   @Type(() => Number)
   @ApiPropertyOptional({ isArray: true, type: Number })
   @Expose()
   rating?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  providerId?: number;
 }
 
 export enum ProductListSortProperty {

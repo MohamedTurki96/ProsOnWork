@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -14,6 +15,7 @@ import { EventHub } from '@pros-on-work/core';
 import {
   ShopCreateCommand,
   ShopCreateDTO,
+  ShopDeleteCommand,
   ShopDTO,
   ShopGetQuery,
   ShopListQuery,
@@ -75,6 +77,15 @@ export class ShopController {
   @ApiParam({ name: 'id', type: Number })
   async update(@Param('id') id: number, @Body() dto: ShopUpdateDTO) {
     return this.eventHub.sendCommand(new ShopUpdateCommand({ id, ...dto }));
+  }
+
+  @Delete(':id')
+  @ApiNeedsAuthentication()
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({ status: HttpStatus.OK })
+  @ApiParam({ name: 'id', type: Number })
+  async delete(@Param('id') id: number) {
+    return this.eventHub.sendQuery(new ShopDeleteCommand({ id }));
   }
 
   @Get(':id')

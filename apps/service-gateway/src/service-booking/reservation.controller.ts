@@ -64,7 +64,7 @@ export class ReservationController {
   }
 
   @Post()
-  @Roles(UserRole.Admin, UserRole.ServiceProvider)
+  @Roles(UserRole.Client)
   @ApiNeedsAuthentication()
   @HttpCode(HttpStatus.CREATED)
   @ApiBody({ type: ReservationCreateDTO })

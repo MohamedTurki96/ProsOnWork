@@ -28,6 +28,12 @@ export class ReservationListWhereDTO {
   @Expose()
   @ApiPropertyOptional()
   productId?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  providerId?: number;
 }
 
 export enum ReservationListSortProperty {

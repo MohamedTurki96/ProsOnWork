@@ -6,6 +6,8 @@ import { Bookings } from '../../pages/serviceProvider/Bookings';
 import { Dashboard } from '../../pages/serviceProvider/Dashboard';
 import { Reviews } from '../../pages/serviceProvider/Reviews';
 import { Services } from '../../pages/serviceProvider/Services';
+import { Shops } from '../../pages/serviceProvider/Shops';
+import { Workers } from '../../pages/serviceProvider/Workers';
 import { Security } from '../../pages/shared/Security';
 import { Settings } from '../../pages/shared/Settings';
 import { Wallet } from '../../pages/shared/Wallet';
@@ -23,6 +25,8 @@ export const professionalRoutes: RouteObject[] = [
     ),
     children: [
       { path: Routes.provider, element: <Dashboard /> },
+      { path: Routes.shops, element: <Shops /> },
+      { path: Routes.workers, element: <Workers /> },
       { path: Routes.services, element: <Services /> },
       { path: Routes.bookings, element: <Bookings /> },
       { path: Routes.providerWallet, element: <Wallet /> },

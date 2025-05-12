@@ -1,9 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
 import StickyBox from 'react-sticky-box';
 import Lightbox from 'yet-another-react-lightbox';
 
+import {
+  FeedbackDTO,
+  ProductDTO,
+  ReservationCreateDTO,
+  UserDTO,
+} from '../../../api';
 import { AppLoader } from '../../../components/AppLoader';
 import { Img } from '../../../components/Img';
 import { RatingDisplay } from '../../../components/Rating/RatingDisplay';
@@ -12,20 +19,30 @@ import { useConnectedUser } from '../../../hooks/useAuth';
 import { useCategory } from '../../../hooks/useCategory';
 import { useFeedbackForProduct } from '../../../hooks/useFeedback';
 import { useProduct } from '../../../hooks/useProducts';
+import {
+  useCreateReservation,
+  useReservations,
+} from '../../../hooks/useReservations';
+import { useShop } from '../../../hooks/useShop';
+import { useUser } from '../../../hooks/useUser';
 import { Routes } from '../../../router/routes/routes';
+import {
+  getGeolocationText,
+  stringToAddress,
+} from '../../../utils/getGeolocationText';
+import { renderDate } from '../../../utils/renderDate';
 import { renderPrice } from '../../../utils/renderPrice';
 
 import 'yet-another-react-lightbox/styles.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import {
-  getGeolocationText,
-  stringToAddress,
-} from '../../../utils/getGeolocationText';
-import { useShop } from '../../../hooks/useShop';
-import { useUser } from '../../../hooks/useUser';
-import { useReservations } from '../../../hooks/useReservations';
-import { renderDate } from '../../../utils/renderDate';
+
+const groupBy = function (array: any[], key: string) {
+  return array.reduce(function (rv, x) {
+    (rv[x[key]] ??= []).push(x);
+    return rv;
+  }, {});
+};
 
 export function ServiceDetails() {
   const params = useParams<{ id: string }>();
@@ -49,46 +66,14 @@ export function ServiceDetails() {
   const sliderRef1 = useRef(null);
   const sliderRef2 = useRef(null);
   const [addressText, setAddressText] = useState('');
-
+  const [openBooking, setOpenBooking] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const videoUrl = 'https://www.youtube.com/watch?v=Vdp6x7Bibtk';
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const two = {
-    dots: false,
-    autoplay: false,
-    slidesToShow: 6,
-    speed: 500,
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 6,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 6,
-        },
-      },
-      {
-        breakpoint: 776,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 567,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-    ],
-  };
   const settings1 = {
     dots: false,
     arrows: true,
@@ -127,6 +112,14 @@ export function ServiceDetails() {
     }
   }, [setAddressText, shop]);
 
+  const handleBook = useCallback(() => {
+    if (!user) {
+      navigate(Routes.login);
+    } else {
+      setOpenBooking(true);
+    }
+  }, [user, navigate, setOpenBooking]);
+
   if (
     !product ||
     !shop ||
@@ -142,8 +135,45 @@ export function ServiceDetails() {
     (sum, feedback) => sum + (feedback.rating ?? 0),
     0,
   );
-
   const avg = feedback.items.length ? total / feedback.items.length : 0;
+  const groups = groupBy(feedback.items, 'rating');
+  const ratings = {
+    1: {
+      count: groups[1] && feedback.items.length ? groups[1].length : 0,
+      avg:
+        groups[1] && feedback.items.length
+          ? (groups[1].length * 100) / feedback.items.length
+          : 0,
+    },
+    2: {
+      count: groups[2] && feedback.items.length ? groups[2].length : 0,
+      avg:
+        groups[2] && feedback.items.length
+          ? (groups[2].length * 100) / feedback.items.length
+          : 0,
+    },
+    3: {
+      count: groups[3] && feedback.items.length ? groups[3].length : 0,
+      avg:
+        groups[3] && feedback.items.length
+          ? (groups[3].length * 100) / feedback.items.length
+          : 0,
+    },
+    4: {
+      count: groups[4] && feedback.items.length ? groups[4].length : 0,
+      avg:
+        groups[4] && feedback.items.length
+          ? (groups[4].length * 100) / feedback.items.length
+          : 0,
+    },
+    5: {
+      count: groups[5] && feedback.items.length ? groups[5].length : 0,
+      avg:
+        groups[5] && feedback.items.length
+          ? (groups[5].length * 100) / feedback.items.length
+          : 0,
+    },
+  };
 
   return (
     <>
@@ -189,7 +219,7 @@ export function ServiceDetails() {
                           className="owl-carousel reactslick service-carousel nav-center mb-3"
                         >
                           {product.medias?.map((media) => (
-                            <div className="service-img">
+                            <div className="service-img" key={media}>
                               <Img
                                 mediaId={media}
                                 className="img-fluid"
@@ -416,16 +446,18 @@ export function ServiceDetails() {
                             <div
                               className="progress w-100"
                               role="progressbar"
-                              aria-valuenow={90}
+                              aria-valuenow={ratings[5].avg}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             >
                               <div
                                 className="progress-bar bg-warning"
-                                style={{ width: '90%' }}
+                                style={{ width: `${ratings[5].avg}%` }}
                               />
                             </div>
-                            <p className="progress-count ms-2">2,547</p>
+                            <p className="progress-count ms-2">
+                              {ratings[5].count}
+                            </p>
                           </div>
                           <div className="d-flex align-items-center mb-2">
                             <p className="me-2 text-nowrap mb-0">
@@ -434,16 +466,18 @@ export function ServiceDetails() {
                             <div
                               className="progress mb-0 w-100"
                               role="progressbar"
-                              aria-valuenow={80}
+                              aria-valuenow={ratings[4].avg}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             >
                               <div
                                 className="progress-bar bg-warning"
-                                style={{ width: '80%' }}
+                                style={{ width: `${ratings[4].avg}%` }}
                               />
                             </div>
-                            <p className="progress-count ms-2">1,245</p>
+                            <p className="progress-count ms-2">
+                              {ratings[4].count}
+                            </p>
                           </div>
                           <div className="d-flex align-items-center mb-2">
                             <p className="me-2 text-nowrap mb-0">
@@ -452,16 +486,18 @@ export function ServiceDetails() {
                             <div
                               className="progress mb-0 w-100"
                               role="progressbar"
-                              aria-valuenow={70}
+                              aria-valuenow={ratings[3].avg}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             >
                               <div
                                 className="progress-bar bg-warning"
-                                style={{ width: '70%' }}
+                                style={{ width: `${ratings[3].avg}%` }}
                               />
                             </div>
-                            <p className="progress-count ms-2">600</p>
+                            <p className="progress-count ms-2">
+                              {ratings[3].count}
+                            </p>
                           </div>
                           <div className="d-flex align-items-center mb-2">
                             <p className="me-2 text-nowrap mb-0">
@@ -470,16 +506,18 @@ export function ServiceDetails() {
                             <div
                               className="progress mb-0 w-100"
                               role="progressbar"
-                              aria-valuenow={90}
+                              aria-valuenow={ratings[2].avg}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             >
                               <div
                                 className="progress-bar bg-warning"
-                                style={{ width: '60%' }}
+                                style={{ width: `${ratings[2].avg}%` }}
                               />
                             </div>
-                            <p className="progress-count ms-2">560</p>
+                            <p className="progress-count ms-2">
+                              {ratings[2].count}
+                            </p>
                           </div>
                           <div className="d-flex align-items-center">
                             <p className="me-2 text-nowrap mb-0">
@@ -488,175 +526,24 @@ export function ServiceDetails() {
                             <div
                               className="progress mb-0 w-100"
                               role="progressbar"
-                              aria-valuenow={40}
+                              aria-valuenow={ratings[1].avg}
                               aria-valuemin={0}
                               aria-valuemax={100}
                             >
                               <div
                                 className="progress-bar bg-warning"
-                                style={{ width: '40%' }}
+                                style={{ width: `${ratings[1].avg}%` }}
                               />
                             </div>
-                            <p className="progress-count ms-2">400</p>
+                            <p className="progress-count ms-2">
+                              {ratings[1].count}
+                            </p>
                           </div>
                         </div>
                       </div>
                     </div>
                     {feedback.items.map((feedback) => {
-                      return (
-                        <div
-                          className="card review-item mb-3"
-                          key={feedback.id}
-                        >
-                          <div className="card-body p-3">
-                            <div className="review-info">
-                              <div className="d-flex align-items-center justify-content-between flex-wrap">
-                                <div className="d-flex align-items-center mb-2">
-                                  <span className="avatar avatar-lg me-2 flex-shrink-0">
-                                    <img
-                                      src="/assets/img/profiles/avatar-01.jpg"
-                                      className="rounded-circle"
-                                      alt="img"
-                                    />
-                                  </span>
-                                  <div>
-                                    <h6 className="fs-16 fw-medium">
-                                      Adrian Hendriques
-                                    </h6>
-                                    <div className="d-flex align-items-center flex-wrap date-info">
-                                      <p className="fs-14 mb-0">2 days ago</p>
-                                      <p className="fs-14 mb-0">
-                                        Excellent service!
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <span className="badge bg-success d-inline-flex align-items-center mb-2">
-                                  <i className="ti ti-star-filled me-1" />5
-                                </span>
-                              </div>
-                              <p className="mb-2">
-                                The electricians were prompt, professional, and
-                                resolved our issues quickly.did a fantastic job
-                                upgrading our electrical panel. Highly recommend
-                                them for any electrical work.
-                              </p>
-                              <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
-                                <div className="d-inline-flex align-items-center">
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-up me-2" />
-                                    Reply
-                                  </Link>
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-up me-2" />
-                                    Like
-                                  </Link>
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center"
-                                  >
-                                    <i className="ti ti-thumb-down me-2" />
-                                    Dislike
-                                  </Link>
-                                </div>
-                                <div className="d-inline-flex align-items-center">
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-up me-2" />
-                                    45
-                                  </Link>
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-down me-2" />
-                                    21
-                                  </Link>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="review-info reply mt-2 p-3">
-                              <div className="d-flex align-items-center justify-content-between flex-wrap">
-                                <div className="d-flex align-items-center mb-2">
-                                  <span className="avatar avatar-lg me-2 flex-shrink-0">
-                                    <img
-                                      src="/assets/img/profiles/avatar-02.jpg"
-                                      className="rounded-circle"
-                                      alt="img"
-                                    />
-                                  </span>
-                                  <div>
-                                    <h6 className="fs-16 fw-medium">
-                                      Stephen Vance
-                                    </h6>
-                                    <div className="d-flex align-items-center flex-wrap date-info">
-                                      <p className="fs-14 mb-0">2 days ago</p>
-                                      <p className="fs-14 mb-0">
-                                        Excellent service!
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <span className="badge bg-success d-inline-flex align-items-center mb-2">
-                                  <i className="ti ti-star-filled me-1" />4
-                                </span>
-                              </div>
-                              <p className="mb-2">
-                                Thank You!!! For Your Appreciation!!!
-                              </p>
-                              <div className="d-flex align-items-center justify-content-between flex-wrap like-info">
-                                <div className="d-inline-flex align-items-center flex-wrap">
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-up me-2" />
-                                    Reply
-                                  </Link>
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-up me-2" />
-                                    Like
-                                  </Link>
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center"
-                                  >
-                                    <i className="ti ti-thumb-down me-2" />
-                                    Dislike
-                                  </Link>
-                                </div>
-                                <div className="d-inline-flex align-items-center">
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-up me-2" />
-                                    45
-                                  </Link>
-                                  <Link
-                                    to="#"
-                                    className="d-inline-flex align-items-center me-2"
-                                  >
-                                    <i className="ti ti-thumb-down me-2" />
-                                    20
-                                  </Link>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      );
+                      return <Comment feedback={feedback} key={feedback.id} />;
                     })}
                   </div>
                 </div>
@@ -670,13 +557,13 @@ export function ServiceDetails() {
                           {renderPrice(product.price, product.priceType)}
                         </h4>
                       </div>
-                      <Link
-                        to={Routes.home}
+                      <button
+                        onClick={handleBook}
                         className="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center"
                       >
                         <i className="ti ti-calendar me-2" />
                         Book Service
-                      </Link>
+                      </button>
                     </div>
                   </div>
                   <div className="card border-0">
@@ -733,7 +620,11 @@ export function ServiceDetails() {
                       </div>
                     </div>
                   </div>
-                  <a href={"#"} className="text-danger fs-14" onClick={() => navigate(Routes.login)}>
+                  <a
+                    href={'#'}
+                    className="text-danger fs-14"
+                    onClick={() => navigate(Routes.login)}
+                  >
                     <i className="ti ti-pennant-filled me-2" />
                     Report Service
                   </a>
@@ -764,6 +655,141 @@ export function ServiceDetails() {
           },
         ]}
       />
+      {user && (
+        <BoookingModal
+          onHide={() => setOpenBooking(false)}
+          open={openBooking}
+          product={product}
+          user={user}
+        />
+      )}
     </>
+  );
+}
+
+type CommentProps = {
+  feedback: FeedbackDTO;
+};
+
+export function Comment({ feedback }: CommentProps) {
+  const { data: user } = useUser(feedback.userId);
+
+  if (!user) {
+    return null;
+  }
+
+  return (
+    <div className="card review-item mb-3">
+      <div className="card-body p-3">
+        <div className="review-info">
+          <div className="d-flex align-items-center justify-content-between flex-wrap">
+            <div className="d-flex align-items-center mb-2">
+              <span className="avatar avatar-lg me-2 flex-shrink-0">
+                <Img
+                  mediaId={user.avatarId}
+                  className="rounded-circle"
+                  alt="img"
+                />
+              </span>
+              <div>
+                <h6 className="fs-16 fw-medium">{user.name}</h6>
+                <div className="d-flex align-items-center flex-wrap date-info">
+                  <p className="fs-14 mb-0">
+                    {new Date(feedback.createdAt).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <span className="badge bg-success d-inline-flex align-items-center mb-2">
+              <i className="ti ti-star-filled me-1" />
+              {feedback.rating}
+            </span>
+          </div>
+          <p className="mb-2">{feedback.comment}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type BoookingModalProps = {
+  open: boolean;
+  onHide: () => any;
+  product: ProductDTO;
+  user: UserDTO;
+};
+
+export function BoookingModal({
+  open,
+  onHide,
+  product,
+  user,
+}: BoookingModalProps) {
+  const { mutate } = useCreateReservation(() => onHide());
+  const [data, setData] = useState<ReservationCreateDTO>({
+    productId: product.id,
+    userId: user.id,
+    startDate: '',
+    endDate: '',
+  });
+
+  const handleCreateChange = useCallback(
+    (key: keyof ReservationCreateDTO, value: any) => {
+      setData({
+        ...data,
+        [key]: value,
+      });
+    },
+    [setData, data],
+  );
+
+  return (
+    <Modal show={open} centered onHide={onHide}>
+      <Modal.Header>
+        <h5>Réserver ce service</h5>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="row">
+          <div className="col-md-12">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="mb-3">
+                  <label className="form-label">Start Date</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    onChange={(e) =>
+                      handleCreateChange('startDate', e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+              <div className="col-md-12">
+                <div className="mb-3">
+                  <label className="form-label">End Date</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    onChange={(e) =>
+                      handleCreateChange('endDate', e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <button
+          type="button"
+          className="btn btn-dark"
+          onClick={() => mutate(data)}
+          disabled={!data.startDate || !data.endDate}
+        >
+          Ajouter
+        </button>
+      </Modal.Footer>
+    </Modal>
   );
 }

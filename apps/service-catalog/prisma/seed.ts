@@ -94,7 +94,7 @@ async function seed() {
             faq: [
               {
                 question: 'Is there a warranty?',
-                answer: 'Yes, 12 months included.',
+                answer: 'Yes, 12 months included.',
               },
               {
                 question: 'Can I get a discount?',
@@ -113,18 +113,6 @@ async function seed() {
             shopId: shop.id,
             medias: [1]
           },
-        });
-      }),
-    );
-
-    /* ---- link each product with at least one worker in the same shop ---- */
-    await Promise.all(
-      products.map((p) => {
-        const sameShopWorkers = workers.filter((w) => w.shopId === p.shopId);
-        const pick = faker.helpers.arrayElement(sameShopWorkers);
-        return client.product.update({
-          where: { id: p.id },
-          data: { workers: { connect: { id: pick.id } } },
         });
       }),
     );

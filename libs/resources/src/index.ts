@@ -59,10 +59,13 @@ export * from './lib/commands/catalog/category-update.command';
 export * from './lib/commands/catalog/category-delete.command';
 export * from './lib/commands/catalog/shop-create.command';
 export * from './lib/commands/catalog/shop-update.command';
+export * from './lib/commands/catalog/shop-delete.command';
 export * from './lib/commands/catalog/worker-create.command';
 export * from './lib/commands/catalog/worker-update.command';
+export * from './lib/commands/catalog/worker-delete.command';
 export * from './lib/commands/catalog/product-create.command';
 export * from './lib/commands/catalog/product-update.command';
+export * from './lib/commands/catalog/product-delete.command';
 export * from './lib/commands/booking/reservation-create.command';
 export * from './lib/commands/booking/reservation-update.command';
 export * from './lib/commands/feedback/feedback-create.command';
@@ -71,6 +74,7 @@ export * from './lib/commands/feedback/reclamation-update.command';
 export * from './lib/commands/chat/message-create.command';
 export * from "./lib/commands/payment/payment-upadte.command"
 export * from "./lib/commands/payment/payment-create.command"
+export * from "./lib/commands/payment/wallet-update.command"
 
 // Queries
 export * from './lib/queries/user/user-get.query';

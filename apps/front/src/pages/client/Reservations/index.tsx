@@ -19,7 +19,7 @@ import {
 import { renderPrice } from '../../../utils/renderPrice';
 
 export function Reservations() {
-  const { data: reservations } = useReservations();
+  const { data: reservations } = useReservations({});
 
   if (!reservations) {
     return <AppLoader />;

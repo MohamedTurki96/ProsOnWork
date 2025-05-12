@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -15,6 +16,7 @@ import {
   UserRole,
   WorkerCreateCommand,
   WorkerCreateDTO,
+  WorkerDeleteCommand,
   WorkerDTO,
   WorkerGetQuery,
   WorkerListQuery,
@@ -75,6 +77,15 @@ export class WorkerController {
   @ApiParam({ name: 'id', type: Number })
   async update(@Param('id') id: number, @Body() dto: WorkerUpdateDTO) {
     return this.eventHub.sendCommand(new WorkerUpdateCommand({ id, ...dto }));
+  }
+
+  @Delete(':id')
+  @ApiNeedsAuthentication()
+  @HttpCode(HttpStatus.OK)
+  @ApiResponse({ status: HttpStatus.OK })
+  @ApiParam({ name: 'id', type: Number })
+  async delete(@Param('id') id: number) {
+    return this.eventHub.sendQuery(new WorkerDeleteCommand({ id }));
   }
 
   @Get(':id')

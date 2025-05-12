@@ -34,5 +34,5 @@ export const publicRoutes: RouteObject[] = [
         element: <ServiceDetails />,
       },
     ],
-  }
+  },
 ];

@@ -37,7 +37,6 @@ model Product {
 
   category Category @relation(fields: [categoryId], references: [id])
   shop     Shop     @relation(fields: [shopId], references: [id])
-  workers  Worker[]
 }
 
 model Shop {
@@ -59,7 +58,6 @@ model Worker {
   createdAt DateTime @default(now())
 
   shop     Shop      @relation(fields: [shopId], references: [id])
-  products Product[]
 }
 
 enum ProductType {

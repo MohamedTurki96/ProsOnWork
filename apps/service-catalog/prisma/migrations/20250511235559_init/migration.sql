@@ -57,17 +57,6 @@ CREATE TABLE "Worker" (
     CONSTRAINT "Worker_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "_ProductToWorker" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL,
-
-    CONSTRAINT "_ProductToWorker_AB_pkey" PRIMARY KEY ("A","B")
-);
-
--- CreateIndex
-CREATE INDEX "_ProductToWorker_B_index" ON "_ProductToWorker"("B");
-
 -- AddForeignKey
 ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -76,9 +65,3 @@ ALTER TABLE "Product" ADD CONSTRAINT "Product_shopId_fkey" FOREIGN KEY ("shopId"
 
 -- AddForeignKey
 ALTER TABLE "Worker" ADD CONSTRAINT "Worker_shopId_fkey" FOREIGN KEY ("shopId") REFERENCES "Shop"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_ProductToWorker" ADD CONSTRAINT "_ProductToWorker_A_fkey" FOREIGN KEY ("A") REFERENCES "Product"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_ProductToWorker" ADD CONSTRAINT "_ProductToWorker_B_fkey" FOREIGN KEY ("B") REFERENCES "Worker"("id") ON DELETE CASCADE ON UPDATE CASCADE;

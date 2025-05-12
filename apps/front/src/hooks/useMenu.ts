@@ -89,6 +89,16 @@ export function useSidebarMenu(): MenuItem[] {
             path: Routes.provider,
           },
           {
+            label: 'Shops',
+            icon: 'ti ti-device-mobile',
+            path: Routes.shops,
+          },
+          {
+            label: 'Workers',
+            icon: 'ti ti-device-mobile',
+            path: Routes.workers,
+          },
+          {
             label: 'Services',
             icon: 'ti ti-device-mobile',
             path: Routes.services,
@@ -102,11 +112,6 @@ export function useSidebarMenu(): MenuItem[] {
             label: 'Wallet',
             icon: 'ti ti-wallet',
             path: Routes.providerWallet,
-          },
-          {
-            label: 'Reviews',
-            icon: 'ti ti-wallet',
-            path: Routes.reviews,
           },
           {
             label: 'Settings',

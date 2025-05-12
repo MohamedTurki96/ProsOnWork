@@ -6,6 +6,7 @@ import {
   IsArray,
   IsDefined,
   IsEnum,
+  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -16,13 +17,18 @@ import { PaginationDTO, PaginationResultDTO } from '../../pagination.dto';
 
 import { ShopDTO } from './shop.dto';
 
-
 export class ShopListWhereDTO {
   @IsOptional()
   @IsString()
   @Expose()
   @ApiPropertyOptional()
   name?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  ownerId?: number;
 }
 
 export enum ShopListSortProperty {

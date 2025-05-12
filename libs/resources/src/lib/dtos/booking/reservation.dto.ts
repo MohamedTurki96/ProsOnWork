@@ -1,6 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
-import { IsDate, IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import {
+  IsDate,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+} from 'class-validator';
 
 export const ReservationStatus = {
   Pending: 'pending',
@@ -75,23 +81,27 @@ export class ReservationCreateDTO {
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()
+  @Expose()
   userId: number;
 
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()
+  @Expose()
   productId: number;
 
   @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   @ApiProperty({ type: Date })
+  @Expose()
   startDate: Date;
 
   @IsNotEmpty()
   @IsDate()
   @Type(() => Date)
   @ApiProperty({ type: Date })
+  @Expose()
   endDate: Date;
 }
 

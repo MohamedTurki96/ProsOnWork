@@ -35,12 +35,6 @@ export class WorkerDTO {
   @Expose()
   phone?: string;
 
-  @IsOptional()
-  @IsNumber()
-  @Expose()
-  @ApiPropertyOptional()
-  avatarId?: string;
-
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()
@@ -68,12 +62,6 @@ export class WorkerCreateDTO {
   @Expose()
   phone?: string;
 
-  @IsOptional()
-  @IsNumber()
-  @Expose()
-  @ApiPropertyOptional()
-  avatarId?: string;
-
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()
@@ -93,12 +81,6 @@ export class WorkerUpdateDTO {
   @ApiPropertyOptional()
   @Expose()
   phone?: string;
-
-  @IsOptional()
-  @IsNumber()
-  @Expose()
-  @ApiPropertyOptional()
-  avatarId?: string;
 
   @IsOptional()
   @IsNumber()

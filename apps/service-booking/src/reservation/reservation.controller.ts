@@ -1,8 +1,11 @@
 import { Controller } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
-import { CommandPattern, QueryPattern } from '@pros-on-work/core';
+import { CommandPattern, EventHub, QueryPattern } from '@pros-on-work/core';
 import {
   PaginationResponse,
+  ProductListQuery,
+  ProductListResultDTO,
+  ProductListSortProperty,
   ReservationCreateCommand,
   ReservationCreateDTO,
   ReservationGetDTO,
@@ -12,19 +15,45 @@ import {
   ReservationUpdateCommand,
   ReservationUpdateDTO,
 } from '@pros-on-work/resources';
+import { QuerySortOrder } from '@pros-on-work/utils';
 
 import { ReservationService } from './reservation.service';
 
 @Controller('Reservation')
 export class ReservationController {
-  constructor(private readonly reservationService: ReservationService) {}
+  constructor(
+    private readonly reservationService: ReservationService,
+    private readonly eventHub: EventHub,
+  ) {}
 
   @QueryPattern(ReservationListQuery)
   async listReservations(@Payload('payload') query: ReservationListDTO) {
     if (!query.where) {
       query.where = {};
     }
-    
+
+    const providerId = query.where.providerId;
+
+    delete query.where.providerId;
+
+    let products = [];
+
+    if (providerId) {
+      products = (
+        await this.eventHub.sendQuery<ProductListResultDTO>(
+          new ProductListQuery({
+            where: {
+              providerId,
+            },
+            sort: {
+              order: QuerySortOrder.ASC,
+              property: ProductListSortProperty.CreatedAt,
+            },
+          }),
+        )
+      ).items;
+    }
+
     const reservations = await this.reservationService.findMany({
       skip: query.skip,
       take: query.take,
@@ -35,6 +64,9 @@ export class ReservationController {
         : undefined,
       where: {
         ...(query.where ?? {}),
+        ...(providerId
+          ? { productId: { in: products.map((x) => x.id) } }
+          : {}),
       },
     });
 

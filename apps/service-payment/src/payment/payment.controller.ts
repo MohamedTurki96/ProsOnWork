@@ -6,6 +6,8 @@ import {
   PaginationResponse,
   PaymentCreateCashInCommand,
   PaymentCreateCashInCommandDTO,
+  PaymentCreateCommand,
+  PaymentCreateDTO,
   PaymentListDTO,
   PaymentListQuery,
   PaymentUpdateCommand,
@@ -54,6 +56,13 @@ export class PaymentController {
   @CommandPattern(PaymentCreateCashInCommand)
   async createCashIn(@Payload('payload') dto: PaymentCreateCashInCommandDTO) {
     const result = await this.paymentService.createCashIn(dto);
+
+    return result.toDTO();
+  }
+
+  @CommandPattern(PaymentCreateCommand)
+  async create(@Payload('payload') dto: PaymentCreateDTO) {
+    const result = await this.paymentService.create(dto);
 
     return result.toDTO();
   }

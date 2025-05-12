@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { PRISMA_CLIENT } from '@pros-on-work/core';
-import { WalletGetDTO } from '@pros-on-work/resources';
+import { WalletGetDTO, WalletUpdateDTO } from '@pros-on-work/resources';
 
 import { ExtendedPrismaClient } from '../db';
 import { Prisma } from '../prisma';
@@ -41,5 +41,18 @@ export class WalletService {
     }
 
     return result.toDTO();
+  }
+
+  async update(query: WalletUpdateDTO) {
+    return await this.client.wallet.update({
+      where: { id: query.walletId },
+      data: {
+        balance: {
+          ...(query.increment
+            ? { increment: query.amount }
+            : { decrement: query.amount }),
+        },
+      },
+    });
   }
 }

@@ -3,6 +3,7 @@ import { PRISMA_CLIENT } from '@pros-on-work/core';
 import {
   CurrentUserDTO,
   PaymentCreateCashInCommandDTO,
+  PaymentCreateDTO,
   PaymentStatus,
   PaymentType,
   PaymentUpdateDTO,
@@ -89,6 +90,23 @@ export class PaymentService {
           balance: {
             increment: payment.amount,
           },
+        },
+      });
+
+      return payment;
+    });
+  }
+
+  async create(data: PaymentCreateDTO) {
+    return await this.client.$transaction(async (client) => {
+      const payment = await client.payment.create({
+        data: {
+          walletId: data.walletId,
+          type: data.type,
+          amount: data.amount,
+          ...(data.type == PaymentType.Reservation
+            ? { status: PaymentStatus.Completed }
+            : {}),
         },
       });
 

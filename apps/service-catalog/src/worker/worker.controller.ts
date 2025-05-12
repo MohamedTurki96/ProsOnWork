@@ -5,6 +5,7 @@ import {
   PaginationResponse,
   WorkerCreateCommand,
   WorkerCreateDTO,
+  WorkerDeleteCommand,
   WorkerGetDTO,
   WorkerGetQuery,
   WorkerListDTO,
@@ -25,6 +26,10 @@ export class WorkerController {
       query.where = {};
     }
 
+    const ownerId = query.where.ownerId;
+
+    delete query.where.ownerId;
+
     const workers = await this.workerService.findMany({
       skip: query.skip,
       take: query.take,
@@ -35,11 +40,10 @@ export class WorkerController {
         : undefined,
       where: {
         ...(query.where ?? {}),
-        ...(query.where.name
+        ...(ownerId
           ? {
-              name: {
-                contains: query.where.name,
-                mode: 'insensitive',
+              shop: {
+                ownerId,
               },
             }
           : {}),
@@ -70,5 +74,10 @@ export class WorkerController {
     const result = await this.workerService.update(dto.id, dto);
 
     return result.toDTO();
+  }
+
+  @CommandPattern(WorkerDeleteCommand)
+  async handleDelete(@Payload('payload') dto: WorkerGetDTO) {
+    return await this.workerService.delete(dto.id);
   }
 }

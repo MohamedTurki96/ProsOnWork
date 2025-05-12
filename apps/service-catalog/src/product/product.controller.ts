@@ -1,12 +1,21 @@
 import { Controller, Inject } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
-import { PRISMA_CLIENT, QueryPattern } from '@pros-on-work/core';
+import {
+  CommandPattern,
+  PRISMA_CLIENT,
+  QueryPattern,
+} from '@pros-on-work/core';
 import {
   PaginationResponse,
+  ProductCreateCommand,
+  ProductCreateDTO,
+  ProductDeleteCommand,
   ProductGetDTO,
   ProductGetQuery,
   ProductListDTO,
   ProductListQuery,
+  ProductUpdateCommand,
+  ProductUpdateCommandDTO,
 } from '@pros-on-work/resources';
 
 import { ExtendedPrismaClient } from '../db';
@@ -89,6 +98,12 @@ export class ProductController {
       }
     }
 
+    if (query.where.providerId) {
+      where.shop = {
+        ownerId: query.where.providerId,
+      };
+    }
+
     const products = await this.productService.findMany({
       skip: query.skip,
       take: query.take,
@@ -112,7 +127,12 @@ export class ProductController {
     return await this.productService.get(query.id);
   }
 
-  /*   @CommandPattern(ProductCreateCommand)
+  @CommandPattern(ProductDeleteCommand)
+  async handleDelete(@Payload('payload') dto: ProductGetDTO) {
+    return await this.productService.delete(dto.id);
+  }
+
+  @CommandPattern(ProductCreateCommand)
   async handleCreate(@Payload('payload') dto: ProductCreateDTO) {
     const result = await this.productService.create(dto);
 
@@ -124,5 +144,5 @@ export class ProductController {
     const result = await this.productService.update(dto.id, dto);
 
     return result.toDTO();
-  } */
+  }
 }

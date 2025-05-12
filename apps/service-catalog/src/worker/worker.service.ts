@@ -1,4 +1,8 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PRISMA_CLIENT } from '@pros-on-work/core';
 import { WorkerCreateDTO, WorkerUpdateDTO } from '@pros-on-work/resources';
 
@@ -43,7 +47,11 @@ export class WorkerService {
 
   async create(dto: WorkerCreateDTO) {
     return this.client.worker.create({
-      data: dto,
+      data: {
+        name: dto.name,
+        shopId: dto.shopId,
+        phone: dto.phone,
+      },
     });
   }
 
@@ -51,6 +59,12 @@ export class WorkerService {
     return this.client.worker.update({
       where: { id },
       data: dto,
+    });
+  }
+
+  async delete(id: number) {
+    return await this.client.worker.delete({
+      where: { id },
     });
   }
 }

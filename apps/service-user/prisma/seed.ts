@@ -28,8 +28,8 @@ async function seed() {
           i == 0
             ? 'admin@dev.com'
             : i <= 2
-              ? `provider${i}@dev.com`
-              : `client${i}@dev.com`;
+              ? `provider${i - 1}@dev.com`
+              : `client${i - 3}@dev.com`;
 
         return client.user.create({
           data: {

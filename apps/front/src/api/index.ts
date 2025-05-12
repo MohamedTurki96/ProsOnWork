@@ -239,6 +239,7 @@ export interface CategoryUpdateDTO {
 
 export interface ShopListWhereDTO {
   name?: string;
+  ownerId?: number;
 }
 
 export interface ShopListSortDTO {
@@ -274,6 +275,7 @@ export interface ShopUpdateDTO {
 export interface WorkerListWhereDTO {
   name?: string;
   phone?: string;
+  ownerId?: number;
 }
 
 export interface WorkerListSortDTO {
@@ -285,7 +287,6 @@ export interface WorkerDTO {
   id: number;
   name: string;
   phone?: string;
-  avatarId?: string;
   shopId: number;
   /** @format date-time */
   createdAt: string;
@@ -299,14 +300,12 @@ export interface WorkerListResultDTO {
 export interface WorkerCreateDTO {
   name: string;
   phone?: string;
-  avatarId?: string;
   shopId: number;
 }
 
 export interface WorkerUpdateDTO {
   name?: string;
   phone?: string;
-  avatarId?: string;
   shopId?: number;
 }
 
@@ -318,6 +317,7 @@ export interface ProductListWhereDTO {
   maxPrice?: number;
   categories?: number[];
   rating?: number[];
+  providerId?: number;
 }
 
 export interface ProductListSortDTO {
@@ -343,7 +343,6 @@ export interface ProductDTO {
   priceType: PriceType;
   categoryId: number;
   shopId: number;
-  workers: WorkerDTO[];
   /** @format date-time */
   createdAt: string;
 }
@@ -365,7 +364,6 @@ export interface ProductCreateDTO {
   priceType: PriceType;
   categoryId: number;
   shopId: number;
-  workers: number[];
 }
 
 export interface ProductUpdateDTO {
@@ -379,12 +377,12 @@ export interface ProductUpdateDTO {
   type?: ProductType;
   priceType?: PriceType;
   categoryId?: number;
-  workers?: number[];
 }
 
 export interface ReservationListWhereDTO {
   userId?: number;
   productId?: number;
+  providerId?: number;
 }
 
 export interface ReservationListSortDTO {
@@ -792,7 +790,6 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name ListUsers
      * @request GET:/users
-     * @secure
      */
     listUsers: (
       query?: {
@@ -803,11 +800,10 @@ export class Api<SecurityDataType extends unknown> {
       },
       params: RequestParams = {},
     ) =>
-      this.http.request<UserListResultDTO, void>({
+      this.http.request<UserListResultDTO, any>({
         path: `/users`,
         method: 'GET',
         query: query,
-        secure: true,
         format: 'json',
         ...params,
       }),
@@ -886,13 +882,11 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Users
      * @name GetUser
      * @request GET:/users/{id}
-     * @secure
      */
     getUser: (id: number, params: RequestParams = {}) =>
-      this.http.request<UserDTO, void>({
+      this.http.request<UserDTO, any>({
         path: `/users/${id}`,
         method: 'GET',
-        secure: true,
         format: 'json',
         ...params,
       }),
@@ -1148,6 +1142,22 @@ export class Api<SecurityDataType extends unknown> {
      * No description
      *
      * @tags Shops
+     * @name Delete
+     * @request DELETE:/shops/{id}
+     * @secure
+     */
+    delete: (id: number, params: RequestParams = {}) =>
+      this.http.request<void, void>({
+        path: `/shops/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Shops
      * @name Get
      * @request GET:/shops/{id}
      */
@@ -1221,6 +1231,22 @@ export class Api<SecurityDataType extends unknown> {
         secure: true,
         type: ContentType.Json,
         format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Workers
+     * @name Delete
+     * @request DELETE:/workers/{id}
+     * @secure
+     */
+    delete: (id: number, params: RequestParams = {}) =>
+      this.http.request<void, void>({
+        path: `/workers/${id}`,
+        method: 'DELETE',
+        secure: true,
         ...params,
       }),
 
@@ -1316,6 +1342,22 @@ export class Api<SecurityDataType extends unknown> {
         format: 'json',
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name Delete
+     * @request DELETE:/products/{id}
+     * @secure
+     */
+    delete: (id: number, params: RequestParams = {}) =>
+      this.http.request<void, void>({
+        path: `/products/${id}`,
+        method: 'DELETE',
+        secure: true,
+        ...params,
+      }),
   };
   reservations = {
     /**
@@ -1324,7 +1366,6 @@ export class Api<SecurityDataType extends unknown> {
      * @tags Reservations
      * @name List
      * @request GET:/reservations
-     * @secure
      */
     list: (
       query?: {
@@ -1335,11 +1376,10 @@ export class Api<SecurityDataType extends unknown> {
       },
       params: RequestParams = {},
     ) =>
-      this.http.request<ReservationListResultDTO, void>({
+      this.http.request<ReservationListResultDTO, any>({
         path: `/reservations`,
         method: 'GET',
         query: query,
-        secure: true,
         format: 'json',
         ...params,
       }),

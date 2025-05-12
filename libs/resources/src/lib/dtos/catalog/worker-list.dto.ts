@@ -6,6 +6,7 @@ import {
   IsArray,
   IsDefined,
   IsEnum,
+  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -28,6 +29,12 @@ export class WorkerListWhereDTO {
   @Expose()
   @ApiPropertyOptional()
   phone?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Expose()
+  @ApiPropertyOptional()
+  ownerId?: number;
 }
 
 export enum WorkerListSortProperty {

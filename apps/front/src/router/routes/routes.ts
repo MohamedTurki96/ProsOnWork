@@ -11,7 +11,7 @@ export class Routes {
   static categories = '/categories';
   static products = '/products';
   static chat = '/chat';
-
+  static book = "/book"
   static dashbaord = '/dashboard';
   static reservations = '/dashboard/reservations';
   static wallet = '/dashboard/wallet';
@@ -19,6 +19,8 @@ export class Routes {
   static security = '/dashboard/security';
 
   static provider = '/provider';
+  static shops = '/provider/shops';
+  static workers = '/provider/workers';
   static services = '/provider/services';
   static bookings = '/provider/bookings';
   static providerWallet = '/provider/wallet';
